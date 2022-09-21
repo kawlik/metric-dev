@@ -1,0 +1,8 @@
+// files
+*.html
+*.md
+
+// folders
+node_modules
+public
+dist

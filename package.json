@@ -1,0 +1,39 @@
+{
+	"name": "metric",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"build": "tsc && vite build",
+		"serve": "vite preview",
+		"start": "vite",
+		"lint:check": "npx prettier --check .",
+		"lint:write": "npx prettier --write .",
+        "git:deploy": "npm run build && npm run git:deploy_update && npm run git:deploy_commit t&& npm run git:deploy_upload",
+        "git:deploy_commit": "git commit -m 'deploy'",
+        "git:deploy_update": "git add dist/",
+        "git:deploy_upload": "git subtree push --prefix dist origin gh-pages"
+	},
+	"dependencies": {
+		"@emotion/react": "^11.10.4",
+		"@emotion/styled": "^11.10.4",
+		"@mui/icons-material": "^5.10.3",
+		"@mui/material": "^5.10.5",
+		"firebase": "^9.10.0",
+		"libphonenumber-js": "^1.10.13",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"react-router-dom": "^6.4.0",
+		"rxjs": "^7.5.6"
+	},
+	"devDependencies": {
+		"@types/react": "^18.0.17",
+		"@types/react-dom": "^18.0.6",
+		"@vitejs/plugin-react": "^2.1.0",
+		"postcss": "^8.4.16",
+		"prettier": "2.7.1",
+		"typescript": "^4.6.4",
+		"vite": "^3.1.0",
+		"vite-plugin-pwa": "^0.12.7"
+	}
+}
