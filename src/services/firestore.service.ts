@@ -3,22 +3,22 @@ import { FirebaseService } from './@';
 
 // define service
 class FirestoreService {
-	constructor(private billData = 'bill-data', private listInfo = 'bill-info') {}
-
-	get BillData() {
-		return this.billData;
-	}
+	constructor(private listInfo = 'bill-info', private billMemo = 'bill-memo') {}
 
 	get BillInfo() {
 		return this.listInfo;
 	}
 
-	get collectionBillData() {
-		return collection(FirebaseService.Firestore, this.BillData);
+	get BillMemo() {
+		return this.billMemo;
 	}
 
 	get collectionBillInfo() {
 		return collection(FirebaseService.Firestore, this.BillInfo);
+	}
+
+	get collectionBillMemo() {
+		return collection(FirebaseService.Firestore, this.BillMemo);
 	}
 }
 

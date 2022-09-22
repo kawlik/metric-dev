@@ -6,7 +6,12 @@ export default function (props: StackProps) {
 	// component layout
 	return (
 		<Fade in>
-			<Stack {...props} flex={1} sx={{ overflowX: 'hidden', overflowY: 'scroll' }}>
+			<Stack
+				{...props}
+				component="main"
+				flex={1}
+				sx={{ overflowX: 'hidden', overflowY: 'scroll' }}
+			>
 				{props.children}
 			</Stack>
 		</Fade>

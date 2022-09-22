@@ -1,6 +1,14 @@
-import { Avatar, ListItemAvatar, ListItemButton, ListItemText } from '@mui/material';
+import {
+	Avatar,
+	ListItemAvatar,
+	ListItemButton,
+	ListItemText,
+	Stack,
+	Typography,
+} from '@mui/material';
+import { Box } from '@mui/system';
 
-export default function (props: {}) {
+export default function (props: { date: string; more: string; title: string }) {
 	// component logic
 
 	// component layout
@@ -10,16 +18,23 @@ export default function (props: {}) {
 				<Avatar></Avatar>
 			</ListItemAvatar>
 			<ListItemText
-				primary={
-					<span className="block overflow-hidden text-ellipsis text-xl whitespace-nowrap">
-						Ledger label
-					</span>
-				}
+				primary={props.title}
 				secondary={
-					<span className="block overflow-hidden text-ellipsis text-md whitespace-nowrap">
-						<small>12.09.2022</small>
-						<span> &bull; You and X others</span>
-					</span>
+					<Stack
+						alignItems="center"
+						component="span"
+						flexDirection="row"
+						gap={1}
+						overflow="hidden"
+					>
+						<Typography component="span" noWrap variant="subtitle2">
+							{props.date}
+						</Typography>
+						&bull;
+						<Typography component="span" noWrap variant="subtitle1">
+							{props.more}
+						</Typography>
+					</Stack>
 				}
 			/>
 		</ListItemButton>

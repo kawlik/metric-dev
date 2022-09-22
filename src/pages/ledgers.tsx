@@ -1,13 +1,21 @@
 import { LibraryAdd, Search } from '@mui/icons-material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AppDialog, AppPageUI } from '../components/@';
+import { useContexts } from '../contexts/@';
+import { LedgersListService } from '../services/@';
+import { BillInfoType } from '../types/@';
 import { LedgersDial, LedgersList } from './utils/@';
 
 export default function (props: {}) {
 	// component logic
+	const contexts = useContexts();
 
-	const [searchedText, setSearchedText] = useState('');
+	// component state
+	const [ledgersList, setLedgersList] = useState<BillInfoType[]>([]);
 	const [promptModal, setPromptModal] = useState(false);
+	const [searchedText, setSearchedText] = useState('');
+
+	console.log(ledgersList);
 
 	const discardSearch = () => {
 		setPromptModal(false);
@@ -18,11 +26,20 @@ export default function (props: {}) {
 		setPromptModal(false);
 	};
 
+	// component lifecycle
+	useEffect(() => {
+		LedgersListService.subscribeOn(contexts.user.get()?.phoneNumber!).subscribe((list) =>
+			setLedgersList(list),
+		);
+
+		return () => LedgersListService.unsubscribe();
+	}, []);
+
 	// component layout
 	return (
 		<>
 			<AppPageUI padding={1} paddingBottom={3}>
-				<LedgersList />
+				<LedgersList ledgersList={ledgersList} />
 				<LedgersDial
 					actions={[
 						{
