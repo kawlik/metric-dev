@@ -21,7 +21,7 @@ export default function (props: { onChange(value: string): void; value: string }
 
 	// component layout
 	return (
-		<Stack flexDirection="row" flexWrap="nowrap" gap={1}>
+		<Stack sx={{ flexDirection: 'row', flexWrap: 'nowrap', gap: 1 }}>
 			<FormControl>
 				<Select
 					displayEmpty

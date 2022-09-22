@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Link } from '@mui/material';
 
 export default function (props: { alt?: string; src: string }) {
 	// component logic
@@ -14,7 +14,7 @@ export default function (props: { alt?: string; src: string }) {
 				flex: 1,
 			}}
 		>
-			{props.alt && <a className="hidden" href={props.alt} title="source attribute" />}
+			{props.alt && <Link display="none" href={props.alt} title="source attribute" />}
 		</Box>
 	);
 }

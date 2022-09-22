@@ -9,7 +9,7 @@ export default function (props: {}) {
 
 	// component layout
 	return (
-		<AppPageUI padding={1}>
+		<AppPageUI sx={{ padding: 1 }}>
 			<AppPicture
 				alt="https://www.flaticon.com/authors/smashingstocks"
 				src={WorkInProgress}

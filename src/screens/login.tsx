@@ -41,7 +41,7 @@ export default function (props: {}) {
 				label="Verify your One-Time Password that we sent you via SMS."
 				title="Verify your OTP"
 			/>
-			<AppPageUI gap={1} padding={2}>
+			<AppPageUI sx={{ gap: 1, padding: 2 }}>
 				<AppPicture
 					alt="https://www.flaticon.com/authors/smashingstocks"
 					src={bgImage}

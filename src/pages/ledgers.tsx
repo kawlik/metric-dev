@@ -38,7 +38,7 @@ export default function (props: {}) {
 	// component layout
 	return (
 		<>
-			<AppPageUI padding={1} paddingBottom={3}>
+			<AppPageUI paddingBottom={3} sx={{ paddingX: 1, paddingBottom: 3 }}>
 				<LedgersList ledgersList={ledgersList} />
 				<LedgersDial
 					actions={[

@@ -21,11 +21,13 @@ export default function (props: { date: string; more: string; title: string }) {
 				primary={props.title}
 				secondary={
 					<Stack
-						alignItems="center"
 						component="span"
-						flexDirection="row"
-						gap={1}
-						overflow="hidden"
+						sx={{
+							alignItems: 'center',
+							flexDirection: 'row',
+							gap: 1,
+							overflow: 'hidden',
+						}}
 					>
 						<Typography component="span" noWrap variant="subtitle2">
 							{props.date}

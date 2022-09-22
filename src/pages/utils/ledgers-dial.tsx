@@ -12,7 +12,15 @@ export default function (props: {
 
 	// component layout
 	return (
-		<Box bottom={0} marginLeft="auto" marginRight={2} marginTop="auto" position="sticky">
+		<Box
+			sx={{
+				bottom: 0,
+				marginLeft: 'auto',
+				marginRight: 2,
+				marginTop: 'auto',
+				position: 'sticky',
+			}}
+		>
 			<SpeedDial ariaLabel="Speed Dial Actions" icon={<SpeedDialIcon />}>
 				{props.actions.map((item) => (
 					<SpeedDialAction
