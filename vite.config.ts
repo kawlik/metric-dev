@@ -15,6 +15,7 @@ export default defineConfig({
 				name: 'Metric',
 				short_name: 'Metric',
 				description: 'Metric — Progressive Web Application to manage your expenses!',
+				theme_color: '#FFFFFF',
 				orientation: 'portrait',
 				display: 'standalone',
 				icons: [

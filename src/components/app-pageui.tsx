@@ -9,7 +9,7 @@ export default function (props: StackProps) {
 			<Stack
 				{...props}
 				component="main"
-				sx={{ flex: 1, overflowX: 'hidden', overflowY: 'scroll' }}
+				sx={{ flex: 1, overflowX: 'hidden', overflowY: 'scroll', ...props.sx }}
 			>
 				{props.children}
 			</Stack>
