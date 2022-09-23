@@ -15,8 +15,6 @@ export default function (props: {}) {
 	const [promptModal, setPromptModal] = useState(false);
 	const [searchedText, setSearchedText] = useState('');
 
-	console.log(ledgersList);
-
 	const discardSearch = () => {
 		setPromptModal(false);
 		setSearchedText('');
