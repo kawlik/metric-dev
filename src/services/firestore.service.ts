@@ -1,5 +1,5 @@
 import { collection } from 'firebase/firestore';
-import { FirebaseService } from './@';
+import { FirebaseService } from './@.service';
 
 // define service
 class FirestoreService {

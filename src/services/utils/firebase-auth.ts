@@ -1,6 +1,6 @@
 import { onAuthStateChanged, Unsubscribe, User } from 'firebase/auth';
 import { BehaviorSubject } from 'rxjs';
-import { FirebaseService } from '../@';
+import { FirebaseService } from '../@.service';
 
 export default abstract class {
 	protected snapshot: Unsubscribe;

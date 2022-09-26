@@ -6,7 +6,7 @@ import {
 	User,
 } from 'firebase/auth';
 import { BehaviorSubject } from 'rxjs';
-import { FirebaseService } from './@';
+import { FirebaseService } from './@.service';
 import { FirebaseAuth } from './utils/@';
 
 // define service

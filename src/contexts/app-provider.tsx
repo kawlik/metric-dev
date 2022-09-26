@@ -3,7 +3,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { User } from 'firebase/auth';
 import { PropsWithChildren, useEffect, useState } from 'react';
 import { MUIThemeDark, MUIThemeLight } from '../configs/@';
-import { AuthService } from '../services/@';
+import { AuthService } from '../services/@.service';
 import { AppContext } from './app-contexts';
 
 export default function (props: PropsWithChildren) {

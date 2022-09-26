@@ -2,7 +2,7 @@ import { List } from '@mui/material';
 import { BillInfoType } from '../../types/@';
 import { LedgersItem } from './@';
 
-export default function (props: { ledgersList: BillInfoType[] }) {
+export default function (props: { ledgersList: BillInfoType[]; navigate(path: string): void }) {
 	// component logic
 	const mapParticipants = (length: number): string => {
 		if (length == 1) return 'Only You';
@@ -14,12 +14,13 @@ export default function (props: { ledgersList: BillInfoType[] }) {
 	// component layout
 	return (
 		<List>
-			{props.ledgersList.map((item) => (
+			{props.ledgersList.map((bill) => (
 				<LedgersItem
-					date={item.timestampUpdated.toDate().toLocaleDateString()}
-					key={item.id}
-					more={mapParticipants(item.participants.length)}
-					title={item.title}
+					date={bill.timestampUpdated.toDate().toLocaleDateString()}
+					key={bill.id}
+					more={mapParticipants(bill.participants.length)}
+					open={() => props.navigate(bill.id!)}
+					title={bill.title}
 				/>
 			))}
 		</List>

@@ -1,6 +1,6 @@
 import { collection, Query, query, QuerySnapshot, where } from 'firebase/firestore';
 import { BehaviorSubject } from 'rxjs';
-import { FirebaseService, FirestoreService } from './@';
+import { FirebaseService, FirestoreService } from './@.service';
 import { BillInfoType } from '../types/@';
 import { FirebaseCollection } from './utils/@';
 

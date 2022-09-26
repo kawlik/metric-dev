@@ -6,14 +6,13 @@ import {
 	Stack,
 	Typography,
 } from '@mui/material';
-import { Box } from '@mui/system';
 
-export default function (props: { date: string; more: string; title: string }) {
+export default function (props: { date: string; more: string; open(): void; title: string }) {
 	// component logic
 
 	// component layout
 	return (
-		<ListItemButton>
+		<ListItemButton onClick={props.open}>
 			<ListItemAvatar>
 				<Avatar></Avatar>
 			</ListItemAvatar>

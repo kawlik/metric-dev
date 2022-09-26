@@ -2,7 +2,7 @@ import { Button, Divider, Stack, Typography } from '@mui/material';
 import { Lock, Security } from '@mui/icons-material';
 import { useState } from 'react';
 import { AppTopbar, AppPicture, AppPhoneField, AppDialog, AppPageUI } from '../components/@';
-import { AuthService, PhoneService } from '../services/@';
+import { AuthService, PhoneService } from '../services/@.service';
 
 // assets
 import bgImage from '../assets/otp-create.png';
@@ -27,7 +27,7 @@ export default function (props: {}) {
 	// component layout
 	return (
 		<>
-			<AppTopbar label="Login" />
+			<AppTopbar label="Sign In" />
 			<AppPageUI gap={1} p={2}>
 				<AppPicture
 					alt="https://www.flaticon.com/authors/smashingstocks"

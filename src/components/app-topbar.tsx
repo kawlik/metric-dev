@@ -12,7 +12,7 @@ export default function (props: {
 	return (
 		<AppBar color="inherit" elevation={0} position="static">
 			<Toolbar>
-				<IconButton disabled={!props?.utilL}>
+				<IconButton disabled={!props?.utilL} onClick={props.utilL?.action}>
 					{props.utilL?.icon || <SvgIcon />}
 				</IconButton>
 				<Typography

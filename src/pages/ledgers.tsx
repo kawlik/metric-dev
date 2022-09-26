@@ -1,14 +1,16 @@
 import { LibraryAdd, Search } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AppDialog, AppPageUI } from '../components/@';
 import { useContexts } from '../contexts/@';
-import { LedgersListService } from '../services/@';
+import { LedgersListService } from '../services/@.service';
 import { BillInfoType } from '../types/@';
 import { LedgersDial, LedgersList } from './utils/@';
 
 export default function (props: {}) {
 	// component logic
 	const contexts = useContexts();
+	const navigate = useNavigate();
 
 	// component state
 	const [ledgersList, setLedgersList] = useState<BillInfoType[]>([]);
@@ -24,6 +26,8 @@ export default function (props: {}) {
 		setPromptModal(false);
 	};
 
+	const navigateBill = (billID: string) => navigate(`/ledger/${billID}`);
+
 	// component lifecycle
 	useEffect(() => {
 		LedgersListService.subscribeOn(contexts.user.get()?.phoneNumber!).subscribe((list) =>
@@ -37,7 +41,7 @@ export default function (props: {}) {
 	return (
 		<>
 			<AppPageUI paddingBottom={3} sx={{ paddingX: 1, paddingBottom: 3 }}>
-				<LedgersList ledgersList={ledgersList} />
+				<LedgersList ledgersList={ledgersList} navigate={navigateBill} />
 				<LedgersDial
 					actions={[
 						{
