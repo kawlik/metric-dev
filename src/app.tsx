@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useContexts } from './contexts/@';
-import { PageAccount, PageLedgers, PageReports, PageUpdates } from './pages/@';
-import { ScreenHome, ScreenLogin } from './screens/@';
+import { AccountPage, LedgersPage, ReportsPage, UpdatesPage } from './pages/@';
+import { HomeScreen, LoginScreen } from './screens/@';
 
 export default function (props: {}) {
 	// component logic
@@ -12,17 +12,17 @@ export default function (props: {}) {
 		<Routes>
 			<Route path="*" element={<Navigate to="login" />} />
 
-			<Route path="login" element={<ScreenLogin />} />
+			<Route path="login" element={<LoginScreen />} />
 		</Routes>
 	) : (
 		<Routes>
 			<Route path="*" element={<Navigate to="ledgers" />} />
 
-			<Route path="*" element={<ScreenHome />}>
-				<Route path="account" element={<PageAccount />} />
-				<Route path="ledgers" element={<PageLedgers />} />
-				<Route path="reports" element={<PageReports />} />
-				<Route path="updates" element={<PageUpdates />} />
+			<Route path="*" element={<HomeScreen />}>
+				<Route path="account" element={<AccountPage />} />
+				<Route path="ledgers" element={<LedgersPage />} />
+				<Route path="reports" element={<ReportsPage />} />
+				<Route path="updates" element={<UpdatesPage />} />
 			</Route>
 		</Routes>
 	);

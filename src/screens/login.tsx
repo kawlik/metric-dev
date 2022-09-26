@@ -28,20 +28,7 @@ export default function (props: {}) {
 	return (
 		<>
 			<AppTopbar label="Login" />
-			<AppDialog
-				actionDiscard={() => setPromptModal(false)}
-				actionProcess={() => verifyCode()}
-				input={{
-					label: 'Enter your OTP',
-					onChange: setConfirmCode,
-					value: confromCode.slice(0, 6),
-					type: 'number',
-				}}
-				isOpen={promptModal}
-				label="Verify your One-Time Password that we sent you via SMS."
-				title="Verify your OTP"
-			/>
-			<AppPageUI sx={{ gap: 1, padding: 2 }}>
+			<AppPageUI gap={1} p={2}>
 				<AppPicture
 					alt="https://www.flaticon.com/authors/smashingstocks"
 					src={bgImage}
@@ -68,6 +55,19 @@ export default function (props: {}) {
 					<div id="recaptcha-verifier-refrence" />
 				</Stack>
 			</AppPageUI>
+			<AppDialog
+				actionDiscard={() => setPromptModal(false)}
+				actionProcess={() => verifyCode()}
+				input={{
+					label: 'Enter your OTP',
+					onChange: setConfirmCode,
+					value: confromCode.slice(0, 6),
+					type: 'number',
+				}}
+				isOpen={promptModal}
+				label="Verify your One-Time Password that we sent you via SMS."
+				title="Verify your OTP"
+			/>
 		</>
 	);
 }

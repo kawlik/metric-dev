@@ -1,4 +1,4 @@
-export { default as PageAccount } from './account';
-export { default as PageLedgers } from './ledgers';
-export { default as PageReports } from './reports';
-export { default as PageUpdates } from './updates';
+export { default as AccountPage } from './account';
+export { default as LedgersPage } from './ledgers';
+export { default as ReportsPage } from './reports';
+export { default as UpdatesPage } from './updates';
