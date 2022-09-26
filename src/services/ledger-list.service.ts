@@ -1,4 +1,12 @@
-import { collection, orderBy, Query, query, QuerySnapshot, Timestamp, where } from 'firebase/firestore';
+import {
+	collection,
+	orderBy,
+	Query,
+	query,
+	QuerySnapshot,
+	Timestamp,
+	where,
+} from 'firebase/firestore';
 import { BehaviorSubject } from 'rxjs';
 import { FirebaseService, FirestoreService } from './@';
 import { BillInfoType } from '../types/@';
@@ -15,7 +23,7 @@ class LedgerListService<T> extends FirebaseCollection<T> {
 			collection(FirebaseService.Firestore, FirestoreService.BillInfo),
 			where('participants', 'array-contains', document),
 			where('timestampClosed', '!=', null),
-            orderBy('timestampClosed', 'desc'),
+			orderBy('timestampClosed', 'desc'),
 		);
 	};
 

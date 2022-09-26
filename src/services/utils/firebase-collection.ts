@@ -16,8 +16,8 @@ export default abstract class FirebaseCollection<T> {
 	subscribeOn = (identifier: string) => {
 		this.unsubscribe();
 		this.snapshot = onSnapshot(this.register(identifier), this.callback, (err) => {
-            console.error(err);
-        });
+			console.error(err);
+		});
 
 		return this.subject$;
 	};
