@@ -1,8 +1,8 @@
-import { ReportScreenView } from './views/@';
+import { SignUpScreenView } from './views/@';
 
 export default function (props: {}) {
 	// component logic
 
 	// component layout
-	return <ReportScreenView />;
+	return <SignUpScreenView />;
 }
