@@ -1,4 +1,4 @@
 export default interface Contexts<T> {
-	get: () => T;
-	set: (item: T) => void;
+	get: () => undefined | T;
+	set: (ctx: undefined | T) => void;
 }

@@ -21,7 +21,7 @@ export default function (props: {}) {
 	const contexts = useContexts();
 
 	// component layout
-	return !!contexts.auth ? (
+	return !contexts.auth.get() ? (
 		<Routes>
 			<Route path="*" element={<Navigate to="sign-in" />} />
 

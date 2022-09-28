@@ -1,21 +1,23 @@
-import { useMediaQuery } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
-import { User } from 'firebase/auth';
 import { PropsWithChildren, useEffect, useState } from 'react';
 import { MUIThemeDark, MUIThemeLight } from '../configs/@';
 import { AuthService } from '../services/@.service';
-import { AppContext } from './app-contexts';
+import { AppContext, AuthType, ModeType, UserType } from './app-contexts';
 
 export default function (props: PropsWithChildren) {
 	// component logic
-	const prefersDark = useMediaQuery('(prefers-color-scheme: dark)');
 
-	const [user, setUser] = useState<User | null>(null);
-	const [mode, setMode] = useState<'dark' | 'light'>('light');
+	// component state
+	const [auth, setAuth] = useState<AuthType>(undefined);
+	const [mode, setMode] = useState<ModeType>('light');
+	const [user, setUser] = useState<UserType>(undefined);
 
 	// component lifecycle
 	useEffect(() => {
-		AuthService.subscribeOn().subscribe((user) => setUser(user));
+		AuthService.subscribeOn().subscribe((user) => {
+			setAuth(!!user);
+			setUser(user);
+		});
 
 		return () => AuthService.unsubscribe();
 	}, []);
@@ -26,9 +28,9 @@ export default function (props: PropsWithChildren) {
 			<AppContext.Provider
 				children={props.children}
 				value={{
-					auth: !!user,
-					mode: { get: () => mode, set: (item) => setMode(item) },
-					user: { get: () => user, set: (item) => setUser(item) },
+					auth: { get: () => auth, set: (ctx) => setAuth(ctx) },
+					mode: { get: () => mode, set: (ctx) => setMode(ctx) },
+					user: { get: () => user, set: (ctx) => setUser(ctx) },
 				}}
 			/>
 		</ThemeProvider>

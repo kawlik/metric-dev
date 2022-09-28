@@ -7,6 +7,8 @@ import {
 
 // define dervice
 class PhoneService {
+	readonly countries: { code: CountryCode; name: string }[] = [{ code: 'PL', name: '🇵🇱' }];
+
 	asTypedPhoneNumber = (phone: string, code?: CountryCode) =>
 		new AsYouType(code).input(phone);
 
