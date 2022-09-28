@@ -1,12 +1,8 @@
-import { AppPageUI } from '../components/@';
+import { BillViewPageView } from './views/@';
 
 export default function (props: {}) {
 	// component logic
 
 	// component layout
-	return (
-		<>
-			<AppPageUI></AppPageUI>
-		</>
-	);
+	return <BillViewPageView />;
 }
