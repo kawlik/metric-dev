@@ -14,7 +14,6 @@ export default function (props: PropsWithChildren) {
 
 	// component lifecycle
 	useEffect(() => {
-		AuthService.logout();
 		AuthService.subscribeOn().subscribe((user) => {
 			setAuth(!!user);
 			setUser(user);
