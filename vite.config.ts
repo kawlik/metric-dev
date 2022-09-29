@@ -11,6 +11,9 @@ export default defineConfig({
 		react(),
 		VitePWA({
 			registerType: 'autoUpdate',
+			workbox: {
+				globPatterns: ['**/*.*'],
+			},
 			manifest: {
 				name: 'Metric',
 				short_name: 'Metric',

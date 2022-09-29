@@ -22,7 +22,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 );
 
 // app service worker
-registerSW({
-	onNeedRefresh() {},
-	onOfflineReady() {},
-});
+// registerSW({
+// 	onNeedRefresh() {},
+// 	onOfflineReady() {},
+// });
