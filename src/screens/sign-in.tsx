@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AuthService, PhoneService } from '../services/@.service';
 import { SignInRecaptcha, AppViewLoading } from '../components/@';
 import { useContexts } from '../contexts/@';
@@ -12,6 +12,9 @@ export default function (props: {}) {
 	// component logic
 	const contexts = useContexts();
 	const navigate = useNavigate();
+
+	const isSignedIn = contexts.auth.get() === true;
+	const isSignedUp = !!contexts.user.get()?.displayName;
 
 	// component state
 	const [phoneNumber, setPhoneNumber] = useState('');
@@ -31,6 +34,11 @@ export default function (props: {}) {
 	};
 
 	const verifyOTP = () => AuthService.verifyOTP(verifyCode);
+
+	// component lifecycle
+	useEffect(() => {
+		if (isSignedIn && !isSignedUp) navigate('/sign-up/');
+	}, [contexts]);
 
 	// component layout
 	return (
