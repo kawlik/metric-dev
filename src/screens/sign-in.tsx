@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { PhoneService } from '../services/@.service';
-import { AppRecaptcha, AppViewLoading } from '../components/@';
+import { AuthService, PhoneService } from '../services/@.service';
+import { SignInRecaptcha, AppViewLoading } from '../components/@';
 import { useContexts } from '../contexts/@';
 import { SignInScreenView } from './views/@';
 
@@ -13,28 +13,35 @@ export default function (props: {}) {
 
 	// component state
 	const [phoneNumber, setPhoneNumber] = useState('');
+	const [promptVerifier, setPromptVerifier] = useState(false);
 	const [verifyCode, setVerifyCode] = useState('');
 
 	const canGenerateOTP = PhoneService.isValidPhoneNumber(phoneNumber);
-	const isLoading = contexts.auth.get() === null;
+	const canVerifyOTP = verifyCode.length >= 4;
+	const isViewLoading = contexts.auth.get() === null;
+
+	const closeVerifier = () => setPromptVerifier(false);
+	const openOTPCodeVerify = () => {
+		AuthService.createOTP(phoneNumber).then(() => setPromptVerifier(true));
+	};
+	const verifyOTP = () => AuthService.verifyOTP(verifyCode);
 
 	// component layout
 	return (
-		<>
-			<AppViewLoading isLoading={isLoading} />
-			<AppRecaptcha />
-			<SignInScreenView
-				get={{
-					phoneNumber: phoneNumber,
-				}}
-				set={{
-					phoneNumber: setPhoneNumber,
-				}}
-				canGenerateOTP={canGenerateOTP}
-				openPrivacyPolicy={() => alert('unimplemented (src\\screens\\sign-in.tsx)')}
-				openOTPCodeVerify={() => alert('unimplemented (src\\screens\\sign-in.tsx)')}
-				srcAppLogo={AppLogo}
-			/>
-		</>
+		<SignInScreenView
+			canGenerateOTP={canGenerateOTP}
+			canVerifyOTP={canVerifyOTP}
+			closeVerifier={closeVerifier}
+			getPhoneNumber={phoneNumber}
+			getVerifyCode={verifyCode}
+			isViewLoading={isViewLoading}
+			isVerifierOpen={promptVerifier}
+			openPrivacyPolicy={() => alert('unimplemented (src\\screens\\sign-in.tsx)')}
+			openOTPCodeVerify={openOTPCodeVerify}
+			setPhoneNumber={setPhoneNumber}
+			setVerifyCode={setVerifyCode}
+			srcAppLogo={AppLogo}
+			verifyOTP={verifyOTP}
+		/>
 	);
 }

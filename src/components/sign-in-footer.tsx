@@ -6,15 +6,13 @@ export default function (props: { openPrivacyPolicy(): void }) {
 
 	// component layout
 	return (
-		<Stack component={'footer'} marginTop={'auto'}>
+		<Stack component={'footer'}>
 			<Box m={'auto'}>
 				<Lock fontSize={'large'} />
 			</Box>
-			<Box mt={'auto'}>
-				<Button fullWidth={true} onClick={props.openPrivacyPolicy}>
-					Privacy policy
-				</Button>
-			</Box>
+			<Button fullWidth={true} onClick={props.openPrivacyPolicy}>
+				Privacy policy
+			</Button>
 		</Stack>
 	);
 }
