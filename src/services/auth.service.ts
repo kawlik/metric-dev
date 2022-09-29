@@ -31,7 +31,7 @@ class AuthService extends FirebaseAuth {
 	};
 
 	verifyOTP = async (code: string): Promise<void> => {
-		await this.recapthcaResult?.confirm(code).then(() => this.recapthcaVerifier?.clear());
+		await this.recapthcaResult?.confirm(code);
 	};
 
 	private attempt = (phone: string) => {

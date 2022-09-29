@@ -6,10 +6,12 @@ import { SignInScreenView } from './views/@';
 
 // assets
 import AppLogo from '../assets/app-logo.png';
+import { useNavigate } from 'react-router-dom';
 
 export default function (props: {}) {
 	// component logic
 	const contexts = useContexts();
+	const navigate = useNavigate();
 
 	// component state
 	const [phoneNumber, setPhoneNumber] = useState('');
@@ -20,10 +22,14 @@ export default function (props: {}) {
 	const canVerifyOTP = verifyCode.length >= 4;
 	const isViewLoading = contexts.auth.get() === null;
 
-	const closeVerifier = () => setPromptVerifier(false);
+	const closeVerifier = () => {
+		setPromptVerifier(false);
+	};
+
 	const openOTPCodeVerify = () => {
 		AuthService.createOTP(phoneNumber).then(() => setPromptVerifier(true));
 	};
+
 	const verifyOTP = () => AuthService.verifyOTP(verifyCode);
 
 	// component layout

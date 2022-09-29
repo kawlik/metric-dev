@@ -1,4 +1,5 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import { useContexts } from './contexts/@';
 import {
 	AccountPage,
@@ -19,9 +20,18 @@ import {
 export default function (props: {}) {
 	// component logic
 	const contexts = useContexts();
+	const navigate = useNavigate();
+
+	const isSignedIn = !!contexts.auth.get();
+	const isSignedUp = !!contexts.user.get()?.displayName;
+
+	// component lifecycle
+	useEffect(() => {
+		if (isSignedIn && !isSignedUp) navigate('sign-up');
+	}, [contexts]);
 
 	// component layout
-	return !contexts.auth.get() ? (
+	return !isSignedUp ? (
 		<Routes>
 			<Route path="*" element={<Navigate to="sign-in" />} />
 
