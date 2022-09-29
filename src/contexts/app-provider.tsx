@@ -8,12 +8,13 @@ export default function (props: PropsWithChildren) {
 	// component logic
 
 	// component state
-	const [auth, setAuth] = useState<AuthType>(undefined);
+	const [auth, setAuth] = useState<AuthType>(null);
 	const [mode, setMode] = useState<ModeType>('light');
-	const [user, setUser] = useState<UserType>(undefined);
+	const [user, setUser] = useState<UserType>(null);
 
 	// component lifecycle
 	useEffect(() => {
+		AuthService.logout();
 		AuthService.subscribeOn().subscribe((user) => {
 			setAuth(!!user);
 			setUser(user);
@@ -28,9 +29,9 @@ export default function (props: PropsWithChildren) {
 			<AppContext.Provider
 				children={props.children}
 				value={{
-					auth: { get: () => auth, set: (ctx) => setAuth(ctx) },
-					mode: { get: () => mode, set: (ctx) => setMode(ctx) },
-					user: { get: () => user, set: (ctx) => setUser(ctx) },
+					auth: { get: () => auth, set: setAuth },
+					mode: { get: () => mode, set: setMode },
+					user: { get: () => user, set: setUser },
 				}}
 			/>
 		</ThemeProvider>

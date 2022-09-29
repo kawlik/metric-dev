@@ -3,9 +3,9 @@ import { createContext, useContext } from 'react';
 import { ContextsType } from '../types/@';
 
 // define contexts
-export type AuthType = undefined | boolean;
-export type ModeType = undefined | 'dark' | 'light';
-export type UserType = undefined | User | null;
+export type AuthType = null | boolean;
+export type ModeType = null | 'dark' | 'light';
+export type UserType = null | User;
 
 // create contexts
 export const AppContext = createContext<{
@@ -13,9 +13,9 @@ export const AppContext = createContext<{
 	mode: ContextsType<ModeType>;
 	user: ContextsType<UserType>;
 }>({
-	auth: { get: () => undefined, set: (ctx) => {} },
-	mode: { get: () => undefined, set: (ctx) => {} },
-	user: { get: () => undefined, set: (ctx) => {} },
+	auth: { get: () => null, set: (ctx) => {} },
+	mode: { get: () => null, set: (ctx) => {} },
+	user: { get: () => null, set: (ctx) => {} },
 });
 
 // export consumer

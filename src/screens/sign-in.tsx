@@ -16,7 +16,7 @@ export default function (props: {}) {
 	const [verifyCode, setVerifyCode] = useState('');
 
 	const canGenerateOTP = PhoneService.isValidPhoneNumber(phoneNumber);
-	const isLoading = contexts.auth.get() === undefined;
+	const isLoading = contexts.auth.get() === null;
 
 	// component layout
 	return (

@@ -18,29 +18,24 @@ export default function (props: {
 
 	// component layout
 	return (
-		<Stack component={'main'} flex={1} justifyContent={'center'} padding={1}>
-			<SignInHeader srcAvatar={props.srcAppLogo} />
-			<Stack gap={1} marginY={2}>
-				<Box>
-					<AppPhoneField
-						onChange={props.set.phoneNumber}
-						value={props.get.phoneNumber}
-					/>
-				</Box>
-				<Box>
-					<Button
-						disabled={!props.canGenerateOTP}
-						endIcon={<Security />}
-						fullWidth={true}
-						onClick={props.openOTPCodeVerify}
-						size={'large'}
-						variant={'outlined'}
-					>
-						Generate OTP
-					</Button>
-				</Box>
+		<Stack component={'main'} flex={1} padding={1}>
+			<Stack gap={1} marginY={'auto'}>
+				<SignInHeader srcAvatar={props.srcAppLogo} />
+				<AppPhoneField onChange={props.set.phoneNumber} value={props.get.phoneNumber} />
+				<Button
+					disabled={!props.canGenerateOTP}
+					endIcon={<Security />}
+					fullWidth={true}
+					onClick={props.openOTPCodeVerify}
+					size={'large'}
+					variant={'outlined'}
+				>
+					Generate OTP
+				</Button>
 			</Stack>
-			<SignInFooter openPrivacyPolicy={props.openPrivacyPolicy} />
+			<Box>
+				<SignInFooter openPrivacyPolicy={props.openPrivacyPolicy} />
+			</Box>
 		</Stack>
 	);
 }
