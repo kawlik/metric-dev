@@ -4,7 +4,7 @@ import { CountryCode } from 'libphonenumber-js';
 import { useEffect, useState } from 'react';
 import { PhoneService } from '../services/@.service';
 
-export default function (props: { onChange(value: string): void; value: string }) {
+export default function (props: { onChange(value: string): void; value?: string }) {
 	// component logic
 
 	// component state

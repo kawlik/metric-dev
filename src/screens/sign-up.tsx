@@ -8,14 +8,6 @@ export default function (props: {}) {
 	const contexts = useContexts();
 	const navigate = useNavigate();
 
-	const isSignedIn = contexts.auth.get() === true;
-	const isSignedUp = !!contexts.user.get()?.displayName;
-
-	// component lifecycle
-	useEffect(() => {
-		if (!isSignedIn) navigate('/sign-in/');
-	}, [contexts]);
-
 	// component layout
 	return <SignUpScreenView />;
 }

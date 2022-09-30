@@ -24,7 +24,7 @@ class AuthService extends FirebaseAuth {
 		if (confirm('Are you sure you want to log out?')) FirebaseService.Auth.signOut();
 	};
 
-	createOTP = async (phone: string): Promise<void> => {
+	generateOTP = async (phone: string): Promise<void> => {
 		await this.prepare()
 			.then(() => this.attempt(phone))
 			.then((result) => (this.recapthcaResult = result));

@@ -21,10 +21,9 @@ export default function (props: {}) {
 	const contexts = useContexts();
 
 	const isSignedIn = contexts.auth.get() === true;
-	const isSignedUp = !!contexts.user.get()?.displayName;
 
 	// component layout
-	return !isSignedIn || !isSignedUp ? (
+	return !isSignedIn ? (
 		<Routes>
 			<Route path="*" element={<Navigate to="sign-in" />} />
 

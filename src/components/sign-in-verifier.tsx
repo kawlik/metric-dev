@@ -5,68 +5,81 @@ import {
 	DialogActions,
 	DialogContent,
 	DialogTitle,
+	LinearProgress,
 	TextField,
 } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function (props: {
-	canVerify: boolean;
 	closeVerifier(): void;
-	isOpen: boolean;
-	getVerifyCode: string;
-	setVerifyCode(value: string): void;
-	verifyOTP(): Promise<void>;
+	isVerifierOpen: boolean;
+	verifyOTPCode(otpCode: string): Promise<void>;
 }) {
 	// component logic
+	const closeAfterSec = 100;
+	const helperTextMap = {
+		'in-initial': 'Enter the code you received by SMS.',
+		'in-failure': 'Invalid verification code. Try again.',
+		'in-pending': 'Verification. Please wait.',
+	};
 
 	// component state
-	const [isInvalid, setIsInvalid] = useState(false);
-	const [isPending, setIsPending] = useState(false);
+	const [verifyCode, setVerifyCode] = useState('');
+	const [verifyTime, setVerifyTime] = useState(closeAfterSec);
+	const [verifyStep, setVerifyStep] = useState<'in-initial' | 'in-failure' | 'in-pending'>(
+		'in-initial',
+	);
 
-	const onCancel = () => {
-		props.setVerifyCode('');
+	const helperText = helperTextMap[verifyStep];
+	const hasErrored = verifyStep === 'in-failure';
+	const inProgress = verifyStep === 'in-pending';
+
+	const closeVerifier = () => {
+		setVerifyStep('in-initial');
+
 		props.closeVerifier();
 	};
 
-	const onVerify = () => {
-		setIsPending(true);
-		setIsInvalid(false);
+	const verifyOTP = () => {
+		setVerifyStep('in-pending');
 
-		props
-			.verifyOTP()
-			.catch(() => {
-				setIsInvalid(true);
-			})
-			.finally(() => setIsPending(false));
+		props.verifyOTPCode(verifyCode).catch(() => setVerifyStep('in-failure'));
 	};
+
+	// component lifecycle
+	useEffect(() => {
+		const autoCloseInterval = setInterval(() => setVerifyTime((prev) => prev - 1), 1000);
+
+		return () => {
+			clearInterval(autoCloseInterval);
+			setVerifyTime(closeAfterSec);
+		};
+	}, [props.isVerifierOpen]);
 
 	// component layout
 	return (
-		<Dialog fullWidth={true} open={props.isOpen} maxWidth={'sm'}>
-			<DialogTitle>Verify Your OTP</DialogTitle>
+		<Dialog fullWidth={true} open={props.isVerifierOpen} maxWidth={'sm'}>
+			<LinearProgress value={verifyTime} variant={'determinate'} />
+			<DialogTitle>Verify OTP code</DialogTitle>
 			<DialogContent>
 				<TextField
 					autoFocus={true}
-					error={isInvalid}
+					error={hasErrored}
 					fullWidth={true}
-					helperText={isInvalid ? 'Invalid authentication code.' : ''}
-					onChange={(e) => props.setVerifyCode(e.target.value)}
+					helperText={helperText}
+					margin={'dense'}
+					onChange={(e) => setVerifyCode(e.target.value)}
 					size={'small'}
 					type={'number'}
-					value={props.getVerifyCode}
+					value={verifyCode}
 				/>
 			</DialogContent>
 			<DialogActions>
-				<Button color="inherit" onClick={onCancel}>
+				<Button color={'inherit'} onClick={closeVerifier}>
 					Cancel
 				</Button>
-				<Button
-					color="primary"
-					disabled={!props.canVerify || isPending}
-					onClick={onVerify}
-					sx={{ position: 'relative' }}
-				>
-					{isPending && <CircularProgress size={24} sx={{ position: 'absolute' }} />}
+				<Button disabled={inProgress} onClick={verifyOTP} sx={{ position: 'relative' }}>
+					{inProgress && <CircularProgress size={24} sx={{ position: 'absolute' }} />}
 					Verify
 				</Button>
 			</DialogActions>

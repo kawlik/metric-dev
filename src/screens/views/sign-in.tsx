@@ -55,7 +55,7 @@ export default function (props: {
 					<SignInVerifier
 						canVerify={props.canVerifyOTP}
 						closeVerifier={props.closeVerifier}
-						isOpen={props.isVerifierOpen}
+						isVerifierOpen={props.isVerifierOpen}
 						getVerifyCode={props.getVerifyCode}
 						setVerifyCode={props.setVerifyCode}
 						verifyOTP={props.verifyOTP}

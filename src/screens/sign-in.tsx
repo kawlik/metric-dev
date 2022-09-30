@@ -1,61 +1,67 @@
+import { Box, Stack } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { AuthService, PhoneService } from '../services/@.service';
-import { SignInRecaptcha, AppViewLoading } from '../components/@';
+import { useNavigate } from 'react-router-dom';
+import { AuthService } from '../services/@.service';
+import {
+	AppViewLoading,
+	AppViewStack,
+	SignInFooter,
+	SignInHeader,
+	SignInRecaptcha,
+	SignInRegister,
+	SignInVerifier,
+} from '../components/@';
 import { useContexts } from '../contexts/@';
-import { SignInScreenView } from './views/@';
 
 // assets
 import AppLogo from '../assets/app-logo.png';
-import { useNavigate } from 'react-router-dom';
 
 export default function (props: {}) {
 	// component logic
 	const contexts = useContexts();
 	const navigate = useNavigate();
 
+	const isLoading = contexts.auth.get() === null;
 	const isSignedIn = contexts.auth.get() === true;
-	const isSignedUp = !!contexts.user.get()?.displayName;
 
 	// component state
-	const [phoneNumber, setPhoneNumber] = useState('');
-	const [promptVerifier, setPromptVerifier] = useState(false);
-	const [verifyCode, setVerifyCode] = useState('');
-
-	const canGenerateOTP = PhoneService.isValidPhoneNumber(phoneNumber);
-	const canVerifyOTP = verifyCode.length >= 4;
-	const isViewLoading = contexts.auth.get() === null;
+	const [isVerifierOpen, setIsVerifierOpen] = useState(false);
 
 	const closeVerifier = () => {
-		setPromptVerifier(false);
+		return setIsVerifierOpen(false);
 	};
 
-	const openOTPCodeVerify = () => {
-		AuthService.createOTP(phoneNumber).then(() => setPromptVerifier(true));
+	const generateOTPCode = (phoneNumber: string) => {
+		return AuthService.generateOTP(phoneNumber).then(() => setIsVerifierOpen(true));
 	};
 
-	const verifyOTP = () => AuthService.verifyOTP(verifyCode);
+	const openPrivacyPolicy = () => {
+		return alert('UNIMPLEMENTED! (openPrivacyPolicy)');
+	};
 
-	// component lifecycle
-	useEffect(() => {
-		if (isSignedIn && !isSignedUp) navigate('/sign-up/');
-	}, [contexts]);
+	const verifyOTPCode = (otpCode: string) => {
+		return AuthService.verifyOTP(otpCode);
+	};
 
 	// component layout
 	return (
-		<SignInScreenView
-			canGenerateOTP={canGenerateOTP}
-			canVerifyOTP={canVerifyOTP}
-			closeVerifier={closeVerifier}
-			getPhoneNumber={phoneNumber}
-			getVerifyCode={verifyCode}
-			isViewLoading={isViewLoading}
-			isVerifierOpen={promptVerifier}
-			openPrivacyPolicy={() => alert('unimplemented (src\\screens\\sign-in.tsx)')}
-			openOTPCodeVerify={openOTPCodeVerify}
-			setPhoneNumber={setPhoneNumber}
-			setVerifyCode={setVerifyCode}
-			srcAppLogo={AppLogo}
-			verifyOTP={verifyOTP}
-		/>
+		<>
+			<AppViewLoading isLoading={isLoading} />
+			<AppViewStack flex={1} padding={1}>
+				<Stack gap={1} marginY={'auto'}>
+					<SignInHeader srcAvatar={AppLogo} />
+					<SignInRegister generateOTPCode={generateOTPCode} />
+					<SignInVerifier
+						closeVerifier={closeVerifier}
+						isVerifierOpen={isVerifierOpen}
+						verifyOTPCode={verifyOTPCode}
+					/>
+				</Stack>
+				<Box>
+					<SignInFooter openPrivacyPolicy={openPrivacyPolicy} />
+					<SignInRecaptcha />
+				</Box>
+			</AppViewStack>
+		</>
 	);
 }
