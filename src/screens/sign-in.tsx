@@ -47,8 +47,8 @@ export default function (props: {}) {
 	return (
 		<>
 			<AppViewLoading isLoading={isLoading} />
-			<AppViewStack flex={1} padding={1}>
-				<Stack gap={1} marginY={'auto'}>
+			<AppViewStack flex={1} paddingX={1} paddingY={2}>
+				<Stack gap={1} padding={1} marginY={'auto'}>
 					<SignInHeader srcAvatar={AppLogo} />
 					<SignInRegister generateOTPCode={generateOTPCode} />
 					<SignInVerifier
