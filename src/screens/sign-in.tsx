@@ -27,21 +27,21 @@ export default function (props: {}) {
 	// component state
 	const [isVerifierOpen, setIsVerifierOpen] = useState(false);
 
-	const closeVerifier = () => {
+	function closeVerifier() {
 		return setIsVerifierOpen(false);
-	};
+	}
 
-	const generateOTPCode = (phoneNumber: string) => {
+	function generateOTPCode(phoneNumber: string) {
 		return AuthService.generateOTP(phoneNumber).then(() => setIsVerifierOpen(true));
-	};
+	}
 
-	const openPrivacyPolicy = () => {
+	function openPrivacyPolicy() {
 		return alert('UNIMPLEMENTED! (openPrivacyPolicy)');
-	};
+	}
 
-	const verifyOTPCode = (otpCode: string) => {
+	function verifyOTPCode(otpCode: string) {
 		return AuthService.verifyOTP(otpCode);
-	};
+	}
 
 	// component layout
 	return (
