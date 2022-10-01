@@ -20,10 +20,8 @@ export default function (props: {}) {
 	// component logic
 	const contexts = useContexts();
 
-	const isSignedIn = contexts.auth.get() === true;
-
 	// component layout
-	return !isSignedIn ? (
+	return !contexts.isSignedUp.get() ? (
 		<Routes>
 			<Route path="*" element={<Navigate to="sign-in" />} />
 

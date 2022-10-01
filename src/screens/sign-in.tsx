@@ -1,8 +1,9 @@
-import { Box, Stack } from '@mui/material';
+import { Container, Stack } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthService } from '../services/@.service';
 import {
+	AppViewIOSChin,
 	AppViewLoading,
 	AppViewStack,
 	SignInFooter,
@@ -21,47 +22,58 @@ export default function (props: {}) {
 	const contexts = useContexts();
 	const navigate = useNavigate();
 
-	const isLoading = contexts.auth.get() === null;
-	const isSignedIn = contexts.auth.get() === true;
-
 	// component state
 	const [isVerifierOpen, setIsVerifierOpen] = useState(false);
+	const [isViewLoading, setIsViewLoading] = useState(true);
 
 	function closeVerifier() {
-		return setIsVerifierOpen(false);
+		setIsVerifierOpen(false);
 	}
 
-	function generateOTPCode(phoneNumber: string) {
-		return AuthService.generateOTP(phoneNumber).then(() => setIsVerifierOpen(true));
+	async function generateOTPCode(phoneNumber: string) {
+		await AuthService.generateOTP(phoneNumber);
+		return setIsVerifierOpen(true);
 	}
 
 	function openPrivacyPolicy() {
-		return alert('UNIMPLEMENTED! (openPrivacyPolicy)');
+		alert('openPrivacyPolicy');
 	}
 
 	function verifyOTPCode(otpCode: string) {
 		return AuthService.verifyOTP(otpCode);
 	}
 
+	// component lifecycle
+	useEffect(() => {
+		if (contexts.auth.get() !== undefined) {
+			setIsViewLoading(false);
+		}
+
+		if (contexts.isSignedIn.get() === true) {
+			navigate('/sign-up/');
+		}
+	}, [contexts.auth, contexts.isSignedIn]);
+
 	// component layout
 	return (
 		<>
-			<AppViewLoading isLoading={isLoading} />
-			<AppViewStack flex={1} paddingX={1} paddingY={2}>
-				<Stack gap={1} padding={1} marginY={'auto'}>
-					<SignInHeader srcAvatar={AppLogo} />
-					<SignInRegister generateOTPCode={generateOTPCode} />
-					<SignInVerifier
-						closeVerifier={closeVerifier}
-						isVerifierOpen={isVerifierOpen}
-						verifyOTPCode={verifyOTPCode}
-					/>
-				</Stack>
-				<Box>
-					<SignInFooter openPrivacyPolicy={openPrivacyPolicy} />
-					<SignInRecaptcha />
-				</Box>
+			<AppViewLoading isLoading={isViewLoading} />
+			<AppViewStack flex={1} gap={1} padding={1}>
+				<Container maxWidth={'md'} sx={{ marginY: 'auto' }}>
+					<Stack gap={1}>
+						<SignInHeader srcAvatar={AppLogo} />
+						<SignInRegister generateOTPCode={generateOTPCode} />
+						<SignInVerifier
+							closeVerifier={closeVerifier}
+							isVerifierOpen={isVerifierOpen}
+							verifyOTPCode={verifyOTPCode}
+						/>
+					</Stack>
+				</Container>
+				<SignInRecaptcha />
+				<SignInFooter openPrivacyPolicy={openPrivacyPolicy} />
 			</AppViewStack>
+			<AppViewIOSChin />
 		</>
 	);
 }

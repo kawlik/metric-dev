@@ -1,4 +1,5 @@
 import {
+	Box,
 	Button,
 	CircularProgress,
 	Dialog,
@@ -34,17 +35,20 @@ export default function (props: {
 	const hasErrored = verifyStep === 'in-failure';
 	const inProgress = verifyStep === 'in-pending';
 
-	const closeVerifier = () => {
+	function closeVerifier() {
 		setVerifyStep('in-initial');
-
 		props.closeVerifier();
-	};
+	}
 
-	const verifyOTP = () => {
+	async function verifyOTP() {
 		setVerifyStep('in-pending');
 
-		props.verifyOTPCode(verifyCode).catch(() => setVerifyStep('in-failure'));
-	};
+		try {
+			await props.verifyOTPCode(verifyCode);
+		} catch {
+			setVerifyStep('in-failure');
+		}
+	}
 
 	// component lifecycle
 	useEffect(() => {
@@ -59,7 +63,9 @@ export default function (props: {
 	// component layout
 	return (
 		<Dialog fullWidth={true} open={props.isVerifierOpen} maxWidth={'sm'}>
-			<LinearProgress value={verifyTime} variant={'determinate'} />
+			<Box width={'100%'}>
+				<LinearProgress value={verifyTime} variant={'determinate'} />
+			</Box>
 			<DialogTitle>Verify OTP code</DialogTitle>
 			<DialogContent>
 				<TextField

@@ -2,21 +2,22 @@ import { ThemeProvider } from '@mui/material/styles';
 import { PropsWithChildren, useEffect, useState } from 'react';
 import { MUIThemeDark, MUIThemeLight } from '../configs/@';
 import { AuthService } from '../services/@.service';
-import { AppContext, AuthType, ModeType, UserType } from './app-contexts';
+import { AppContext, AuthType, ModeType } from './app-contexts';
 
 export default function (props: PropsWithChildren) {
 	// component logic
 
 	// component state
-	const [auth, setAuth] = useState<AuthType>(null);
-	const [mode, setMode] = useState<ModeType>('light');
-	const [user, setUser] = useState<UserType>(null);
+	const [auth, setAuth] = useState<AuthType>(undefined);
+	const [mode, setMode] = useState<ModeType>(undefined);
+	const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
+	const [isSignedUp, setIsSignedUp] = useState<boolean>(false);
 
 	// component lifecycle
 	useEffect(() => {
 		AuthService.subscribeOn().subscribe((user) => {
-			setAuth(!!user);
-			setUser(user);
+			setIsSignedIn(!!user);
+			setAuth(user);
 		});
 
 		return () => AuthService.unsubscribe();
@@ -30,7 +31,8 @@ export default function (props: PropsWithChildren) {
 				value={{
 					auth: { get: () => auth, set: setAuth },
 					mode: { get: () => mode, set: setMode },
-					user: { get: () => user, set: setUser },
+					isSignedIn: { get: () => isSignedIn, set: setIsSignedIn },
+					isSignedUp: { get: () => isSignedUp, set: setIsSignedUp },
 				}}
 			/>
 		</ThemeProvider>

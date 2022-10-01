@@ -11,7 +11,13 @@ export default function (props: { generateOTPCode(phoneNumber: string): Promise<
 	const [canGenerate, setCanGenerate] = useState(false);
 	const [phoneNumber, setPhoneNumber] = useState('');
 
-	const generate = () => props.generateOTPCode(phoneNumber);
+	async function generate() {
+		try {
+			await props.generateOTPCode(phoneNumber);
+		} catch {
+			alert('Something went wrong. Please try again later.');
+		}
+	}
 
 	// component lifecycle
 	useEffect(() => {
