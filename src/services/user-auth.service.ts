@@ -10,7 +10,7 @@ import { FirebaseService } from './@.service';
 import { FirebaseAuth } from './utils/@';
 
 // define service
-class AuthService extends FirebaseAuth {
+class UserAuthService extends FirebaseAuth {
 	constructor(
 		private recapthcaParams: RecaptchaParameters = { size: 'invisible' },
 		private recapthcaResult: ConfirmationResult | null = null,
@@ -51,4 +51,4 @@ class AuthService extends FirebaseAuth {
 }
 
 // export service
-export default new AuthService();
+export default new UserAuthService();

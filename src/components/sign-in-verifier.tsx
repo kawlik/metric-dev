@@ -63,7 +63,7 @@ export default function (props: {
 	// component layout
 	return (
 		<Dialog fullWidth={true} open={props.isVerifierOpen} maxWidth={'sm'}>
-			<Box width={'100%'}>
+			<Box overflow={'hidden'} width={'100%'}>
 				<LinearProgress value={verifyTime} variant={'determinate'} />
 			</Box>
 			<DialogTitle>Verify OTP code</DialogTitle>

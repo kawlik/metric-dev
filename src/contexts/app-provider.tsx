@@ -1,7 +1,7 @@
 import { ThemeProvider } from '@mui/material/styles';
 import { PropsWithChildren, useEffect, useState } from 'react';
 import { MUIThemeDark, MUIThemeLight } from '../configs/@';
-import { AuthService } from '../services/@.service';
+import { UserAuthService } from '../services/@.service';
 import { AppContext, AuthType, ModeType } from './app-contexts';
 
 export default function (props: PropsWithChildren) {
@@ -15,12 +15,12 @@ export default function (props: PropsWithChildren) {
 
 	// component lifecycle
 	useEffect(() => {
-		AuthService.subscribeOn().subscribe((user) => {
+		UserAuthService.subscribeOn().subscribe((user) => {
 			setIsSignedIn(!!user);
 			setAuth(user);
 		});
 
-		return () => AuthService.unsubscribe();
+		return () => UserAuthService.unsubscribe();
 	}, []);
 
 	// component layout

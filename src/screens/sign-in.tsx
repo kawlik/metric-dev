@@ -1,7 +1,7 @@
 import { Container, Stack } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthService } from '../services/@.service';
+import { UserAuthService } from '../services/@.service';
 import {
 	AppViewIOSChin,
 	AppViewLoading,
@@ -31,7 +31,7 @@ export default function (props: {}) {
 	}
 
 	async function generateOTPCode(phoneNumber: string) {
-		await AuthService.generateOTP(phoneNumber);
+		await UserAuthService.generateOTP(phoneNumber);
 		return setIsVerifierOpen(true);
 	}
 
@@ -40,7 +40,7 @@ export default function (props: {}) {
 	}
 
 	function verifyOTPCode(otpCode: string) {
-		return AuthService.verifyOTP(otpCode);
+		return UserAuthService.verifyOTP(otpCode);
 	}
 
 	// component lifecycle

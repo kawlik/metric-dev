@@ -1,7 +1,6 @@
 import { Security } from '@mui/icons-material';
 import { Button } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { PhoneService } from '../services/@.service';
 import { AppPhoneField } from './@';
 
 export default function (props: { generateOTPCode(phoneNumber: string): Promise<void> }) {
@@ -21,7 +20,7 @@ export default function (props: { generateOTPCode(phoneNumber: string): Promise<
 
 	// component lifecycle
 	useEffect(() => {
-		if (PhoneService.isValidPhoneNumber(phoneNumber)) {
+		if (!!phoneNumber.length) {
 			setCanGenerate(true);
 		} else {
 			setCanGenerate(false);

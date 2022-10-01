@@ -2,7 +2,7 @@ import { MenuItem, Select, TextField } from '@mui/material';
 import { Stack } from '@mui/system';
 import { CountryCode } from 'libphonenumber-js';
 import { useEffect, useState } from 'react';
-import { PhoneService } from '../services/@.service';
+import { AppPhoneService } from '../services/@.service';
 
 export default function (props: { onChange(value: string): void; value?: string }) {
 	// component logic
@@ -15,9 +15,9 @@ export default function (props: { onChange(value: string): void; value?: string 
 	useEffect(() => {
 		if (phoneNumber.length < 9) return;
 
-		const parsedPhoneNumber = PhoneService.parseToPhoneNumber(phoneNumber, countryCode);
+		const parsedPhoneNumber = AppPhoneService.parseToPhoneNumber(phoneNumber, countryCode);
 
-		if (PhoneService.isValidPhoneNumber(parsedPhoneNumber)) {
+		if (AppPhoneService.isValidPhoneNumber(parsedPhoneNumber)) {
 			props?.onChange(parsedPhoneNumber);
 		}
 	}, [countryCode, phoneNumber]);
@@ -32,7 +32,7 @@ export default function (props: { onChange(value: string): void; value?: string 
 				sx={{ pr: 1 }}
 				value={countryCode}
 			>
-				{PhoneService.countries.map((country) => (
+				{AppPhoneService.countries.map((country) => (
 					<MenuItem key={country.code} value={country.code}>
 						{country.name}
 					</MenuItem>
@@ -44,7 +44,7 @@ export default function (props: { onChange(value: string): void; value?: string 
 				onChange={(e) => setPhoneNumber(e.target.value)}
 				size={'small'}
 				type={'tel'}
-				value={PhoneService.asTypedPhoneNumber(phoneNumber, countryCode)}
+				value={AppPhoneService.asTypedPhoneNumber(phoneNumber, countryCode)}
 			/>
 		</Stack>
 	);

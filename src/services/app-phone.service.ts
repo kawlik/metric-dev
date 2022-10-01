@@ -6,7 +6,7 @@ import {
 } from 'libphonenumber-js';
 
 // define dervice
-class PhoneService {
+class AppPhoneService {
 	readonly countries: { code: CountryCode; name: string }[] = [{ code: 'PL', name: '🇵🇱' }];
 
 	asTypedPhoneNumber = (phone: string, code?: CountryCode) =>
@@ -19,4 +19,4 @@ class PhoneService {
 }
 
 // export service
-export default new PhoneService();
+export default new AppPhoneService();

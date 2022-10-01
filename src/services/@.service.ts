@@ -1,6 +1,9 @@
-export { default as AuthService } from './auth.service';
+export { default as AppPhoneService } from './app-phone.service';
 export { default as FirebaseService } from './firebase.service';
 export { default as FirestoreService } from './firestore.service';
 export { default as LedgersListService } from './ledger-list.service';
-export { default as PhoneService } from './phone.service';
 export { default as ReportsListService } from './reports-list.service';
+export { default as StorageCloudService } from './storage-cloud.service';
+export { default as StorageLocalService } from './storage-local.service';
+export { default as UserAuthService } from './user-auth.service';
+export { default as UserDataService } from './user-data.service';
