@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { StorageCloudService } from '../services/@.service';
 
 export default function (props: {
-	userPicture: string;
-	updateUserPicture(userPicture: string): void;
+	displayPict: string;
+	updateDisplayPict(userPicture: string): void;
 }) {
 	// component logic
 	const [isPending, setIsPending] = useState(false);
@@ -15,7 +15,7 @@ export default function (props: {
 
 		try {
 			const userPictureUrl = await StorageCloudService.uploadUserPicture(files[0]);
-			props.updateUserPicture(userPictureUrl);
+			props.updateDisplayPict(userPictureUrl);
 		} catch {
 			alert('Something went wrong. Please try again later.');
 		}
@@ -26,7 +26,7 @@ export default function (props: {
 	// component layout
 	return (
 		<Stack gap={2} flex={1} alignItems={'center'} justifyContent={'center'}>
-			<Avatar src={props.userPicture} sx={{ height: 192, width: 192 }} />
+			<Avatar src={props.displayPict} sx={{ height: 192, width: 192 }} />
 			<Button
 				component={'label'}
 				disabled={isPending}

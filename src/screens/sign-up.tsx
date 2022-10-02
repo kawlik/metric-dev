@@ -6,12 +6,13 @@ import {
 	AppViewLoading,
 	AppViewStack,
 	SignUpActions,
-	SignUpDisplay,
-	SignUpPicture,
+	SignUpDisplayName,
+	SignUpDisplayPict,
 	SignUpPreview,
 	SignUpStepper,
 } from '../components/@';
 import { useContexts } from '../contexts/@';
+import { UserDataService } from '../services/@.service';
 
 export default function (props: {}) {
 	// component logic
@@ -23,49 +24,63 @@ export default function (props: {}) {
 	// component state
 	const [currentStep, setCurrentStep] = useState(0);
 	const [displayName, setDisplayName] = useState('');
-	const [userPicture, setUserPicture] = useState('');
+	const [displayPict, setDisplayPict] = useState('');
+	const [viewLoading, setViewLoading] = useState(false);
 
 	const canGoBack = currentStep !== 0;
 	const canGoNext = currentStep !== 2 && !!displayName.length;
-	const canGoSave = currentStep === 2 && !!displayName.length && !!userPicture.length;
+	const canGoSave = currentStep === 2 && !!displayName.length;
 
 	const userPhoneNumber = contexts.auth.get()?.phoneNumber!;
 
 	function goBack() {
-		setCurrentStep((prev) => prev - 1);
+		setCurrentStep((prev) => (prev > 0 ? prev - 1 : 0));
 	}
 
 	function goNext() {
-		setCurrentStep((prev) => prev + 1);
+		setCurrentStep((prev) => (prev < 2 ? prev + 1 : 2));
 	}
 
-	function goSave() {
-		return Promise.reject(alert('DUPA'));
+	async function goSave() {
+		setViewLoading(true);
+
+		try {
+			await UserDataService.saveUser({
+				displayName: displayName,
+				displayPict: displayPict,
+			});
+
+			contexts.isSignedUp.set(true);
+		} catch {
+			alert('Something went wrong. Please try again later.');
+		}
+
+		setViewLoading(false);
 	}
 
 	// component layout
 	return (
 		<>
-			<AppViewLoading isLoading={false} />
+			<AppViewLoading isLoading={viewLoading} />
 			<AppViewStack flex={1} gap={1} padding={1}>
 				<SignUpStepper activeStep={currentStep} steps={steps} />
 				<Container maxWidth={'md'} sx={{ marginY: 'auto' }}>
 					{currentStep === 0 && (
-						<SignUpDisplay
+						<SignUpDisplayName
 							displayName={displayName}
 							updateDisplayName={setDisplayName}
 						/>
 					)}
 					{currentStep === 1 && (
-						<SignUpPicture
-							userPicture={userPicture}
-							updateUserPicture={setUserPicture}
+						<SignUpDisplayPict
+							displayPict={displayPict}
+							updateDisplayPict={setDisplayPict}
 						/>
 					)}
 					{currentStep === 2 && (
 						<SignUpPreview
 							displayname={displayName}
-							userPicture={userPicture}
+							displayPict={displayPict}
 							userPhoneNumber={userPhoneNumber}
 						/>
 					)}

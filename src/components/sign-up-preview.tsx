@@ -2,7 +2,7 @@ import { Avatar, Stack, Typography } from '@mui/material';
 
 export default function (props: {
 	displayname: string;
-	userPicture: string;
+	displayPict: string;
 	userPhoneNumber: string;
 }) {
 	// component logic
@@ -10,7 +10,7 @@ export default function (props: {
 	// component layout
 	return (
 		<Stack gap={2} alignItems={'center'} justifyContent={'center'}>
-			<Avatar src={props.userPicture} sx={{ height: 128, width: 128 }} />
+			<Avatar src={props.displayPict} sx={{ height: 128, width: 128 }} />
 			<Typography textAlign={'center'} variant={'h5'}>
 				{props.displayname}
 			</Typography>
