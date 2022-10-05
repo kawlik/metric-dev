@@ -2,7 +2,6 @@ import { Logout, MoreVert, ReportProblem, Search, Settings } from '@mui/icons-ma
 import {
 	AppBar,
 	Avatar,
-	Badge,
 	ButtonGroup,
 	Divider,
 	IconButton,
@@ -34,9 +33,7 @@ export default function (props: { logout(): void }) {
 	return (
 		<AppBar color={'inherit'} elevation={0} position={'static'}>
 			<Toolbar>
-				<Badge color={'default'} variant={'dot'}>
-					<Avatar sx={{ height: 32, width: 32 }} />
-				</Badge>
+				<Avatar sx={{ height: 32, width: 32 }} />
 				<Typography marginX={1} noWrap={true} variant={'h6'}>
 					Home
 				</Typography>
@@ -50,13 +47,13 @@ export default function (props: { logout(): void }) {
 				</ButtonGroup>
 			</Toolbar>
 			<Menu anchorEl={menuAnchor.current} onClose={closeMenu} open={isMenuOpen}>
-				<MenuItem onClick={closeMenu}>
+				<MenuItem disabled={true} onClick={closeMenu}>
 					<ListItemIcon>
 						<Settings />
 					</ListItemIcon>
 					<ListItemText>Settings</ListItemText>
 				</MenuItem>
-				<MenuItem onClick={closeMenu}>
+				<MenuItem disabled={true} onClick={closeMenu}>
 					<ListItemIcon>
 						<ReportProblem />
 					</ListItemIcon>
