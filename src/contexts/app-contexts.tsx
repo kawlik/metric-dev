@@ -1,22 +1,17 @@
-import { User } from 'firebase/auth';
 import { createContext, useContext } from 'react';
-import { ContextsType } from '../types/@';
-
-// define contexts
-export type AuthType = undefined | null | User;
-export type ModeType = undefined | 'dark' | 'light';
+import { ContextsType, UserAuthType, UserModeType } from '../types/@';
 
 // create contexts
 export const AppContext = createContext<{
-	auth: ContextsType<AuthType>;
-	mode: ContextsType<ModeType>;
 	isSignedIn: ContextsType<boolean>;
 	isSignedUp: ContextsType<boolean>;
+	userAuth: ContextsType<UserAuthType>;
+	userMode: ContextsType<UserModeType>;
 }>({
-	auth: { get: () => undefined, set: (ctx) => {} },
-	mode: { get: () => undefined, set: (ctx) => {} },
 	isSignedIn: { get: () => false, set: (ctx) => {} },
 	isSignedUp: { get: () => false, set: (ctx) => {} },
+	userAuth: { get: () => undefined, set: (ctx) => {} },
+	userMode: { get: () => undefined, set: (ctx) => {} },
 });
 
 // export consumer

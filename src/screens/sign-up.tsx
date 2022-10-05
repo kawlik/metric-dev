@@ -31,7 +31,7 @@ export default function (props: {}) {
 	const canGoNext = currentStep !== 2 && !!displayName.length;
 	const canGoSave = currentStep === 2 && !!displayName.length;
 
-	const userPhoneNumber = contexts.auth.get()?.phoneNumber!;
+	const userPhoneNumber = contexts.userAuth.get()?.phoneNumber!;
 
 	function goBack() {
 		setCurrentStep((prev) => (prev > 0 ? prev - 1 : 0));

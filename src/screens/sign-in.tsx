@@ -45,14 +45,16 @@ export default function (props: {}) {
 
 	// component lifecycle
 	useEffect(() => {
-		if (contexts.auth.get() !== undefined) {
+		if (contexts.userAuth.get() === undefined) {
+			setIsViewLoading(true);
+		} else {
 			setIsViewLoading(false);
 		}
 
 		if (contexts.isSignedIn.get() === true) {
 			navigate('/sign-up/');
 		}
-	}, [contexts.auth, contexts.isSignedIn]);
+	}, [contexts.userAuth, contexts.isSignedIn]);
 
 	// component layout
 	return (

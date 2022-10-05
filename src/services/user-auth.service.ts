@@ -3,7 +3,6 @@ import {
 	RecaptchaParameters,
 	RecaptchaVerifier,
 	signInWithPhoneNumber,
-	User,
 } from 'firebase/auth';
 import { BehaviorSubject } from 'rxjs';
 import { FirebaseService } from './@.service';
@@ -17,11 +16,11 @@ class UserAuthService extends FirebaseAuth {
 		private recapthcaSelector: string = 'recaptcha-verifier-refrence',
 		private recapthcaVerifier: RecaptchaVerifier | null = null,
 	) {
-		super(new BehaviorSubject<User | null>(null));
+		super(new BehaviorSubject(undefined));
 	}
 
 	logout = (): void => {
-		if (confirm('Are you sure you want to log out?')) FirebaseService.Auth.signOut();
+		FirebaseService.Auth.signOut();
 	};
 
 	generateOTP = async (phone: string): Promise<void> => {

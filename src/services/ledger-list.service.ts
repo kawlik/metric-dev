@@ -1,12 +1,4 @@
-import {
-	collection,
-	orderBy,
-	Query,
-	query,
-	QuerySnapshot,
-	Timestamp,
-	where,
-} from 'firebase/firestore';
+import { collection, orderBy, Query, query, QuerySnapshot, where } from 'firebase/firestore';
 import { BehaviorSubject } from 'rxjs';
 import { FirebaseService, FirestoreService } from './@.service';
 import { BillInfoType } from '../types/@';

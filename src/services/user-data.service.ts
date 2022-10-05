@@ -1,5 +1,5 @@
 import { updateProfile } from 'firebase/auth';
-import { doc, runTransaction, setDoc, writeBatch } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import { UserDataType } from '../types/@';
 import { FirebaseService, FirestoreService } from './@.service';
 
