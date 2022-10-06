@@ -1,8 +1,8 @@
-import { ReportsPageView } from './views/@';
+import { AppViewStack } from '../components/@';
 
 export default function (props: {}) {
 	// component logic
 
 	// component layout
-	return <ReportsPageView />;
+	return <AppViewStack flex={1} />;
 }

@@ -1,8 +1,15 @@
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
+import { HomeTabbar, HomeTopbar } from '../components/@';
+import { useContexts } from '../contexts/@';
 import { UserAuthService } from '../services/@.service';
-import { HomeScreenView } from './views/@';
 
 export default function (props: {}) {
 	// component logic
+	const contexts = useContexts();
+	const navigate = useNavigate();
+	const pathname = useParams();
+
+	const currentPage = pathname['*']?.split('/')[0] || 'Metric';
 
 	function logout() {
 		if (confirm('Are you sure you want to log out?')) {
@@ -10,6 +17,16 @@ export default function (props: {}) {
 		}
 	}
 
+	function openPage(route: string) {
+		navigate(`/${route}/`);
+	}
+
 	// component layout
-	return <HomeScreenView logout={logout} />;
+	return (
+		<>
+			<HomeTopbar label={currentPage} logout={logout} />
+			<Outlet />
+			<HomeTabbar page={currentPage} setPage={openPage} />
+		</>
+	);
 }

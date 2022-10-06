@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import { useRef, useState } from 'react';
 
-export default function (props: { logout(): void }) {
+export default function (props: { label: string; logout(): void }) {
 	// component logic
 	const menuAnchor = useRef(null);
 
@@ -34,8 +34,13 @@ export default function (props: { logout(): void }) {
 		<AppBar color={'inherit'} elevation={0} position={'static'}>
 			<Toolbar>
 				<Avatar sx={{ height: 32, width: 32 }} />
-				<Typography marginX={1} noWrap={true} variant={'h6'}>
-					Home
+				<Typography
+					marginX={1}
+					noWrap={true}
+					textTransform={'capitalize'}
+					variant={'h6'}
+				>
+					{props.label}
 				</Typography>
 				<ButtonGroup sx={{ marginLeft: 'auto' }}>
 					<IconButton>

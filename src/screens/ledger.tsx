@@ -1,10 +1,8 @@
-import { useNavigate } from 'react-router-dom';
-import { LedgerScreenView } from './views/@';
+import { AppViewStack } from '../components/@';
 
 export default function (props: {}) {
 	// component logic
-	const navigate = useNavigate();
 
 	// component layout
-	return <LedgerScreenView />;
+	return <AppViewStack flex={1} />;
 }
