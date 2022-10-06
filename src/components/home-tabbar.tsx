@@ -1,5 +1,6 @@
 import { AccountCircle, Leaderboard, Notifications, ReceiptLong } from '@mui/icons-material';
 import { AppBar, BottomNavigation, BottomNavigationAction } from '@mui/material';
+import { AppViewIOSChin } from './@';
 
 export default function (props: { page: string; setPage(route: string): void }) {
 	// component logic
@@ -12,7 +13,7 @@ export default function (props: { page: string; setPage(route: string): void }) 
 
 	// component layout
 	return (
-		<AppBar color={'inherit'} elevation={0} position={'static'}>
+		<AppBar color={'inherit'} variant={'outlined'} elevation={0} position={'static'}>
 			<BottomNavigation
 				onChange={(event, page) => props.setPage(page)}
 				value={props.page}
@@ -22,10 +23,12 @@ export default function (props: { page: string; setPage(route: string): void }) 
 						key={tab.route}
 						icon={tab.icon}
 						label={tab.route}
+                        sx={{ textTransform: 'capitalize' }}
 						value={tab.route}
 					/>
 				))}
 			</BottomNavigation>
+			<AppViewIOSChin />
 		</AppBar>
 	);
 }

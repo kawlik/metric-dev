@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import { useRef, useState } from 'react';
 
-export default function (props: { label: string; logout(): void }) {
+export default function (props: { avatar: string; label: string; logout(): void }) {
 	// component logic
 	const menuAnchor = useRef(null);
 
@@ -33,7 +33,7 @@ export default function (props: { label: string; logout(): void }) {
 	return (
 		<AppBar color={'inherit'} elevation={0} position={'static'}>
 			<Toolbar>
-				<Avatar sx={{ height: 32, width: 32 }} />
+				<Avatar src={props.avatar} sx={{ height: 32, width: 32 }} />
 				<Typography
 					marginX={1}
 					noWrap={true}

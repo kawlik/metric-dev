@@ -1,3 +1,4 @@
+export { default as AppAgentService } from './app-agent.service';
 export { default as AppPhoneService } from './app-phone.service';
 export { default as FirebaseService } from './firebase.service';
 export { default as FirestoreService } from './firestore.service';
