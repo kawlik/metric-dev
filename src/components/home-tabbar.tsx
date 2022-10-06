@@ -13,7 +13,7 @@ export default function (props: { page: string; setPage(route: string): void }) 
 
 	// component layout
 	return (
-		<AppBar color={'inherit'} variant={'outlined'} elevation={0} position={'static'}>
+		<AppBar color={'inherit'} position={'static'} variant={'outlined'}>
 			<BottomNavigation
 				onChange={(event, page) => props.setPage(page)}
 				value={props.page}
@@ -23,7 +23,7 @@ export default function (props: { page: string; setPage(route: string): void }) 
 						key={tab.route}
 						icon={tab.icon}
 						label={tab.route}
-                        sx={{ textTransform: 'capitalize' }}
+						sx={{ textTransform: 'capitalize' }}
 						value={tab.route}
 					/>
 				))}

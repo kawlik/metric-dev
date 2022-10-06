@@ -1,5 +1,5 @@
-import { Outlet, useNavigate, useParams } from 'react-router-dom';
-import { AppViewIOSChin, HomeTabbar, HomeTopbar } from '../components/@';
+import { Outlet as PageOutlet, useNavigate, useParams } from 'react-router-dom';
+import { HomeTabbar, HomeTopbar } from '../components/@';
 import { useContexts } from '../contexts/@';
 import { UserAuthService } from '../services/@.service';
 
@@ -26,7 +26,7 @@ export default function (props: {}) {
 	return (
 		<>
 			<HomeTopbar avatar={userAvatar} label={currentPage} logout={logout} />
-			<Outlet />
+			<PageOutlet />
 			<HomeTabbar page={currentPage} setPage={openPage} />
 		</>
 	);
