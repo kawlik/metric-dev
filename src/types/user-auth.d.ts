@@ -1,5 +1,5 @@
 import { User } from 'firebase/auth';
 
-type UserAuth = undefined | null | User;
+type UserAuth = User | null | undefined;
 
 export default UserAuth;

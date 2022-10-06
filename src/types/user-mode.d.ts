@@ -1,3 +1,3 @@
-type UserMode = undefined | 'dark' | 'light';
+type UserMode = 'dark' | 'light' | undefined;
 
 export default UserMode;
