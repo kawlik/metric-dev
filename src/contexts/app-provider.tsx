@@ -2,13 +2,14 @@ import { ThemeProvider } from '@mui/material/styles';
 import { PropsWithChildren, useEffect, useState } from 'react';
 import { MUIThemeDark, MUIThemeLight } from '../configs/@';
 import { UserAuthService } from '../services/@.service';
-import { UserAuthType, UserModeType } from '../types/@';
+import { BillInfoType, UserAuthType, UserModeType } from '../types/@';
 import { AppContext } from './app-contexts';
 
 export default function (props: PropsWithChildren) {
 	// component logic
 
 	// component state
+	const [activeBill, setActiveBill] = useState<BillInfoType | null>(null);
 	const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
 	const [isSignedUp, setIsSignedUp] = useState<boolean>(false);
 	const [userAuth, setUserAuth] = useState<UserAuthType>(undefined);
@@ -31,10 +32,11 @@ export default function (props: PropsWithChildren) {
 			<AppContext.Provider
 				children={props.children}
 				value={{
-					userAuth: { get: () => userAuth, set: setUserAuth },
-					userMode: { get: () => userMode, set: setUserMode },
+					activeBill: { get: () => activeBill, set: setActiveBill },
 					isSignedIn: { get: () => isSignedIn, set: setIsSignedIn },
 					isSignedUp: { get: () => isSignedUp, set: setIsSignedUp },
+					userAuth: { get: () => userAuth, set: setUserAuth },
+					userMode: { get: () => userMode, set: setUserMode },
 				}}
 			/>
 		</ThemeProvider>

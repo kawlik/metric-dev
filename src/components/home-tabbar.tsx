@@ -13,7 +13,7 @@ export default function (props: { page: string; setPage(route: string): void }) 
 
 	// component layout
 	return (
-		<AppBar color={'inherit'} position={'static'} variant={'outlined'}>
+		<AppBar color={'inherit'} elevation={0} position={'static'} variant={'outlined'}>
 			<BottomNavigation
 				onChange={(event, page) => props.setPage(page)}
 				value={props.page}

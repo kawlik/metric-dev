@@ -9,7 +9,7 @@ export default function (props: {}) {
 	const navigate = useNavigate();
 	const pathname = useParams();
 
-	const userAvatar = contexts.userAuth.get()?.photoURL;
+	const userAvatar = contexts.userAuth.get()?.photoURL!;
 	const currentPage = pathname['*']?.split('/')[0] || 'Metric';
 
 	function logout() {

@@ -33,7 +33,7 @@ export default function (props: { avatar: string; label: string; logout(): void 
 	return (
 		<AppBar color={'inherit'} elevation={0} position={'static'}>
 			<Toolbar>
-				<Avatar src={props.avatar} sx={{ height: 32, width: 32 }} />
+				<Avatar src={props.avatar} sx={{ height: 36, width: 36 }} />
 				<Typography
 					marginX={1}
 					noWrap={true}

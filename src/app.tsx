@@ -8,13 +8,7 @@ import {
 	ReportsPage,
 	UpdatesPage,
 } from './pages/@';
-import {
-	HomeScreen,
-	LedgerScreen,
-	ReportScreen,
-	SignInScreen,
-	SignUpScreen,
-} from './screens/@';
+import { BillScreen, HomeScreen, SignInScreen, SignUpScreen } from './screens/@';
 
 export default function (props: {}) {
 	// component logic
@@ -32,11 +26,11 @@ export default function (props: {}) {
 		<Routes>
 			<Route path="*" element={<Navigate to="ledgers" />} />
 
-			<Route path="ledger" element={<LedgerScreen />}>
+			<Route path="ledger" element={<BillScreen />}>
 				<Route path=":billID" element={<BillChatPage />} />
 			</Route>
 
-			<Route path="report" element={<ReportScreen />}>
+			<Route path="report" element={<BillScreen />}>
 				<Route path=":billID" element={<BillViewPage />} />
 			</Route>
 
