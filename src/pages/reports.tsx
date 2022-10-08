@@ -15,17 +15,17 @@ export default function (props: {}) {
 	const contexts = useContexts();
 	const navigate = useNavigate();
 
-	const billsList = contexts.savedLedgers.get();
+	const billsList = contexts.savedReports.get();
 	const isLoading = billsList === undefined;
 
 	function openBillView(billID: string) {
-		navigate(`/ledger/${billID}/`);
+		navigate(`/report/${billID}/`);
 	}
 
 	// component lifecycle
 	useEffect(() => {
 		BillReportService.subscribeOn(contexts.userAuth.get()?.phoneNumber!).subscribe(
-			(bills) => contexts.savedLedgers.set(bills),
+			(bills) => contexts.savedReports.set(bills),
 		);
 
 		return () => BillReportService.unsubscribe();

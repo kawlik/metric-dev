@@ -29,7 +29,7 @@ export default function (props: { bills: BillInfoType[] }) {
 					data={parsed}
 					dataKey={'balance'}
 					fill={'#8884d8'}
-					innerRadius={75}
+					innerRadius={70}
 					outerRadius={90}
 					paddingAngle={5}
 				/>

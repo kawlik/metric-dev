@@ -1,4 +1,4 @@
-import { ArrowBack } from '@mui/icons-material';
+import { ArrowBackIosNew } from '@mui/icons-material';
 import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
 
 export default function (props: { goBack(): void; label: string }) {
@@ -9,7 +9,7 @@ export default function (props: { goBack(): void; label: string }) {
 		<AppBar color={'inherit'} elevation={0} position={'static'}>
 			<Toolbar>
 				<IconButton onClick={props.goBack}>
-					<ArrowBack />
+					<ArrowBackIosNew />
 				</IconButton>
 				<Typography
 					marginX={1}

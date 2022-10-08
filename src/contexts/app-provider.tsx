@@ -1,7 +1,7 @@
 import { ThemeProvider } from '@mui/material/styles';
 import { PropsWithChildren, useEffect, useState } from 'react';
 import { MUIThemeDark, MUIThemeLight } from '../configs/@';
-import { UserAuthService } from '../services/@.service';
+import { StorageLocalService, UserAuthService } from '../services/@.service';
 import { BillInfoType, UserAuthType, UserModeType } from '../types/@';
 import { AppContext } from './app-contexts';
 
