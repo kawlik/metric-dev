@@ -11,7 +11,7 @@ export default function (props: {}) {
 	const pathname = useParams();
 
 	const billID = pathname['billID']?.split('/')[0];
-	const label = contexts.activeBill.get()?.title!;
+	const label = contexts.activeBill.get()?.title || '';
 
 	function goBack() {
 		navigate(-1);
@@ -23,7 +23,10 @@ export default function (props: {}) {
 			contexts.activeBill.set(billInfo),
 		);
 
-		return () => BillItemService.unsubscribe();
+		return () => {
+			BillItemService.unsubscribe();
+			contexts.activeBill.set(null);
+		};
 	}, []);
 
 	// component layout
