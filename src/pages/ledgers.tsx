@@ -1,6 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AppViewStack, BillChart, BillFLoat, BillList } from '../components/@';
+import {
+	AppPageAdvice,
+	AppViewLoading,
+	AppViewStack,
+	BillChart,
+	BillFLoat,
+	BillList,
+} from '../components/@';
 import { useContexts } from '../contexts/@';
 import { BillListService } from '../services/@.service';
 import { BillInfoType } from '../types/@';
@@ -31,10 +38,21 @@ export default function (props: {}) {
 
 	// component layout
 	return (
-		<AppViewStack flex={1} sx={{ overflowX: 'hidden', overflowY: 'scroll' }}>
-			<BillChart bills={bills} />
-			<BillList bills={bills} filters={[]} openBillView={openBillView} />
-			<BillFLoat openBillCreate={openBillCreate} />
-		</AppViewStack>
+		<>
+			<AppViewLoading isLoading={!bills.length} />
+			<AppViewStack flex={1} sx={{ overflowX: 'hidden', overflowY: 'scroll' }}>
+				{!bills.length ? (
+					<>
+						<AppPageAdvice />
+					</>
+				) : (
+					<>
+						<BillChart bills={bills} />
+						<BillList bills={bills} filters={[]} openBillView={openBillView} />
+						<BillFLoat openBillCreate={openBillCreate} />
+					</>
+				)}
+			</AppViewStack>
+		</>
 	);
 }

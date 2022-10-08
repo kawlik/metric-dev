@@ -29,8 +29,8 @@ export default function (props: { bills: BillInfoType[] }) {
 					data={parsed}
 					dataKey={'balance'}
 					fill={'#8884d8'}
-					innerRadius={60}
-					outerRadius={80}
+					innerRadius={75}
+					outerRadius={90}
 					paddingAngle={5}
 				/>
 				<Tooltip
@@ -45,12 +45,9 @@ export default function (props: { bills: BillInfoType[] }) {
 					align="center"
 					verticalAlign="middle"
 					content={
-						<Box>
-							<AccountBalance fontSize={'large'} />
-							<Typography textAlign={'center'} variant={'h6'}>
-								{balance}
-							</Typography>
-						</Box>
+						<Typography textAlign={'center'} variant={'h4'}>
+							{balance}
+						</Typography>
 					}
 				/>
 			</PieChart>

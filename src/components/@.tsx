@@ -1,3 +1,5 @@
+export { default as AppPageAdvice } from './app-page-advice';
+export { default as AppPageLoader } from './app-page-loader';
 export { default as AppPhoneField } from './app-phone-field';
 export { default as AppViewIOSChin } from './app-view-ioschin';
 export { default as AppViewLoading } from './app-view-loading';

@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AppViewStack, BillChart, BillList } from '../components/@';
+import {
+	AppPageAdvice,
+	AppViewLoading,
+	AppViewStack,
+	BillChart,
+	BillList,
+} from '../components/@';
 import { useContexts } from '../contexts/@';
 import { BillListService } from '../services/@.service';
 import { BillInfoType } from '../types/@';
@@ -12,8 +18,6 @@ export default function (props: {}) {
 
 	// component state
 	const [bills, setBills] = useState<BillInfoType[]>([]);
-
-	function openBillCreate() {}
 
 	function openBillView(billID: string) {
 		navigate(`/report/${billID}/`);
@@ -31,9 +35,20 @@ export default function (props: {}) {
 
 	// component layout
 	return (
-		<AppViewStack flex={1} sx={{ overflowX: 'hidden', overflowY: 'scroll' }}>
-			<BillChart bills={bills} />
-			<BillList bills={bills} filters={[]} openBillView={openBillView} />
-		</AppViewStack>
+		<>
+			<AppViewLoading isLoading={!bills.length} />
+			<AppViewStack flex={1} sx={{ overflowX: 'hidden', overflowY: 'scroll' }}>
+				{!bills.length ? (
+					<>
+						<AppPageAdvice />
+					</>
+				) : (
+					<>
+						<BillChart bills={bills} />
+						<BillList bills={bills} filters={[]} openBillView={openBillView} />
+					</>
+				)}
+			</AppViewStack>
+		</>
 	);
 }
