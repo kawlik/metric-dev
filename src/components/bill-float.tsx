@@ -6,7 +6,7 @@ export default function (props: { openBillCreate(): void }) {
 
 	// component layout
 	return (
-		<Box bottom={0} marginLeft={'auto'} marginTop={'auto'} padding={2} position={'sticky'}>
+		<Box padding={2} position={'absolute'} sx={{ bottom: 0, right: 0 }}>
 			<Fab color={'primary'} onClick={props.openBillCreate} variant={'circular'}>
 				<Add />
 			</Fab>

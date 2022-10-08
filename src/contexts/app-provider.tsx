@@ -12,6 +12,8 @@ export default function (props: PropsWithChildren) {
 	const [activeBill, setActiveBill] = useState<BillInfoType | null>(null);
 	const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
 	const [isSignedUp, setIsSignedUp] = useState<boolean>(false);
+	const [savedLedgers, setSavedLedgers] = useState<BillInfoType[] | undefined>(undefined);
+	const [savedReports, setSavedReports] = useState<BillInfoType[] | undefined>(undefined);
 	const [userAuth, setUserAuth] = useState<UserAuthType>(undefined);
 	const [userMode, setUserMode] = useState<UserModeType>(undefined);
 
@@ -35,6 +37,8 @@ export default function (props: PropsWithChildren) {
 					activeBill: { get: () => activeBill, set: setActiveBill },
 					isSignedIn: { get: () => isSignedIn, set: setIsSignedIn },
 					isSignedUp: { get: () => isSignedUp, set: setIsSignedUp },
+					savedLedgers: { get: () => savedLedgers, set: setSavedLedgers },
+					savedReports: { get: () => savedReports, set: setSavedReports },
 					userAuth: { get: () => userAuth, set: setUserAuth },
 					userMode: { get: () => userMode, set: setUserMode },
 				}}

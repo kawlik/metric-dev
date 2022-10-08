@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
 	AppPageAdvice,
@@ -9,16 +9,15 @@ import {
 	BillList,
 } from '../components/@';
 import { useContexts } from '../contexts/@';
-import { BillListService } from '../services/@.service';
-import { BillInfoType } from '../types/@';
+import { BillLedgerService } from '../services/@.service';
 
 export default function (props: {}) {
 	// component logic
 	const contexts = useContexts();
 	const navigate = useNavigate();
 
-	// component state
-	const [bills, setBills] = useState<BillInfoType[]>([]);
+	const billsList = contexts.savedLedgers.get();
+	const isLoading = billsList === undefined;
 
 	function openBillCreate() {}
 
@@ -28,28 +27,24 @@ export default function (props: {}) {
 
 	// component lifecycle
 	useEffect(() => {
-		BillListService.useBillType('ledgers');
-		BillListService.subscribeOn(contexts.userAuth.get()?.phoneNumber!).subscribe((bills) =>
-			setBills(bills),
+		BillLedgerService.subscribeOn(contexts.userAuth.get()?.phoneNumber!).subscribe(
+			(bills) => contexts.savedLedgers.set(bills),
 		);
 
-		return () => BillListService.unsubscribe();
+		return () => BillLedgerService.unsubscribe();
 	}, []);
 
 	// component layout
 	return (
 		<>
-			<AppViewLoading isLoading={!bills.length} />
+			<AppViewLoading isLoading={isLoading} />
 			<AppViewStack flex={1} sx={{ overflowX: 'hidden', overflowY: 'scroll' }}>
-				{!bills.length ? (
+				<BillFLoat openBillCreate={openBillCreate} />
+				{Array.isArray(billsList) && billsList?.length === 0 && <AppPageAdvice />}
+				{Array.isArray(billsList) && billsList?.length !== 0 && (
 					<>
-						<AppPageAdvice />
-					</>
-				) : (
-					<>
-						<BillChart bills={bills} />
-						<BillList bills={bills} filters={[]} openBillView={openBillView} />
-						<BillFLoat openBillCreate={openBillCreate} />
+						<BillChart bills={billsList} />
+						<BillList bills={billsList} filters={[]} openBillView={openBillView} />
 					</>
 				)}
 			</AppViewStack>

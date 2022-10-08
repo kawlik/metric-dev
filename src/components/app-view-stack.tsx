@@ -4,5 +4,5 @@ export default function (props: StackProps) {
 	// component logic
 
 	// component layout
-	return <Stack component={'article'} {...props} />;
+	return <Stack component={'article'} position={'relative'} {...props} />;
 }

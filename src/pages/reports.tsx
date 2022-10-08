@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
 	AppPageAdvice,
@@ -8,44 +8,39 @@ import {
 	BillList,
 } from '../components/@';
 import { useContexts } from '../contexts/@';
-import { BillListService } from '../services/@.service';
-import { BillInfoType } from '../types/@';
+import { BillReportService } from '../services/@.service';
 
 export default function (props: {}) {
 	// component logic
 	const contexts = useContexts();
 	const navigate = useNavigate();
 
-	// component state
-	const [bills, setBills] = useState<BillInfoType[]>([]);
+	const billsList = contexts.savedLedgers.get();
+	const isLoading = billsList === undefined;
 
 	function openBillView(billID: string) {
-		navigate(`/report/${billID}/`);
+		navigate(`/ledger/${billID}/`);
 	}
 
 	// component lifecycle
 	useEffect(() => {
-		BillListService.useBillType('reports');
-		BillListService.subscribeOn(contexts.userAuth.get()?.phoneNumber!).subscribe((bills) =>
-			setBills(bills),
+		BillReportService.subscribeOn(contexts.userAuth.get()?.phoneNumber!).subscribe(
+			(bills) => contexts.savedLedgers.set(bills),
 		);
 
-		return () => BillListService.unsubscribe();
+		return () => BillReportService.unsubscribe();
 	}, []);
 
 	// component layout
 	return (
 		<>
-			<AppViewLoading isLoading={!bills.length} />
+			<AppViewLoading isLoading={isLoading} />
 			<AppViewStack flex={1} sx={{ overflowX: 'hidden', overflowY: 'scroll' }}>
-				{!bills.length ? (
+				{Array.isArray(billsList) && billsList?.length === 0 && <AppPageAdvice />}
+				{Array.isArray(billsList) && billsList?.length !== 0 && (
 					<>
-						<AppPageAdvice />
-					</>
-				) : (
-					<>
-						<BillChart bills={bills} />
-						<BillList bills={bills} filters={[]} openBillView={openBillView} />
+						<BillChart bills={billsList} />
+						<BillList bills={billsList} filters={[]} openBillView={openBillView} />
 					</>
 				)}
 			</AppViewStack>
