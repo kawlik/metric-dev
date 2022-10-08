@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-	AppPageAdvice,
+	AppPageEmpty,
 	AppViewLoading,
 	AppViewStack,
 	BillChart,
@@ -40,7 +40,7 @@ export default function (props: {}) {
 			<AppViewLoading isLoading={isLoading} />
 			<AppViewStack flex={1} sx={{ overflowX: 'hidden', overflowY: 'scroll' }}>
 				<BillFLoat openBillCreate={openBillCreate} />
-				{Array.isArray(billsList) && billsList?.length === 0 && <AppPageAdvice />}
+				{Array.isArray(billsList) && billsList?.length === 0 && <AppPageEmpty />}
 				{Array.isArray(billsList) && billsList?.length !== 0 && (
 					<>
 						<BillChart bills={billsList} />

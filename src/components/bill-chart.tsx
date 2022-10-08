@@ -1,34 +1,26 @@
-import { AccountBalance } from '@mui/icons-material';
 import { Box, Paper, Typography } from '@mui/material';
 import { Cell, Tooltip, Pie, PieChart, Legend } from 'recharts';
+import { AppNormsService } from '../services/@.service';
 import { BillInfoType } from '../types/@';
 
 export default function (props: { bills: BillInfoType[] }) {
 	// component logic
-	const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
-	const parsed = new Array(4).fill({ title: 'Bill title' }).map((bill) => ({
-		...bill,
-		balance: Math.ceil(Math.random() * 1000),
-	}));
-
-	const formatter = Intl.NumberFormat('en', { notation: 'compact' });
-	const balance = formatter.format(parsed.reduce((prev, curr) => prev + curr.balance, 0));
+	const ballance = props.bills.reduce((prev, curr) => prev + curr.balance, 0);
 
 	// component layout
 	return (
 		<Box marginX={'auto'} marginY={1}>
 			<PieChart height={200} width={200}>
 				<Pie
-					children={parsed.map((item, index) => (
+					children={props.bills.map((bill) => (
 						<Cell
-							fill={colors[index % colors.length]}
-							key={item.title}
-							name={item.title}
+							fill={AppNormsService.normalizeColor(bill.id!)}
+							key={bill.title}
+							name={bill.title}
 						/>
 					))}
-					data={parsed}
+					data={props.bills}
 					dataKey={'balance'}
-					fill={'#8884d8'}
 					innerRadius={70}
 					outerRadius={90}
 					paddingAngle={5}
@@ -42,13 +34,13 @@ export default function (props: { bills: BillInfoType[] }) {
 					)}
 				/>
 				<Legend
-					align="center"
-					verticalAlign="middle"
-					content={
+					align={'center'}
+					verticalAlign={'middle'}
+					content={() => (
 						<Typography textAlign={'center'} variant={'h4'}>
-							{balance}
+							{AppNormsService.normalizeNumber(ballance)}
 						</Typography>
-					}
+					)}
 				/>
 			</PieChart>
 		</Box>

@@ -1,4 +1,4 @@
-import { AppPageAdvice, AppViewStack } from '../components/@';
+import { AppPageEmpty, AppViewStack } from '../components/@';
 
 export default function (props: {}) {
 	// component logic
@@ -6,7 +6,7 @@ export default function (props: {}) {
 	// component layout
 	return (
 		<AppViewStack flex={1}>
-			<AppPageAdvice />
+			<AppPageEmpty />
 		</AppViewStack>
 	);
 }

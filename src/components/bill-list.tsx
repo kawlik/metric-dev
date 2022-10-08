@@ -7,6 +7,7 @@ import {
 	ListItemText,
 	Typography,
 } from '@mui/material';
+import { AppNormsService } from '../services/@.service';
 import { BillInfoType } from '../types/@';
 
 export default function (props: {
@@ -29,7 +30,7 @@ export default function (props: {
 			{props.bills.map((bill) => (
 				<ListItemButton key={bill.id} onClick={() => props.openBillView(bill.id!)}>
 					<ListItemAvatar>
-						<Avatar>
+						<Avatar sx={{ bgcolor: AppNormsService.normalizeColor(bill.id!) }}>
 							<Extension />
 						</Avatar>
 					</ListItemAvatar>

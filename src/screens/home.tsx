@@ -19,7 +19,7 @@ export default function (props: {}) {
 	}
 
 	function openPage(route: string) {
-		navigate(`/${route}/`);
+		navigate(`/${route}/`, { replace: true });
 	}
 
 	// component layout
