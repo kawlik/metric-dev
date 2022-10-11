@@ -1,5 +1,5 @@
 import { BillPostType } from './@';
 
-export default interface BillMemo {
+export default interface BillData {
 	posts: BillPostType[];
 }

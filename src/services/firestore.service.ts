@@ -5,7 +5,7 @@ import { FirebaseService } from './@.service';
 class FirestoreService {
 	constructor(
 		private listInfo = 'bill-info',
-		private billMemo = 'bill-memo',
+		private billData = 'bill-data',
 		private userData = 'user-data',
 	) {}
 
@@ -13,8 +13,8 @@ class FirestoreService {
 		return this.listInfo;
 	}
 
-	get BillMemo() {
-		return this.billMemo;
+	get BillData() {
+		return this.billData;
 	}
 
 	get UserData() {
@@ -25,8 +25,8 @@ class FirestoreService {
 		return collection(FirebaseService.Firestore, this.BillInfo);
 	}
 
-	get collectionBillMemo() {
-		return collection(FirebaseService.Firestore, this.BillMemo);
+	get collectionBillData() {
+		return collection(FirebaseService.Firestore, this.BillData);
 	}
 
 	get collectionUserData() {

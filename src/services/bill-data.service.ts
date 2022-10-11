@@ -1,11 +1,11 @@
 import { doc, DocumentSnapshot } from 'firebase/firestore';
 import { BehaviorSubject } from 'rxjs';
 import { FirestoreService } from './@.service';
-import { BillInfoType } from '../types/@';
+import { BillInfoType, BillDataType } from '../types/@';
 import { FirebaseDocument } from './utils/@';
 
 // define service
-class BillInfoService<T> extends FirebaseDocument<T> {
+class BillDataService<T> extends FirebaseDocument<T> {
 	constructor(feed: T) {
 		super(new BehaviorSubject<T>(feed));
 	}
@@ -22,4 +22,4 @@ class BillInfoService<T> extends FirebaseDocument<T> {
 }
 
 // export service
-export default new BillInfoService<BillInfoType | null>(null);
+export default new BillDataService<BillDataType | null>(null);

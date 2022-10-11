@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Outlet as PageOutlet, useNavigate, useParams } from 'react-router-dom';
 import { BillTopbar } from '../components/@';
 import { useContexts } from '../contexts/@';
-import { BillItemService } from '../services/@.service';
+import { BillInfoService } from '../services/@.service';
 
 export default function (props: {}) {
 	// component logic
@@ -19,12 +19,12 @@ export default function (props: {}) {
 
 	// component lifecycle
 	useEffect(() => {
-		BillItemService.subscribeOn(billID!).subscribe((billInfo) =>
+		BillInfoService.subscribeOn(billID!).subscribe((billInfo) =>
 			contexts.activeBill.set(billInfo),
 		);
 
 		return () => {
-			BillItemService.unsubscribe();
+			BillInfoService.unsubscribe();
 			contexts.activeBill.set(null);
 		};
 	}, []);
