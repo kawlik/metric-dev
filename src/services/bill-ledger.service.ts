@@ -14,7 +14,7 @@ import { FirebaseCollection } from './utils/@';
 
 // define service
 class BillLedger<T> extends FirebaseCollection<T> {
-	constructor(feed: T, private billType: 'ledgers' | 'reports' = 'ledgers') {
+	constructor(feed: T) {
 		super(new BehaviorSubject<T>(feed));
 	}
 
@@ -22,8 +22,8 @@ class BillLedger<T> extends FirebaseCollection<T> {
 		return query(
 			collection(FirebaseService.Firestore, FirestoreService.BillInfo),
 			where('participants', 'array-contains', document),
-			where('timestampClosed', '>=', Timestamp.now()),
-			orderBy('timestampClosed', 'desc'),
+			where('timestampValidTo', '>=', Timestamp.now()),
+			orderBy('timestampValidTo', 'desc'),
 			orderBy('timestampUpdated', 'desc'),
 		);
 	};

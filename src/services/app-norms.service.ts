@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 // define dervice
 class AppNormsService {
 	constructor(private format = Intl.NumberFormat('en', { notation: 'compact' })) {}
@@ -7,6 +9,8 @@ class AppNormsService {
 
 		return '#' + '00000'.substring(0, 6 - base.length) + base;
 	};
+
+	normalizeMoment = () => moment();
 
 	normalizeNumber = (value: number): string => {
 		return this.format.format(value);

@@ -17,7 +17,6 @@ import { UserDataService } from '../services/@.service';
 export default function (props: {}) {
 	// component logic
 	const contexts = useContexts();
-	const navigate = useNavigate();
 
 	const steps = ['Set profile name', 'Set profile picture', 'Save your profile'];
 
