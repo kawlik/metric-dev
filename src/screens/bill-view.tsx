@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Outlet as PageOutlet, useNavigate, useParams } from 'react-router-dom';
-import { BillTopbar } from '../components/@';
+import { BillViewTopbar } from '../components/@';
 import { useContexts } from '../contexts/@';
 import { BillInfoService } from '../services/@.service';
 
@@ -19,20 +19,17 @@ export default function (props: {}) {
 
 	// component lifecycle
 	useEffect(() => {
-		BillInfoService.subscribeOn(billID!).subscribe((billInfo) =>
-			contexts.activeBill.set(billInfo),
-		);
+		BillInfoService.subscribeOn(billID!).subscribe((billInfo) => {
+			contexts.activeBill.set(billInfo);
+		});
 
-		return () => {
-			BillInfoService.unsubscribe();
-			contexts.activeBill.set(null);
-		};
+		return () => BillInfoService.unsubscribe();
 	}, []);
 
 	// component layout
 	return (
 		<>
-			<BillTopbar goBack={goBack} label={label} />
+			<BillViewTopbar goBack={goBack} label={label} />
 			<PageOutlet />
 		</>
 	);

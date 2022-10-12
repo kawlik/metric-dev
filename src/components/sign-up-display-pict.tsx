@@ -24,8 +24,6 @@ export default function (props: {
 			const userPictureCrop = await AppPhotoService.cropImage(image);
 			const userPictureUrl = await StorageCloudService.uploadUserPicture(userPictureCrop);
 
-			console.log(userPictureUrl);
-
 			props.updateDisplayPict(userPictureUrl);
 		} catch {
 			alert('Something went wrong. Please try again later.');

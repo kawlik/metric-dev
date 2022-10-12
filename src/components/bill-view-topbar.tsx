@@ -11,12 +11,7 @@ export default function (props: { goBack(): void; label: string }) {
 				<IconButton onClick={props.goBack}>
 					<ArrowBackIosNew />
 				</IconButton>
-				<Typography
-					marginX={1}
-					noWrap={true}
-					textTransform={'capitalize'}
-					variant={'h6'}
-				>
+				<Typography marginX={1} noWrap={true} variant={'h6'}>
 					{props.label}
 				</Typography>
 			</Toolbar>

@@ -2,13 +2,19 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { useContexts } from './contexts/@';
 import {
 	AccountPage,
-	BillChatPage,
+	BillLedgerPage,
 	LedgersPage,
-	BillViewPage,
+	BillReportPage,
 	ReportsPage,
 	UpdatesPage,
 } from './pages/@';
-import { BillScreen, HomeScreen, SignInScreen, SignUpScreen } from './screens/@';
+import {
+	BillFormScreen,
+	BillViewScreen,
+	HomeScreen,
+	SignInScreen,
+	SignUpScreen,
+} from './screens/@';
 
 export default function (props: {}) {
 	// component logic
@@ -26,12 +32,14 @@ export default function (props: {}) {
 		<Routes>
 			<Route path="*" element={<Navigate to="ledgers" />} />
 
-			<Route path="ledger" element={<BillScreen />}>
-				<Route path=":billID" element={<BillChatPage />} />
+			<Route path="create" element={<BillFormScreen />} />
+
+			<Route path="ledger" element={<BillViewScreen />}>
+				<Route path=":billID" element={<BillLedgerPage />} />
 			</Route>
 
-			<Route path="report" element={<BillScreen />}>
-				<Route path=":billID" element={<BillViewPage />} />
+			<Route path="report" element={<BillViewScreen />}>
+				<Route path=":billID" element={<BillReportPage />} />
 			</Route>
 
 			<Route path="*" element={<HomeScreen />}>

@@ -4,9 +4,9 @@ import {
 	AppPageEmpty,
 	AppViewLoading,
 	AppViewStack,
-	BillChart,
-	BillFLoat,
-	BillList,
+	BillViewChart,
+	BillViewFLoat,
+	BillViewList,
 } from '../components/@';
 import { useContexts } from '../contexts/@';
 import { BillLedgerService } from '../services/@.service';
@@ -19,7 +19,9 @@ export default function (props: {}) {
 	const billsList = contexts.savedLedgers.get();
 	const isLoading = billsList === undefined;
 
-	function openBillCreate() {}
+	function openBillForm() {
+		navigate(`/create/`);
+	}
 
 	function openBillView(billID: string) {
 		navigate(`/ledger/${billID}/`);
@@ -39,12 +41,16 @@ export default function (props: {}) {
 		<>
 			<AppViewLoading isLoading={isLoading} />
 			<AppViewStack flex={1} sx={{ overflowX: 'hidden', overflowY: 'scroll' }}>
-				<BillFLoat openBillCreate={openBillCreate} />
+				<BillViewFLoat openBillForm={openBillForm} />
 				{Array.isArray(billsList) && billsList?.length === 0 && <AppPageEmpty />}
 				{Array.isArray(billsList) && billsList?.length !== 0 && (
 					<>
-						<BillChart bills={billsList} />
-						<BillList bills={billsList} filters={[]} openBillView={openBillView} />
+						<BillViewChart bills={billsList} />
+						<BillViewList
+							bills={billsList}
+							filters={[]}
+							openBillView={openBillView}
+						/>
 					</>
 				)}
 			</AppViewStack>

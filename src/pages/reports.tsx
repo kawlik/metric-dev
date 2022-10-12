@@ -4,8 +4,8 @@ import {
 	AppPageEmpty,
 	AppViewLoading,
 	AppViewStack,
-	BillChart,
-	BillList,
+	BillViewChart,
+	BillViewList,
 } from '../components/@';
 import { useContexts } from '../contexts/@';
 import { BillReportService } from '../services/@.service';
@@ -39,8 +39,12 @@ export default function (props: {}) {
 				{Array.isArray(billsList) && billsList?.length === 0 && <AppPageEmpty />}
 				{Array.isArray(billsList) && billsList?.length !== 0 && (
 					<>
-						<BillChart bills={billsList} />
-						<BillList bills={billsList} filters={[]} openBillView={openBillView} />
+						<BillViewChart bills={billsList} />
+						<BillViewList
+							bills={billsList}
+							filters={[]}
+							openBillView={openBillView}
+						/>
 					</>
 				)}
 			</AppViewStack>
