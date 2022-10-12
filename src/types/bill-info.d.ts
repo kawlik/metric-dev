@@ -4,7 +4,7 @@ export default interface BillInfo {
 	id?: string;
 	balance: number;
 	participants: string[];
-	timestampClosed: Timestamp | null;
+	timestampClosed: Timestamp;
 	timestampCreated: Timestamp;
 	timestampUpdated: Timestamp;
 	title: string;

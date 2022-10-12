@@ -4,13 +4,13 @@ import { FirebaseService } from './@.service';
 // define service
 class FirestoreService {
 	constructor(
-		private listInfo = 'bill-info',
+		private billInfo = 'bill-info',
 		private billData = 'bill-data',
 		private userData = 'user-data',
 	) {}
 
 	get BillInfo() {
-		return this.listInfo;
+		return this.billInfo;
 	}
 
 	get BillData() {

@@ -1,24 +1,22 @@
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { getDownloadURL, ref, uploadString } from 'firebase/storage';
 import { FirebaseService } from './@.service';
 
 // define service
 class StorageCloudService {
 	constructor(private userPicture = 'user-picture') {}
 
-	uploadUserPicture = async (file: File): Promise<string> => {
-		console.log(file);
-
-		const snapshot = await uploadBytes(this.getUserPictureRef(file), file);
+	uploadUserPicture = async (data: string): Promise<string> => {
+		const snapshot = await uploadString(this.getUserPictureRef(), data, 'data_url');
 
 		return getDownloadURL(snapshot.ref);
 	};
 
-	private getUserPictureRef(file: File) {
-		return ref(FirebaseService.Storage, this.getUserPictureUrl(file));
+	private getUserPictureRef() {
+		return ref(FirebaseService.Storage, this.getUserPictureUrl());
 	}
 
-	private getUserPictureUrl(file: File) {
-		return `${this.userPicture}/${FirebaseService.Auth.currentUser?.uid!}`;
+	private getUserPictureUrl() {
+		return `${this.userPicture}/${FirebaseService.Auth.currentUser?.phoneNumber!}`;
 	}
 }
 

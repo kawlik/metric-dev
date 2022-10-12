@@ -1,7 +1,7 @@
 import { PhotoCamera } from '@mui/icons-material';
-import { Avatar, Box, Button, CircularProgress, Stack } from '@mui/material';
-import { useState } from 'react';
-import { StorageCloudService } from '../services/@.service';
+import { Avatar, Button, CircularProgress, Stack } from '@mui/material';
+import { ChangeEvent, useState } from 'react';
+import { AppPhotoService, StorageCloudService } from '../services/@.service';
 
 export default function (props: {
 	displayPict: string;
@@ -10,11 +10,22 @@ export default function (props: {
 	// component logic
 	const [isPending, setIsPending] = useState(false);
 
-	async function uploadPicture(files: FileList) {
+	async function upload(event: ChangeEvent<HTMLInputElement>) {
 		setIsPending(true);
 
 		try {
-			const userPictureUrl = await StorageCloudService.uploadUserPicture(files[0]);
+			if (!event.target.files?.length) {
+				throw 'No file selected!';
+			}
+
+			const files = event.target.files;
+			const image = files[0];
+
+			const userPictureCrop = await AppPhotoService.cropImage(image);
+			const userPictureUrl = await StorageCloudService.uploadUserPicture(userPictureCrop);
+
+			console.log(userPictureUrl);
+
 			props.updateDisplayPict(userPictureUrl);
 		} catch {
 			alert('Something went wrong. Please try again later.');
@@ -40,8 +51,8 @@ export default function (props: {
 					accept={'image/*'}
 					hidden={true}
 					multiple={false}
+					onChange={upload}
 					type={'file'}
-					onChange={(e) => uploadPicture(e.target.files!)}
 				/>
 				Upload
 			</Button>
