@@ -18,7 +18,7 @@ export default function (props: {}) {
 	// component logic
 	const contexts = useContexts();
 
-	const steps = ['Set profile name', 'Set profile picture', 'Save your profile'];
+	const steps = ['Profile name', 'Profile picture', 'Profile preview'];
 
 	// component state
 	const [currentStep, setCurrentStep] = useState(0);

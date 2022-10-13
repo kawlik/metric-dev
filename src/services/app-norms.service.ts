@@ -10,7 +10,7 @@ class AppNormsService {
 		return '#' + '00000'.substring(0, 6 - base.length) + base;
 	};
 
-	normalizeMoment = () => moment();
+	normalizeMoment = (value?: number) => moment(value && value * 1000);
 
 	normalizeNumber = (value: number): string => {
 		return this.format.format(value);

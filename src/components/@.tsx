@@ -6,6 +6,7 @@ export { default as AppViewStack } from './app-view-stack';
 export { default as BillFormActions } from './bill-form-actions';
 export { default as BillFormDisplayInfo } from './bill-form-display-info';
 export { default as BillFormDisplayPlan } from './bill-form-display-plan';
+export { default as BillFormParticipants } from './bill-form-participants';
 export { default as BillFormStepper } from './bill-form-stepper';
 export { default as BillFormTopbar } from './bill-form-topbar';
 export { default as BillViewChart } from './bill-view-chart';
