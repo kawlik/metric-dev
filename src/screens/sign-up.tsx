@@ -45,7 +45,7 @@ export default function (props: {}) {
 
 		try {
 			await UserDataService.saveUser({
-				displayName: displayName,
+				displayName: displayName.trim(),
 				displayPict: displayPict,
 			});
 

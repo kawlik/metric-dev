@@ -10,7 +10,7 @@ export default function (props: {
 	setDedline(dedline: number): void;
 }) {
 	// component logic
-	const isTitleValid = props.title.length > 0 && props.title.length < 32;
+	const isTitleValid = props.title.trim().length > 0 && props.title.length < 32;
 
 	const deadlineForm = AppNormsService.normalizeMoment(props.dedline).format('YYYY-MM-DD');
 	const indefined = AppNormsService.normalizeMoment('9999-12-31T23:59:59.999Z').valueOf();
@@ -54,7 +54,7 @@ export default function (props: {
 				error={!isTitleValid}
 				fullWidth={true}
 				label={'Bill title'}
-				onChange={(e) => props.setTitle(e.target.value.slice(0, 31).trim())}
+				onChange={(e) => props.setTitle(e.target.value.slice(0, 31))}
 				size={'small'}
 				type={'text'}
 				value={props.title}
