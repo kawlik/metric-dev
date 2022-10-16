@@ -3,10 +3,7 @@ import { Avatar, Button, CircularProgress, Stack } from '@mui/material';
 import { ChangeEvent, useState } from 'react';
 import { AppPhotoService, StorageCloudService } from '../services/@.service';
 
-export default function (props: {
-	displayPict: string;
-	updateDisplayPict(userPicture: string): void;
-}) {
+export default function (props: { pict: string; setPict(pict: string): void }) {
 	// component logic
 	const [isPending, setIsPending] = useState(false);
 
@@ -24,7 +21,7 @@ export default function (props: {
 			const userPictureCrop = await AppPhotoService.cropImage(image);
 			const userPictureUrl = await StorageCloudService.uploadUserPicture(userPictureCrop);
 
-			props.updateDisplayPict(userPictureUrl);
+			props.setPict(userPictureUrl);
 		} catch {
 			alert('Something went wrong. Please try again later.');
 		}
@@ -35,7 +32,7 @@ export default function (props: {
 	// component layout
 	return (
 		<Stack gap={2} flex={1} alignItems={'center'} justifyContent={'center'}>
-			<Avatar src={props.displayPict} sx={{ height: 192, width: 192 }} />
+			<Avatar src={props.pict} sx={{ height: 192, width: 192 }} />
 			<Button
 				component={'label'}
 				disabled={isPending}

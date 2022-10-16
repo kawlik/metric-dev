@@ -6,8 +6,8 @@ import {
 	AppViewLoading,
 	AppViewStack,
 	SignUpActions,
-	SignUpDisplayName,
-	SignUpDisplayPict,
+	SignUpStepName,
+	SignUpStepPict,
 	SignUpPreview,
 	SignUpStepper,
 } from '../components/@';
@@ -65,16 +65,10 @@ export default function (props: {}) {
 				<SignUpStepper activeStep={currentStep} steps={steps} />
 				<Container maxWidth={'md'} sx={{ marginY: 'auto' }}>
 					{currentStep === 0 && (
-						<SignUpDisplayName
-							displayName={displayName}
-							updateDisplayName={setDisplayName}
-						/>
+						<SignUpStepName name={displayName} setName={setDisplayName} />
 					)}
 					{currentStep === 1 && (
-						<SignUpDisplayPict
-							displayPict={displayPict}
-							updateDisplayPict={setDisplayPict}
-						/>
+						<SignUpStepPict pict={displayPict} setPict={setDisplayPict} />
 					)}
 					{currentStep === 2 && (
 						<SignUpPreview

@@ -1,4 +1,4 @@
-import { Container, OutlinedInput } from '@mui/material';
+import { Container } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -6,9 +6,9 @@ import {
 	AppViewLoading,
 	AppViewStack,
 	BillFormActions,
-	BillFormDisplayInfo,
-	BillFormDisplayPlan,
-	BillFormParticipants,
+	BillFormStepBasic,
+	BillFormStepPlans,
+	BillFormStepUsers,
 	BillFormStepper,
 	BillFormTopbar,
 } from '../components/@';
@@ -22,19 +22,19 @@ export default function (props: {}) {
 
 	const steps = ['Bill basics', 'Expense plan', 'Participants'];
 
-	const month = AppNormsService.normalizeMoment().endOf('month').unix();
-	const today = AppNormsService.normalizeMoment().endOf('day').unix();
+	const monthUnix = AppNormsService.normalizeMoment().endOf('month').unix();
+	const todayUnix = AppNormsService.normalizeMoment().endOf('day').unix();
 
 	// component state
 	const [billTitle, setBillTitle] = useState('');
 	const [currentStep, setCurrentStep] = useState(0);
-	const [participants, setParticipants] = useState(new Set<string>());
-	const [validToDate, setValidToDate] = useState(month);
+	const [participants, setParticipants] = useState([]);
+	const [validToDate, setValidToDate] = useState(monthUnix);
 	const [viewLoading, setViewLoading] = useState(false);
 
 	const canGoBack = currentStep !== 0;
-	const canGoNext = currentStep !== 2 && !!billTitle.length && validToDate >= today;
-	const canGoSave = currentStep === 2 && !!billTitle.length && validToDate >= today;
+	const canGoNext = currentStep !== 2 && !!billTitle.length && validToDate >= todayUnix;
+	const canGoSave = currentStep === 2 && !!billTitle.length && validToDate >= todayUnix;
 
 	function goHome() {
 		navigate(-1);
@@ -68,15 +68,15 @@ export default function (props: {}) {
 				<BillFormStepper activeStep={currentStep} steps={steps} />
 				<Container maxWidth={'md'} sx={{ marginY: 'auto' }}>
 					{currentStep === 0 && (
-						<BillFormDisplayInfo
-							displayTitle={billTitle}
-							displayValidTo={validToDate}
-							updateDisplayTitle={setBillTitle}
-							updateDisplayValidTo={setValidToDate}
+						<BillFormStepBasic
+							title={billTitle}
+							dedline={validToDate}
+							setTitle={setBillTitle}
+							setDedline={setValidToDate}
 						/>
 					)}
-					{currentStep === 1 && <BillFormDisplayPlan />}
-					{currentStep === 2 && <BillFormParticipants />}
+					{currentStep === 1 && <BillFormStepPlans />}
+					{currentStep === 2 && <BillFormStepUsers />}
 				</Container>
 				<BillFormActions
 					canGoBack={canGoBack}
