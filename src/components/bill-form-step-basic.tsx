@@ -43,43 +43,41 @@ export default function (props: {
 
 	// component layout
 	return (
-		<Stack gap={2} justifyContent={'center'}>
+		<Stack gap={2} paddingY={2}>
 			<Box margin={'auto'}>
 				<Avatar sx={{ height: 72, width: 72 }}>
 					<ReceiptLong fontSize={'large'} />
 				</Avatar>
 			</Box>
-			<Stack gap={2}>
-				<TextField
-					autoFocus={true}
-					error={!isTitleValid}
-					fullWidth={true}
-					label={'Bill title'}
-					onChange={(e) => props.setTitle(e.target.value.slice(0, 31).trim())}
-					size={'small'}
-					type={'text'}
-					value={props.title}
-				/>
-				<TextField
-					disabled={hasNoDeadline}
-					fullWidth={true}
-					label={'Valid until'}
-					onChange={(e) => changeDedline(e.target.value)}
-					size={'small'}
-					type={'date'}
-					value={hasNoDeadline ? todayForm : deadlineForm}
-				/>
-				<FormControlLabel
-					control={
-						<Checkbox
-							checked={hasNoDeadline}
-							onChange={(e) => setHasNoDeadline(e.target.checked)}
-						/>
-					}
-					label={'No deadline'}
-					sx={{ marginY: -2 }}
-				/>
-			</Stack>
+			<TextField
+				autoFocus={true}
+				error={!isTitleValid}
+				fullWidth={true}
+				label={'Bill title'}
+				onChange={(e) => props.setTitle(e.target.value.slice(0, 31).trim())}
+				size={'small'}
+				type={'text'}
+				value={props.title}
+			/>
+			<TextField
+				disabled={hasNoDeadline}
+				fullWidth={true}
+				label={'Valid until'}
+				onChange={(e) => changeDedline(e.target.value)}
+				size={'small'}
+				type={'date'}
+				value={hasNoDeadline ? todayForm : deadlineForm}
+			/>
+			<FormControlLabel
+				control={
+					<Checkbox
+						checked={hasNoDeadline}
+						onChange={(e) => setHasNoDeadline(e.target.checked)}
+					/>
+				}
+				label={'No deadline'}
+				sx={{ marginY: -2 }}
+			/>
 		</Stack>
 	);
 }

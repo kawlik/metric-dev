@@ -26,7 +26,7 @@ export default function (props: {}) {
 	const todayUnix = AppNormsService.normalizeMoment().endOf('day').valueOf();
 
 	// component state
-	const [billTitle, setBillTitle] = useState('Tytuł testowy');
+	const [billTitle, setBillTitle] = useState('');
 	const [currentStep, setCurrentStep] = useState(0);
 	const [participants, setParticipants] = useState([]);
 	const [validToDate, setValidToDate] = useState(monthUnix);
@@ -66,9 +66,9 @@ export default function (props: {}) {
 		<>
 			<BillFormTopbar goBack={goHome} />
 			<AppViewLoading isLoading={viewLoading} />
-			<AppViewStack flex={1} gap={1} padding={1}>
+			<AppViewStack flex={1} gap={1} padding={1} sx={{ overflowY: 'hidden' }}>
 				<BillFormStepper activeStep={currentStep} steps={steps} />
-				<Container maxWidth={'md'} sx={{ marginY: 'auto' }}>
+				<Container maxWidth={'md'} sx={{ marginY: 'auto', overflowY: 'scroll' }}>
 					{currentStep === 0 && (
 						<BillFormStepBasic
 							title={billTitle}
