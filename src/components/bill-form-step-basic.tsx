@@ -1,6 +1,6 @@
-import { CheckBox, ReceiptLong } from '@mui/icons-material';
+import { ReceiptLong } from '@mui/icons-material';
 import { Avatar, Box, Checkbox, FormControlLabel, Stack, TextField } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AppNormsService } from '../services/@.service';
 
 export default function (props: {
@@ -10,19 +10,18 @@ export default function (props: {
 	setDedline(dedline: number): void;
 }) {
 	// component logic
-	const isTitleValid = props.title.trim().length > 0 && props.title.trim().length < 32;
-	const deadlineForm = AppNormsService.normalizeMoment(props.dedline * 1000).format(
-		'YYYY-MM-DD',
-	);
+	const isTitleValid = props.title.length > 0 && props.title.length < 32;
 
+	const deadlineForm = AppNormsService.normalizeMoment(props.dedline).format('YYYY-MM-DD');
+	const indefined = AppNormsService.normalizeMoment('9999-12-31T23:59:59.999Z').valueOf();
 	const todayForm = AppNormsService.normalizeMoment().endOf('day').format('YYYY-MM-DD');
-	const todayUnix = AppNormsService.normalizeMoment().endOf('day').unix();
+	const todayUnix = AppNormsService.normalizeMoment().endOf('day').valueOf();
 
 	// component state
-	const [noDeadline, setNoDedline] = useState(true);
+	const [hasNoDeadline, setHasNoDeadline] = useState(props.dedline === indefined);
 
 	function changeDedline(date: string) {
-		const newDateUnix = AppNormsService.normalizeMoment(date).unix();
+		const newDateUnix = AppNormsService.normalizeMoment(date).valueOf();
 
 		if (newDateUnix < todayUnix) {
 			alert('You cannot choose a date from the past!');
@@ -30,6 +29,17 @@ export default function (props: {
 			props.setDedline(newDateUnix);
 		}
 	}
+
+	// component lifecycle
+	useEffect(() => {
+		const validUnix = props.dedline === indefined ? todayUnix : props.dedline;
+
+		if (!hasNoDeadline) {
+			props.setDedline(validUnix);
+		} else {
+			props.setDedline(indefined);
+		}
+	}, [hasNoDeadline]);
 
 	// component layout
 	return (
@@ -45,28 +55,29 @@ export default function (props: {
 					error={!isTitleValid}
 					fullWidth={true}
 					label={'Bill title'}
-					onChange={(e) => props.setTitle(e.target.value.slice(0, 31))}
+					onChange={(e) => props.setTitle(e.target.value.slice(0, 31).trim())}
 					size={'small'}
 					type={'text'}
 					value={props.title}
 				/>
 				<TextField
-					disabled={noDeadline}
+					disabled={hasNoDeadline}
 					fullWidth={true}
 					label={'Valid until'}
 					onChange={(e) => changeDedline(e.target.value)}
 					size={'small'}
 					type={'date'}
-					value={deadlineForm}
+					value={hasNoDeadline ? todayForm : deadlineForm}
 				/>
 				<FormControlLabel
 					control={
 						<Checkbox
-							checked={noDeadline}
-							onChange={(e) => setNoDedline(e.target.checked)}
+							checked={hasNoDeadline}
+							onChange={(e) => setHasNoDeadline(e.target.checked)}
 						/>
 					}
 					label={'No deadline'}
+					sx={{ marginY: -2 }}
 				/>
 			</Stack>
 		</Stack>

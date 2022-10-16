@@ -30,7 +30,7 @@ export default function (props: {}) {
 		</Routes>
 	) : (
 		<Routes>
-			<Route path="*" element={<Navigate to="ledgers" />} />
+			<Route path="*" element={<Navigate to="create" />} />
 
 			<Route path="create" element={<BillFormScreen />} />
 

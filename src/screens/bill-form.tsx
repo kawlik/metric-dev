@@ -22,19 +22,21 @@ export default function (props: {}) {
 
 	const steps = ['Bill basics', 'Expense plan', 'Participants'];
 
-	const monthUnix = AppNormsService.normalizeMoment().endOf('month').unix();
-	const todayUnix = AppNormsService.normalizeMoment().endOf('day').unix();
+	const monthUnix = AppNormsService.normalizeMoment().endOf('month').valueOf();
+	const todayUnix = AppNormsService.normalizeMoment().endOf('day').valueOf();
 
 	// component state
-	const [billTitle, setBillTitle] = useState('');
+	const [billTitle, setBillTitle] = useState('Tytuł testowy');
 	const [currentStep, setCurrentStep] = useState(0);
 	const [participants, setParticipants] = useState([]);
 	const [validToDate, setValidToDate] = useState(monthUnix);
 	const [viewLoading, setViewLoading] = useState(false);
 
+	console.log(AppNormsService.normalizeMoment(validToDate).toISOString());
+
 	const canGoBack = currentStep !== 0;
-	const canGoNext = currentStep !== 2 && !!billTitle.length && validToDate >= todayUnix;
-	const canGoSave = currentStep === 2 && !!billTitle.length && validToDate >= todayUnix;
+	const canGoNext = currentStep !== 2 && !!billTitle.length && validToDate > todayUnix;
+	const canGoSave = currentStep === 2 && !!billTitle.length && validToDate > todayUnix;
 
 	function goHome() {
 		navigate(-1);
