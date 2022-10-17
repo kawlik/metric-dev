@@ -27,13 +27,11 @@ export default function (props: {}) {
 
 	// component state
 	const [billTitle, setBillTitle] = useState('');
-	const [currentStep, setCurrentStep] = useState(1);
+	const [currentStep, setCurrentStep] = useState(0);
 	const [expensesPlan, setExpensesPlan] = useState([]);
 	const [participants, setParticipants] = useState([]);
 	const [validToDate, setValidToDate] = useState(monthUnix);
 	const [viewLoading, setViewLoading] = useState(false);
-
-	console.log(AppNormsService.normalizeMoment(validToDate).toISOString());
 
 	const canGoBack = currentStep !== 0;
 	const canGoNext = currentStep !== 2 && !!billTitle.length && validToDate > todayUnix;

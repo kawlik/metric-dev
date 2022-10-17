@@ -11,14 +11,17 @@ export default function (props: {
 }) {
 	// component logic
 	const isTitleValid = props.title.trim().length > 0 && props.title.length < 32;
+	const maxTimestamp = '9999-12-31T23:59:59.9999999Z';
 
 	const deadlineForm = AppNormsService.normalizeMoment(props.dedline).format('YYYY-MM-DD');
-	const indefined = AppNormsService.normalizeMoment('9999-12-31T23:59:59.999Z').valueOf();
+	const deadlineUnix = AppNormsService.normalizeMoment(maxTimestamp).valueOf();
+
 	const todayForm = AppNormsService.normalizeMoment().endOf('day').format('YYYY-MM-DD');
 	const todayUnix = AppNormsService.normalizeMoment().endOf('day').valueOf();
 
 	// component state
-	const [hasNoDeadline, setHasNoDeadline] = useState(props.dedline === indefined);
+	const [hasNoDeadline, setHasNoDeadline] = useState(props.dedline === deadlineUnix);
+	const [savedDeadline, setSavedDeadline] = useState(props.dedline);
 
 	function changeDedline(date: string) {
 		const newDateUnix = AppNormsService.normalizeMoment(date).endOf('day').valueOf();
@@ -26,18 +29,17 @@ export default function (props: {
 		if (newDateUnix < todayUnix) {
 			alert('You cannot choose a date from the past!');
 		} else {
+			setSavedDeadline(newDateUnix);
 			props.setDedline(newDateUnix);
 		}
 	}
 
 	// component lifecycle
 	useEffect(() => {
-		const validUnix = props.dedline === indefined ? todayUnix : props.dedline;
-
 		if (!hasNoDeadline) {
-			props.setDedline(validUnix);
+			props.setDedline(savedDeadline);
 		} else {
-			props.setDedline(indefined);
+			props.setDedline(deadlineUnix);
 		}
 	}, [hasNoDeadline]);
 
