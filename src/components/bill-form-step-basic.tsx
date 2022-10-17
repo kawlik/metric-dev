@@ -21,7 +21,7 @@ export default function (props: {
 	const [hasNoDeadline, setHasNoDeadline] = useState(props.dedline === indefined);
 
 	function changeDedline(date: string) {
-		const newDateUnix = AppNormsService.normalizeMoment(date).valueOf();
+		const newDateUnix = AppNormsService.normalizeMoment(date).endOf('day').valueOf();
 
 		if (newDateUnix < todayUnix) {
 			alert('You cannot choose a date from the past!');
