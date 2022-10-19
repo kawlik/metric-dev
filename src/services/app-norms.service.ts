@@ -5,9 +5,9 @@ class AppNormsService {
 	constructor(private format = Intl.NumberFormat('en', { notation: 'compact' })) {}
 
 	normalizeColor = (value: string): string => {
-		const base = (this.prepareHash(value) & 0x00ffff).toString(16).toUpperCase();
+		const base = (this.prepareHash(value) & 0x00ffffff).toString(16).toUpperCase();
 
-		return '#' + '00000'.substring(0, 6 - base.length) + base;
+		return '#' + '000000'.substring(0, 6 - base.length) + base;
 	};
 
 	normalizeMoment = (value?: moment.MomentInput) => moment(value);

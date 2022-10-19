@@ -20,6 +20,7 @@ export default function (props: {}) {
 	const contexts = useContexts();
 	const navigate = useNavigate();
 
+	const self = contexts.userAuth.get()?.phoneNumber!;
 	const steps = ['Bill basics', 'Expense plan', 'Participants'];
 
 	const monthUnix = AppNormsService.normalizeMoment().endOf('month').valueOf();
@@ -28,8 +29,8 @@ export default function (props: {}) {
 	// component state
 	const [billTitle, setBillTitle] = useState('');
 	const [currentStep, setCurrentStep] = useState(0);
-	const [expensesPlan, setExpensesPlan] = useState([]);
-	const [participants, setParticipants] = useState([]);
+	const [expensesPlan, setExpensesPlan] = useState(new Array<string>());
+	const [participants, setParticipants] = useState(new Array<string>(self));
 	const [validToDate, setValidToDate] = useState(monthUnix);
 	const [viewLoading, setViewLoading] = useState(false);
 
@@ -76,8 +77,8 @@ export default function (props: {}) {
 							setDedline={setValidToDate}
 						/>
 					)}
-					{currentStep === 1 && <BillFormStepPlans />}
-					{currentStep === 2 && <BillFormStepUsers />}
+					{currentStep === 1 && <BillFormStepPlans setPlans={setExpensesPlan} />}
+					{currentStep === 2 && <BillFormStepUsers setUsers={setParticipants} />}
 				</Container>
 				<BillFormActions
 					canGoBack={canGoBack}

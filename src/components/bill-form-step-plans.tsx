@@ -1,43 +1,49 @@
-import { AttachMoney, Extension } from '@mui/icons-material';
 import {
+	Checkbox,
 	List,
 	ListItem,
 	ListItemIcon,
 	ListItemText,
-	Switch,
-	TextField,
 	Typography,
 } from '@mui/material';
+import { useState } from 'react';
+import { AppNormsService, BillDataService } from '../services/@.service';
 
-export default function (props: {}) {
+export default function (props: { setPlans(plans: string[]): void }) {
 	// component logic
-	const availableExpenses = [
-		'Wydatek 1',
-		'Wydatek 2',
-		'Wydatek 3',
-		'Wydatek 4',
-		'Wydatek 5',
-		'Wydatek 6',
-	];
+	const availableExpenses = [...BillDataService.AvailablePlansMap].map((plan) => ({
+		color: AppNormsService.normalizeColor(plan[0]),
+		name: plan[0],
+		icon: plan[1],
+	}));
+
+	// component state
+	const [selectedExpensesSet, setSelectedExpensesSet] = useState(new Set<string>());
+
+	function onExpanseChange(expense: string, value: boolean) {
+		selectedExpensesSet.delete(expense);
+
+		if (value) {
+			setSelectedExpensesSet(selectedExpensesSet.add(expense));
+		}
+
+		props.setPlans([...selectedExpensesSet]);
+	}
 
 	// component layout
 	return (
-		<List>
+		<List sx={{ padding: 0 }}>
 			{availableExpenses.map((expense) => (
-				<ListItem key={expense}>
-					<ListItemIcon>
-						<Extension />
+				<ListItem key={expense.name}>
+					<ListItemIcon sx={{ color: expense.color }}>
+						<expense.icon />
 					</ListItemIcon>
-					<ListItemText primary={<Typography noWrap={true}>{expense}</Typography>} />
-					<TextField
-						helperText={'Your plan'}
-						size={'small'}
-						sx={{ width: 72 }}
-						type={'number'}
-						variant={'standard'}
-						InputProps={{
-							endAdornment: <AttachMoney fontSize={'inherit'} />,
-						}}
+					<ListItemText
+						primary={<Typography noWrap={true}>{expense.name}</Typography>}
+					/>
+					<Checkbox
+						onChange={(e) => onExpanseChange(expense.name, e.target.checked)}
+						value={selectedExpensesSet.has(expense.name)}
 					/>
 				</ListItem>
 			))}

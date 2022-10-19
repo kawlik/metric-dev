@@ -8,4 +8,5 @@ export default interface BillInfo {
 	timestampUpdated: Timestamp;
 	timestampValidTo: Timestamp;
 	title: string;
+	type: string;
 }
