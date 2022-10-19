@@ -1,11 +1,13 @@
 import {
 	collection,
+	doc,
 	orderBy,
 	Query,
 	query,
 	QuerySnapshot,
 	Timestamp,
 	where,
+	writeBatch,
 } from 'firebase/firestore';
 import { BehaviorSubject } from 'rxjs';
 import { FirebaseService, FirestoreService } from './@.service';
@@ -35,6 +37,34 @@ class BillLedger<T> extends FirebaseCollection<T> {
 		}));
 
 		this.subject$.next(payload as T);
+	};
+
+	openLedger = async (data: {
+		deadline: number;
+		expensesPlan: string[];
+		participants: string[];
+		title: string;
+		type: string;
+	}): Promise<string> => {
+		const batch = writeBatch(FirebaseService.Firestore);
+
+		const billDataRef = doc(FirestoreService.collectionBillData);
+		const billInfoRef = doc(FirestoreService.collectionBillInfo, billDataRef.id);
+
+		batch.set(billDataRef, { posts: [], plans: data.expensesPlan });
+		batch.set(billInfoRef, {
+			balance: Math.ceil(Math.random() * 100),
+			participants: data.participants,
+			timestampCreated: Timestamp.now(),
+			timestampUpdated: Timestamp.now(),
+			timestampValidTo: Timestamp.fromMillis(data.deadline),
+			title: data.title,
+			type: data.type,
+		});
+
+		await batch.commit();
+
+		return billInfoRef.id;
 	};
 }
 

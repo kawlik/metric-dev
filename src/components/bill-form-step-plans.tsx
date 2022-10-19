@@ -6,7 +6,7 @@ import {
 	ListItemText,
 	Typography,
 } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AppNormsService, BillDataService } from '../services/@.service';
 
 export default function (props: { setPlans(plans: string[]): void }) {
@@ -18,7 +18,9 @@ export default function (props: { setPlans(plans: string[]): void }) {
 	}));
 
 	// component state
-	const [selectedExpensesSet, setSelectedExpensesSet] = useState(new Set<string>());
+	const [selectedExpensesSet, setSelectedExpensesSet] = useState(
+		new Set<string>(['Entertainment', 'Food', 'Household', 'Mobility', 'Other']),
+	);
 
 	function onExpanseChange(expense: string, value: boolean) {
 		selectedExpensesSet.delete(expense);
@@ -29,6 +31,11 @@ export default function (props: { setPlans(plans: string[]): void }) {
 
 		props.setPlans([...selectedExpensesSet]);
 	}
+
+	// component lifecycle
+	useEffect(() => {
+		props.setPlans([...selectedExpensesSet]);
+	}, []);
 
 	// component layout
 	return (
@@ -43,7 +50,7 @@ export default function (props: { setPlans(plans: string[]): void }) {
 					/>
 					<Checkbox
 						onChange={(e) => onExpanseChange(expense.name, e.target.checked)}
-						value={selectedExpensesSet.has(expense.name)}
+						checked={selectedExpensesSet.has(expense.name)}
 					/>
 				</ListItem>
 			))}

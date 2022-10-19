@@ -8,7 +8,6 @@ import './style.css';
 // app providers
 import { HashRouter } from 'react-router-dom';
 import { AppContexts } from './contexts/@';
-import { registerSW } from 'virtual:pwa-register';
 
 // app instantization
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
@@ -20,9 +19,3 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 		</AppContexts>
 	</React.StrictMode>,
 );
-
-// app service worker
-// registerSW({
-// 	onNeedRefresh() {},
-// 	onOfflineReady() {},
-// });

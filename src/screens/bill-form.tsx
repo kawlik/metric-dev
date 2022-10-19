@@ -12,15 +12,12 @@ import {
 	BillFormStepper,
 	BillFormTopbar,
 } from '../components/@';
-import { useContexts } from '../contexts/@';
-import { AppNormsService } from '../services/@.service';
+import { AppNormsService, BillLedgerService } from '../services/@.service';
 
 export default function (props: {}) {
 	// component logic
-	const contexts = useContexts();
 	const navigate = useNavigate();
 
-	const self = contexts.userAuth.get()?.phoneNumber!;
 	const steps = ['Bill basics', 'Expense plan', 'Participants'];
 
 	const monthUnix = AppNormsService.normalizeMoment().endOf('month').valueOf();
@@ -30,7 +27,7 @@ export default function (props: {}) {
 	const [billTitle, setBillTitle] = useState('');
 	const [currentStep, setCurrentStep] = useState(0);
 	const [expensesPlan, setExpensesPlan] = useState(new Array<string>());
-	const [participants, setParticipants] = useState(new Array<string>(self));
+	const [participants, setParticipants] = useState(new Array<string>());
 	const [validToDate, setValidToDate] = useState(monthUnix);
 	const [viewLoading, setViewLoading] = useState(false);
 
@@ -54,6 +51,15 @@ export default function (props: {}) {
 		setViewLoading(true);
 
 		try {
+			const newLedgerID = await BillLedgerService.openLedger({
+				expensesPlan: expensesPlan,
+				participants: participants,
+				title: billTitle,
+				type: 'default',
+				deadline: validToDate,
+			});
+
+			navigate(`/ledger/${newLedgerID}`, { replace: true });
 		} catch {
 			alert('Something went wrong. Please try again later.');
 		}

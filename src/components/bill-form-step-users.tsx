@@ -9,7 +9,7 @@ import {
 	ListItemText,
 	Typography,
 } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useContexts } from '../contexts/@';
 import { AppPhoneField } from './@';
 
@@ -19,6 +19,11 @@ export default function (props: { setUsers(users: string[]): void }) {
 
 	// component state
 	const [otherUsersSet, setOtherUsersSet] = useState();
+
+	// component lifecycle
+	useEffect(() => {
+		props.setUsers([contexts.userAuth.get()?.phoneNumber!]);
+	}, []);
 
 	// component layout
 	return (
