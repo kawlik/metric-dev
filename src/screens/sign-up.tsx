@@ -61,7 +61,7 @@ export default function (props: {}) {
 	return (
 		<>
 			<AppViewLoading isLoading={viewLoading} />
-			<AppViewStack flex={1} gap={1} padding={1} sx={{ overflowY: 'hidden' }}>
+			<AppViewStack flex={1} gap={1} padding={1} sx={{ overflowY: 'scroll' }}>
 				<SignUpStepper activeStep={currentStep} steps={steps} />
 				<Container maxWidth={'md'} sx={{ marginY: 'auto', overflowY: 'scroll' }}>
 					{currentStep === 0 && (

@@ -43,10 +43,10 @@ export default function (props: {}) {
 			</Route>
 
 			<Route path="*" element={<HomeScreen />}>
-				<Route path="account" element={<AccountPage />} />
 				<Route path="ledgers" element={<LedgersPage />} />
 				<Route path="reports" element={<ReportsPage />} />
 				<Route path="updates" element={<UpdatesPage />} />
+				<Route path="account" element={<AccountPage />} />
 			</Route>
 		</Routes>
 	);

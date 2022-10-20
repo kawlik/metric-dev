@@ -1,7 +1,6 @@
-import { PersonSearch } from '@mui/icons-material';
+import { Delete, PersonSearch } from '@mui/icons-material';
 import {
 	Avatar,
-	Divider,
 	IconButton,
 	List,
 	ListItem,
@@ -9,54 +8,51 @@ import {
 	ListItemText,
 	Typography,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useContexts } from '../contexts/@';
-import { AppPhoneField } from './@';
 
-export default function (props: { setUsers(users: string[]): void }) {
+export default function (props: { users: string[]; setUsers(users: string[]): void }) {
 	// component logic
 	const contexts = useContexts();
 
-	// component state
-	const [otherUsersSet, setOtherUsersSet] = useState();
+	const userAuth = contexts.userAuth.get();
+	const usersSet = new Set(props.users);
+
+	const assignedUsersArray = new Array(...usersSet);
+	const assignedUsersLimit = 6;
 
 	// component lifecycle
 	useEffect(() => {
-		props.setUsers([contexts.userAuth.get()?.phoneNumber!]);
+		props.setUsers([...usersSet.add(userAuth?.phoneNumber!)]);
 	}, []);
 
 	// component layout
 	return (
 		<List sx={{ padding: 0 }}>
-			<ListItem>
-				<ListItemAvatar>
-					<Avatar src={contexts.userAuth.get()?.photoURL || ''} />
-				</ListItemAvatar>
-				<ListItemText
-					primary={
-						<Typography noWrap={true}>
-							{contexts.userAuth.get()?.phoneNumber} (You)
-						</Typography>
-					}
-				/>
-			</ListItem>
-			<Divider />
-			{new Array(5).fill(null).map((user, index) => (
-				<ListItem
-					key={index}
-					disabled={true}
-					secondaryAction={
-						<IconButton edge={'end'}>
-							<PersonSearch />
-						</IconButton>
-					}
-				>
+			{assignedUsersArray.map((user, index) => (
+				<ListItem key={index}>
 					<ListItemAvatar>
 						<Avatar />
 					</ListItemAvatar>
-					<ListItemText primary={<AppPhoneField onChange={() => {}} />} />
+					<ListItemText primary={<Typography noWrap={true}>{user}</Typography>} />
+					<IconButton disabled={user === userAuth?.phoneNumber}>
+						<Delete />
+					</IconButton>
 				</ListItem>
 			))}
+			{new Array(assignedUsersLimit - assignedUsersArray.length)
+				.fill('Free slot')
+				.map((user, index) => (
+					<ListItem key={index}>
+						<ListItemAvatar>
+							<Avatar />
+						</ListItemAvatar>
+						<ListItemText primary={<Typography noWrap={true}>{user}</Typography>} />
+						<IconButton>
+							<PersonSearch />
+						</IconButton>
+					</ListItem>
+				))}
 		</List>
 	);
 }

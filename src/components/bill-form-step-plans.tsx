@@ -6,35 +6,31 @@ import {
 	ListItemText,
 	Typography,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { AppNormsService, BillDataService } from '../services/@.service';
 
-export default function (props: { setPlans(plans: string[]): void }) {
+export default function (props: { plans: string[]; setPlans(plans: string[]): void }) {
 	// component logic
+	const chosenExpensesSet = new Set(props.plans);
 	const availableExpenses = [...BillDataService.AvailablePlansMap].map((plan) => ({
 		color: AppNormsService.normalizeColor(plan[0]),
 		name: plan[0],
 		icon: plan[1],
 	}));
 
-	// component state
-	const [selectedExpensesSet, setSelectedExpensesSet] = useState(
-		new Set<string>(['Entertainment', 'Food', 'Household', 'Mobility', 'Other']),
-	);
-
 	function onExpanseChange(expense: string, value: boolean) {
-		selectedExpensesSet.delete(expense);
-
 		if (value) {
-			setSelectedExpensesSet(selectedExpensesSet.add(expense));
+			chosenExpensesSet.add(expense);
+		} else {
+			chosenExpensesSet.delete(expense);
 		}
 
-		props.setPlans([...selectedExpensesSet]);
+		props.setPlans([...chosenExpensesSet.add('Other')]);
 	}
 
 	// component lifecycle
 	useEffect(() => {
-		props.setPlans([...selectedExpensesSet]);
+		props.setPlans([...chosenExpensesSet.add('Other')]);
 	}, []);
 
 	// component layout
@@ -50,7 +46,7 @@ export default function (props: { setPlans(plans: string[]): void }) {
 					/>
 					<Checkbox
 						onChange={(e) => onExpanseChange(expense.name, e.target.checked)}
-						checked={selectedExpensesSet.has(expense.name)}
+						checked={chosenExpensesSet.has(expense.name)}
 					/>
 				</ListItem>
 			))}

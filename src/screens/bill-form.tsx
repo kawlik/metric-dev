@@ -72,7 +72,7 @@ export default function (props: {}) {
 		<>
 			<BillFormTopbar goBack={goHome} />
 			<AppViewLoading isLoading={viewLoading} />
-			<AppViewStack flex={1} gap={1} padding={1} sx={{ overflowY: 'hidden' }}>
+			<AppViewStack flex={1} gap={1} padding={1} sx={{ overflowY: 'scroll' }}>
 				<BillFormStepper activeStep={currentStep} steps={steps} />
 				<Container maxWidth={'md'} sx={{ marginY: 'auto', overflowY: 'scroll' }}>
 					{currentStep === 0 && (
@@ -83,8 +83,12 @@ export default function (props: {}) {
 							setDedline={setValidToDate}
 						/>
 					)}
-					{currentStep === 1 && <BillFormStepPlans setPlans={setExpensesPlan} />}
-					{currentStep === 2 && <BillFormStepUsers setUsers={setParticipants} />}
+					{currentStep === 1 && (
+						<BillFormStepPlans plans={expensesPlan} setPlans={setExpensesPlan} />
+					)}
+					{currentStep === 2 && (
+						<BillFormStepUsers users={participants} setUsers={setParticipants} />
+					)}
 				</Container>
 				<BillFormActions
 					canGoBack={canGoBack}

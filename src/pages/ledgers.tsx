@@ -41,7 +41,6 @@ export default function (props: {}) {
 		<>
 			<AppViewLoading isLoading={isLoading} />
 			<AppViewStack flex={1} sx={{ overflowX: 'hidden', overflowY: 'scroll' }}>
-				<BillViewFLoat openBillForm={openBillForm} />
 				{Array.isArray(billsList) && billsList?.length === 0 && <AppPageEmpty />}
 				{Array.isArray(billsList) && billsList?.length !== 0 && (
 					<>
@@ -53,6 +52,7 @@ export default function (props: {}) {
 						/>
 					</>
 				)}
+				<BillViewFLoat openBillForm={openBillForm} />
 			</AppViewStack>
 		</>
 	);

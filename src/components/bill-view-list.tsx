@@ -36,7 +36,11 @@ export default function (props: {
 					</ListItemAvatar>
 					<ListItemText
 						primary={<Typography noWrap={true}>{bill.title}</Typography>}
-						secondary={<Typography noWrap={true}>{parse(bill)}</Typography>}
+						secondary={
+							<Typography noWrap={true} variant={'subtitle2'}>
+								{parse(bill)}
+							</Typography>
+						}
 					/>
 				</ListItemButton>
 			))}
