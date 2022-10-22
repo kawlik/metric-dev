@@ -18,7 +18,7 @@ export default function (props: PropsWithChildren) {
 	const [savedLedgers, setSavedLedgers] = useState<BillInfoType[] | undefined>(undefined);
 	const [savedReports, setSavedReports] = useState<BillInfoType[] | undefined>(undefined);
 	const [userAuth, setUserAuth] = useState<UserAuthType>(undefined);
-	const [userMode, setUserMode] = useState<UserModeType>(preferedMode);
+	const [userMode, setUserMode] = useState<UserModeType>(undefined);
 
 	// component lifecycle
 	useEffect(() => {
