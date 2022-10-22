@@ -1,3 +1,4 @@
+import { CssBaseline, useMediaQuery } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { PropsWithChildren, useEffect, useState } from 'react';
 import { MUIThemeDark, MUIThemeLight } from '../configs/@';
@@ -7,6 +8,8 @@ import { AppContext } from './app-contexts';
 
 export default function (props: PropsWithChildren) {
 	// component logic
+	const preferesDark = useMediaQuery('(prefers-color-scheme: dark)');
+	const preferedMode = preferesDark ? 'dark' : 'light';
 
 	// component state
 	const [activeBill, setActiveBill] = useState<BillInfoType | null>(null);
@@ -15,7 +18,7 @@ export default function (props: PropsWithChildren) {
 	const [savedLedgers, setSavedLedgers] = useState<BillInfoType[] | undefined>(undefined);
 	const [savedReports, setSavedReports] = useState<BillInfoType[] | undefined>(undefined);
 	const [userAuth, setUserAuth] = useState<UserAuthType>(undefined);
-	const [userMode, setUserMode] = useState<UserModeType>(undefined);
+	const [userMode, setUserMode] = useState<UserModeType>(preferedMode);
 
 	// component lifecycle
 	useEffect(() => {
@@ -28,9 +31,14 @@ export default function (props: PropsWithChildren) {
 		return () => UserAuthService.unsubscribe();
 	}, []);
 
+	useEffect(() => {
+		setUserMode(preferedMode);
+	}, [preferedMode]);
+
 	// component layout
 	return (
 		<ThemeProvider theme={userMode === 'dark' ? MUIThemeDark : MUIThemeLight}>
+			<CssBaseline />
 			<AppContext.Provider
 				children={props.children}
 				value={{
