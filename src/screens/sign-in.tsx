@@ -15,7 +15,7 @@ import {
 import { useContexts } from '../contexts/@';
 
 // assets
-import AppLogo from '../assets/app-logo.png';
+import Logo from '../assets/logo.png';
 
 export default function (props: {}) {
 	// component logic
@@ -61,7 +61,7 @@ export default function (props: {}) {
 			<AppViewStack flex={1} gap={1} padding={1}>
 				<Container maxWidth={'md'} sx={{ marginY: 'auto' }}>
 					<Stack gap={1}>
-						<SignInHeader srcAvatar={AppLogo} />
+						<SignInHeader srcAvatar={Logo} />
 						<SignInRegister generateOTPCode={generateOTPCode} />
 						<SignInVerifier
 							closeVerifier={closeVerifier}

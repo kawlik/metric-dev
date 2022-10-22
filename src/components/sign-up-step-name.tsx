@@ -1,5 +1,7 @@
-import { Handshake } from '@mui/icons-material';
 import { Avatar, Box, Stack, TextField, Typography } from '@mui/material';
+
+// assets
+import Gif from '../assets/love.gif';
 
 export default function (props: { name: string; setName(name: string): void }) {
 	// component logic
@@ -9,9 +11,7 @@ export default function (props: { name: string; setName(name: string): void }) {
 	return (
 		<Stack gap={2} paddingY={2} justifyContent={'center'}>
 			<Box margin={'auto'}>
-				<Avatar sx={{ height: 72, width: 72 }}>
-					<Handshake fontSize={'large'} />
-				</Avatar>
+				<Avatar src={Gif} sx={{ height: 72, width: 72 }} variant={'rounded'} />
 			</Box>
 			<Typography noWrap={true} textAlign={'center'} variant={'h6'}>
 				Hello {props.name.trim() || 'Stranger'}!

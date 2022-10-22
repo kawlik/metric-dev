@@ -1,16 +1,9 @@
-import { ReceiptLong } from '@mui/icons-material';
-import {
-	Avatar,
-	Box,
-	Checkbox,
-	FormControlLabel,
-	MenuItem,
-	Select,
-	Stack,
-	TextField,
-} from '@mui/material';
+import { Avatar, Box, Checkbox, FormControlLabel, Stack, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { AppNormsService } from '../services/@.service';
+
+// assets
+import Gif from '../assets/cheque.gif';
 
 export default function (props: {
 	title: string;
@@ -55,9 +48,7 @@ export default function (props: {
 	return (
 		<Stack gap={2} paddingY={2}>
 			<Box margin={'auto'}>
-				<Avatar sx={{ height: 72, width: 72 }}>
-					<ReceiptLong fontSize={'large'} />
-				</Avatar>
+				<Avatar src={Gif} sx={{ height: 72, width: 72 }} variant={'rounded'} />
 			</Box>
 			<TextField
 				autoFocus={true}
