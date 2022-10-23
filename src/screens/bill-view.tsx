@@ -11,7 +11,7 @@ export default function (props: {}) {
 	const pathname = useParams();
 
 	const billID = pathname['billID']?.split('/')[0];
-	const label = contexts.activeBill.get()?.title || '';
+	const label = contexts.billCurrent.get()?.title || '';
 
 	function goBack() {
 		navigate(-1);
@@ -20,7 +20,7 @@ export default function (props: {}) {
 	// component lifecycle
 	useEffect(() => {
 		BillInfoService.subscribeOn(billID!).subscribe((billInfo) => {
-			contexts.activeBill.set(billInfo);
+			contexts.billCurrent.set(billInfo);
 		});
 
 		return () => BillInfoService.unsubscribe();

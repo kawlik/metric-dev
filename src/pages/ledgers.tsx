@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
 	AppPageEmpty,
@@ -9,14 +8,13 @@ import {
 	BillViewList,
 } from '../components/@';
 import { useContexts } from '../contexts/@';
-import { BillLedgerService } from '../services/@.service';
 
 export default function (props: {}) {
 	// component logic
 	const contexts = useContexts();
 	const navigate = useNavigate();
 
-	const billsList = contexts.savedLedgers.get();
+	const billsList = contexts.billLedgers.get();
 	const isLoading = billsList === undefined;
 
 	function openBillForm() {
@@ -26,15 +24,6 @@ export default function (props: {}) {
 	function openBillView(billID: string) {
 		navigate(`/ledger/${billID}/`);
 	}
-
-	// component lifecycle
-	useEffect(() => {
-		BillLedgerService.subscribeOn(contexts.userAuth.get()?.phoneNumber!).subscribe(
-			(bills) => contexts.savedLedgers.set(bills),
-		);
-
-		return () => BillLedgerService.unsubscribe();
-	}, []);
 
 	// component layout
 	return (

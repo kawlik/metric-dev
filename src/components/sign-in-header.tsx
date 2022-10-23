@@ -15,7 +15,7 @@ export default function (props: { srcAvatar: string }) {
 			</Box>
 			<Box>
 				<Typography textAlign={'center'} variant={'h5'}>
-					Sign in & to be up to <Highlight text={'Metric'} />
+					Sign in & be up to <Highlight text={'Metric'} />
 				</Typography>
 				<Typography textAlign={'center'} variant={'subtitle1'}>
 					Use a One-Time Password for secure login
