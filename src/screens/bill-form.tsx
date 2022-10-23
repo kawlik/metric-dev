@@ -25,7 +25,7 @@ export default function (props: {}) {
 
 	// component state
 	const [billTitle, setBillTitle] = useState('');
-	const [currentStep, setCurrentStep] = useState(0);
+	const [currentStep, setCurrentStep] = useState(2);
 	const [expensesPlan, setExpensesPlan] = useState(new Array<string>());
 	const [participants, setParticipants] = useState(new Array<string>());
 	const [validToDate, setValidToDate] = useState(monthUnix);

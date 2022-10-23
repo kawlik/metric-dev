@@ -1,6 +1,7 @@
-import { Delete, PersonSearch } from '@mui/icons-material';
+import { Delete, Dialpad, PersonOff, PersonSearch } from '@mui/icons-material';
 import {
 	Avatar,
+	ButtonGroup,
 	IconButton,
 	List,
 	ListItem,
@@ -18,8 +19,11 @@ export default function (props: { users: string[]; setUsers(users: string[]): vo
 	const userAuth = contexts.userAuth.get();
 	const usersSet = new Set(props.users);
 
+	const assignedUsersLimit = 9;
 	const assignedUsersArray = new Array(...usersSet);
-	const assignedUsersLimit = 6;
+	const unassignedSlots = new Array(assignedUsersLimit - assignedUsersArray.length).fill(
+		'Unasigned slot',
+	);
 
 	// component lifecycle
 	useEffect(() => {
@@ -40,19 +44,24 @@ export default function (props: { users: string[]; setUsers(users: string[]): vo
 					</IconButton>
 				</ListItem>
 			))}
-			{new Array(assignedUsersLimit - assignedUsersArray.length)
-				.fill('Free slot')
-				.map((user, index) => (
-					<ListItem key={index}>
-						<ListItemAvatar>
-							<Avatar />
-						</ListItemAvatar>
-						<ListItemText primary={<Typography noWrap={true}>{user}</Typography>} />
+			{unassignedSlots.map((user, index) => (
+				<ListItem key={index}>
+					<ListItemAvatar>
+						<Avatar>
+							<PersonOff />
+						</Avatar>
+					</ListItemAvatar>
+					<ListItemText primary={<Typography noWrap={true}>{user}</Typography>} />
+					<ButtonGroup>
+						<IconButton>
+							<Dialpad />
+						</IconButton>
 						<IconButton>
 							<PersonSearch />
 						</IconButton>
-					</ListItem>
-				))}
+					</ButtonGroup>
+				</ListItem>
+			))}
 		</List>
 	);
 }
