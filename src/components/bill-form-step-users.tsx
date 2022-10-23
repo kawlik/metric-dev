@@ -34,7 +34,7 @@ export default function (props: { users: string[]; setUsers(users: string[]): vo
 	return (
 		<List sx={{ padding: 0 }}>
 			{assignedUsersArray.map((user, index) => (
-				<ListItem key={index}>
+				<ListItem key={index} sx={{ my: '1px' }}>
 					<ListItemAvatar>
 						<Avatar />
 					</ListItemAvatar>
@@ -45,7 +45,7 @@ export default function (props: { users: string[]; setUsers(users: string[]): vo
 				</ListItem>
 			))}
 			{unassignedSlots.map((user, index) => (
-				<ListItem key={index}>
+				<ListItem key={index} sx={{ my: '1px' }}>
 					<ListItemAvatar>
 						<Avatar>
 							<PersonOff />

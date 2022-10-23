@@ -11,7 +11,7 @@ export default function (props: {}) {
 		<Stack alignItems={'center'} flex={1} gap={1} justifyContent={'center'}>
 			<Avatar src={Gif} sx={{ height: 128, width: 128 }} variant={'rounded'} />
 			<Typography textAlign={'center'} variant={'h6'}>
-				There is nothing here yet.
+				It's a bit empty in here.
 			</Typography>
 		</Stack>
 	);

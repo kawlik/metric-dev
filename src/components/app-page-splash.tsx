@@ -1,8 +1,19 @@
-import { AppViewLoading } from './@';
+import { Avatar, LinearProgress, Stack, Typography } from '@mui/material';
+
+// assets
+import Gif from '../assets/checklist.gif';
 
 export default function (props: {}) {
 	// component logic
 
 	// component layout
-	return <AppViewLoading isLoading={true} />;
+	return (
+		<Stack alignItems={'center'} flex={1} gap={1} justifyContent={'center'}>
+			<Avatar src={Gif} sx={{ height: 128, width: 128 }} variant={'rounded'} />
+			<Typography textAlign={'center'} variant={'h6'}>
+				<LinearProgress />
+				I'm already warming up pens!
+			</Typography>
+		</Stack>
+	);
 }
