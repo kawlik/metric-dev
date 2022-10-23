@@ -5,7 +5,7 @@ export default function (props: StackProps) {
 
 	// component layout
 	return (
-		<Grow in={true} timeout={400}>
+		<Grow in={true}>
 			<Stack component={'main'} position={'relative'} {...props} />
 		</Grow>
 	);
