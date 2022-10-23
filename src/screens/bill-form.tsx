@@ -24,7 +24,6 @@ export default function (props: {}) {
 	const todayUnix = AppNormsService.normalizeMoment().endOf('day').valueOf();
 
 	// component state
-	const [billType, setBillType] = useState('');
 	const [billTitle, setBillTitle] = useState('');
 	const [currentStep, setCurrentStep] = useState(0);
 	const [expensesPlan, setExpensesPlan] = useState(new Array<string>());
@@ -57,7 +56,6 @@ export default function (props: {}) {
 				expensesPlan: expensesPlan,
 				participants: participants,
 				title: billTitle,
-				type: billType,
 			});
 
 			navigate(`/ledger/${newLedgerID}`, { replace: true });

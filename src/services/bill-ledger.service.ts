@@ -44,7 +44,6 @@ class BillLedger<T> extends FirebaseCollection<T> {
 		expensesPlan: string[];
 		participants: string[];
 		title: string;
-		type: string;
 	}): Promise<string> => {
 		const batch = writeBatch(FirebaseService.Firestore);
 
@@ -59,7 +58,7 @@ class BillLedger<T> extends FirebaseCollection<T> {
 			timestampUpdated: Timestamp.now(),
 			timestampValidTo: Timestamp.fromMillis(data.deadline),
 			title: data.title,
-			type: data.type,
+			type: '',
 		});
 
 		await batch.commit();
