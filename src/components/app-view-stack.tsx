@@ -1,8 +1,12 @@
-import { Stack, StackProps } from '@mui/material';
+import { Grow, Stack, StackProps } from '@mui/material';
 
 export default function (props: StackProps) {
 	// component logic
 
 	// component layout
-	return <Stack component={'main'} position={'relative'} {...props} />;
+	return (
+		<Grow in={true} timeout={400}>
+			<Stack component={'main'} position={'relative'} {...props} />
+		</Grow>
+	);
 }
