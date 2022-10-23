@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
+import AppPageSplash from './components/app-page-splash';
 import { useContexts } from './contexts/@';
 import {
 	AccountPage,
@@ -19,6 +20,11 @@ import {
 export default function (props: {}) {
 	// component logic
 	const contexts = useContexts();
+
+	// component loading
+	if (contexts.userAuth.get() === undefined) {
+		return <AppPageSplash />;
+	}
 
 	// component layout
 	return !contexts.isSignedUp.get() ? (

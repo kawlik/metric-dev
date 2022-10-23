@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { UserAuthService } from '../services/@.service';
 import {
 	AppViewIOSChin,
-	AppViewLoading,
 	AppViewStack,
 	SignInFooter,
 	SignInHeader,
@@ -24,7 +23,6 @@ export default function (props: {}) {
 
 	// component state
 	const [isVerifierOpen, setIsVerifierOpen] = useState(false);
-	const [isViewLoading, setIsViewLoading] = useState(true);
 
 	function closeVerifier() {
 		setIsVerifierOpen(false);
@@ -43,21 +41,14 @@ export default function (props: {}) {
 
 	// component lifecycle
 	useEffect(() => {
-		if (contexts.userAuth.get() === undefined) {
-			setIsViewLoading(true);
-		} else {
-			setIsViewLoading(false);
-		}
-
 		if (contexts.isSignedIn.get() === true) {
 			navigate('/sign-up/');
 		}
-	}, [contexts.userAuth, contexts.isSignedIn]);
+	}, [contexts.isSignedIn]);
 
 	// component layout
 	return (
 		<>
-			<AppViewLoading isLoading={isViewLoading} />
 			<AppViewStack flex={1} gap={1} padding={1}>
 				<Container maxWidth={'md'} sx={{ marginY: 'auto' }}>
 					<Stack gap={1}>
