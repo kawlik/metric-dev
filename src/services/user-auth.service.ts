@@ -4,7 +4,7 @@ import {
 	RecaptchaVerifier,
 	signInWithPhoneNumber,
 } from 'firebase/auth';
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { UserAuthType } from '../types/@';
 import { FirebaseService } from './@.service';
 import { FirebaseAuth } from './utils/@';
@@ -17,7 +17,7 @@ class UserAuthService extends FirebaseAuth {
 		private recapthcaSelector: string = 'recaptcha-verifier-refrence',
 		private recapthcaVerifier: RecaptchaVerifier | null = null,
 	) {
-		super(new BehaviorSubject<UserAuthType>(undefined));
+		super(new Subject<UserAuthType>());
 	}
 
 	logout = (): void => {

@@ -1,13 +1,13 @@
 import { doc, DocumentSnapshot } from 'firebase/firestore';
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { FirestoreService } from './@.service';
 import { BillInfoType } from '../types/@';
 import { FirebaseDocument } from './utils/@';
 
 // define service
 class BillInfoService<T> extends FirebaseDocument<T> {
-	constructor(feed: T) {
-		super(new BehaviorSubject<T>(feed));
+	constructor() {
+		super(new Subject<T>());
 	}
 
 	override register = (document: string) => {
@@ -22,4 +22,4 @@ class BillInfoService<T> extends FirebaseDocument<T> {
 }
 
 // export service
-export default new BillInfoService<BillInfoType | null>(null);
+export default new BillInfoService<BillInfoType | null>();

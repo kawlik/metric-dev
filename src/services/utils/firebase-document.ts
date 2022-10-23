@@ -4,16 +4,16 @@ import {
 	onSnapshot,
 	Unsubscribe,
 } from 'firebase/firestore';
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 export default abstract class FirebaseDocument<T> {
 	protected abstract callback: (snapshot: DocumentSnapshot) => void;
 	protected abstract register: (identifier: string) => DocumentReference;
 
 	protected snapshot: Unsubscribe;
-	protected subject$: BehaviorSubject<T>;
+	protected subject$: Subject<T>;
 
-	constructor(subject$: BehaviorSubject<T>) {
+	constructor(subject$: Subject<T>) {
 		this.snapshot = () => {};
 		this.subject$ = subject$;
 	}

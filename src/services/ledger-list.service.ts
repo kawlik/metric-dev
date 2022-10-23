@@ -1,13 +1,13 @@
 import { collection, orderBy, Query, query, QuerySnapshot, where } from 'firebase/firestore';
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { FirebaseService, FirestoreService } from './@.service';
 import { BillInfoType } from '../types/@';
 import { FirebaseCollection } from './utils/@';
 
 // define service
 class LedgerListService<T> extends FirebaseCollection<T> {
-	constructor(feed: T) {
-		super(new BehaviorSubject<T>(feed));
+	constructor() {
+		super(new Subject<T>());
 	}
 
 	override register = (document: string): Query => {
@@ -30,4 +30,4 @@ class LedgerListService<T> extends FirebaseCollection<T> {
 }
 
 // export service
-export default new LedgerListService<BillInfoType[]>([]);
+export default new LedgerListService<BillInfoType[]>();

@@ -1,18 +1,18 @@
 import { onAuthStateChanged, Unsubscribe, User } from 'firebase/auth';
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { UserAuthType } from '../../types/@';
 import { FirebaseService } from '../@.service';
 
 export default abstract class {
 	protected snapshot: Unsubscribe;
-	protected subject$: BehaviorSubject<UserAuthType>;
+	protected subject$: Subject<UserAuthType>;
 
-	constructor(subject$: BehaviorSubject<UserAuthType>) {
+	constructor(subject$: Subject<UserAuthType>) {
 		this.snapshot = () => {};
 		this.subject$ = subject$;
 	}
 
-	subscribeOn = (): BehaviorSubject<UserAuthType> => {
+	subscribeOn = (): Subject<UserAuthType> => {
 		this.unsubscribe();
 		this.snapshot = onAuthStateChanged(FirebaseService.Auth, (user) => {
 			this.subject$.next(user);

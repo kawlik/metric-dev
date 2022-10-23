@@ -1,5 +1,5 @@
 import { doc, DocumentSnapshot } from 'firebase/firestore';
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { FirestoreService } from './@.service';
 import { BillDataType } from '../types/@';
 import { FirebaseDocument } from './utils/@';
@@ -19,8 +19,8 @@ import {
 
 // define service
 class BillDataService<T> extends FirebaseDocument<T> {
-	constructor(feed: T, private plansMap = new Map<string, FunctionComponent>()) {
-		super(new BehaviorSubject<T>(feed));
+	constructor(private plansMap = new Map<string, FunctionComponent>()) {
+		super(new Subject<T>());
 
 		this.plansMap.set('Clothing', Checkroom);
 		this.plansMap.set('Education', School);
@@ -49,4 +49,4 @@ class BillDataService<T> extends FirebaseDocument<T> {
 }
 
 // export service
-export default new BillDataService<BillDataType | null>(null);
+export default new BillDataService<BillDataType | null>();

@@ -9,15 +9,15 @@ import {
 	where,
 	writeBatch,
 } from 'firebase/firestore';
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { FirebaseService, FirestoreService } from './@.service';
 import { BillInfoType } from '../types/@';
 import { FirebaseCollection } from './utils/@';
 
 // define service
 class BillLedger<T> extends FirebaseCollection<T> {
-	constructor(feed: T) {
-		super(new BehaviorSubject<T>(feed));
+	constructor() {
+		super(new Subject<T>());
 	}
 
 	override register = (document: string): Query => {
@@ -69,4 +69,4 @@ class BillLedger<T> extends FirebaseCollection<T> {
 }
 
 // export service
-export default new BillLedger<BillInfoType[] | undefined>(undefined);
+export default new BillLedger<BillInfoType[]>();
