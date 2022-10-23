@@ -11,7 +11,7 @@ import {
 } from 'firebase/firestore';
 import { Subject } from 'rxjs';
 import { FirebaseService, FirestoreService } from './@.service';
-import { BillInfoType } from '../types/@';
+import { BillDataType, BillInfoType } from '../types/@';
 import { FirebaseCollection } from './utils/@';
 
 // define service
@@ -50,15 +50,22 @@ class BillLedger<T> extends FirebaseCollection<T> {
 		const billDataRef = doc(FirestoreService.collectionBillData);
 		const billInfoRef = doc(FirestoreService.collectionBillInfo, billDataRef.id);
 
-		batch.set(billDataRef, { posts: [], plans: data.expensesPlan });
-		batch.set(billInfoRef, {
+		batch.set(billDataRef, <BillDataType>{
+			posts: [],
+			plans: data.expensesPlan.map((plan) => ({
+				limit: 0,
+				title: plan,
+			})),
+		});
+
+		batch.set(billInfoRef, <BillInfoType>{
 			balance: Math.ceil(Math.random() * 100),
 			participants: data.participants,
 			timestampCreated: Timestamp.now(),
 			timestampUpdated: Timestamp.now(),
 			timestampValidTo: Timestamp.fromMillis(data.deadline),
 			title: data.title,
-			type: '',
+			type: 'Expenses',
 		});
 
 		await batch.commit();
