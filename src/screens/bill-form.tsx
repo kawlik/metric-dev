@@ -24,8 +24,9 @@ export default function (props: {}) {
 	const todayUnix = AppNormsService.normalizeMoment().endOf('day').valueOf();
 
 	// component state
+	const [billType, setBillType] = useState('');
 	const [billTitle, setBillTitle] = useState('');
-	const [currentStep, setCurrentStep] = useState(2);
+	const [currentStep, setCurrentStep] = useState(0);
 	const [expensesPlan, setExpensesPlan] = useState(new Array<string>());
 	const [participants, setParticipants] = useState(new Array<string>());
 	const [validToDate, setValidToDate] = useState(monthUnix);
@@ -52,11 +53,11 @@ export default function (props: {}) {
 
 		try {
 			const newLedgerID = await BillLedgerService.openLedger({
+				deadline: validToDate,
 				expensesPlan: expensesPlan,
 				participants: participants,
 				title: billTitle,
-				type: 'default',
-				deadline: validToDate,
+				type: billType,
 			});
 
 			navigate(`/ledger/${newLedgerID}`, { replace: true });
