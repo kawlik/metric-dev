@@ -3,6 +3,8 @@ export type { default as BillInfoType } from './bill-info';
 export type { default as BillPlanType } from './bill-plan';
 export type { default as BillPostType } from './bill-post';
 export type { default as ContextsType } from './contexts';
+export type { default as UserBillPlansType } from './user-bill-plans';
+export type { default as UserBillTypesType } from './user-bill-types';
 export type { default as UserAuthType } from './user-auth';
 export type { default as UserDataType } from './user-data';
 export type { default as UserModeType } from './user-mode';

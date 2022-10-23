@@ -7,15 +7,16 @@ import {
 	Typography,
 } from '@mui/material';
 import { useEffect } from 'react';
-import { AppNormsService, BillDataService } from '../services/@.service';
+import { BillPlanIcon } from '../configs/@';
+import { AppNormsService } from '../services/@.service';
 
 export default function (props: { plans: string[]; setPlans(plans: string[]): void }) {
 	// component logic
 	const chosenExpensesSet = new Set(props.plans);
-	const availableExpenses = [...BillDataService.AvailablePlansMap].map((plan) => ({
+	const availableExpenses = [...BillPlanIcon].map((plan) => ({
 		color: AppNormsService.normalizeColor(plan[0]),
-		name: plan[0],
 		icon: plan[1],
+		name: plan[0],
 	}));
 
 	function onExpanseChange(expense: string, value: boolean) {
