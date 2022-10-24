@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Outlet as PageOutlet, useNavigate, useParams } from 'react-router-dom';
-import { BillViewTopbar } from '../components/@';
+import { AppViewIOSChin, AppViewLoading, BillViewTopbar } from '../components/@';
 import { useContexts } from '../contexts/@';
 import { BillInfoService } from '../services/@.service';
 
@@ -11,7 +11,8 @@ export default function (props: {}) {
 	const pathname = useParams();
 
 	const billID = pathname['billID']?.split('/')[0];
-	const label = contexts.billCurrent.get()?.title || '';
+	const billLabel = contexts.billCurrent.get()?.title || '';
+	const isLoading = contexts.billCurrent.get() === null;
 
 	function goBack() {
 		navigate(-1);
@@ -23,14 +24,19 @@ export default function (props: {}) {
 			contexts.billCurrent.set(billInfo);
 		});
 
-		return () => BillInfoService.unsubscribe();
+		return () => {
+			contexts.billCurrent.set(null);
+			BillInfoService.unsubscribe();
+		};
 	}, []);
 
 	// component layout
 	return (
 		<>
-			<BillViewTopbar goBack={goBack} label={label} />
+			<AppViewLoading isLoading={isLoading} />
+			<BillViewTopbar goBack={goBack} label={billLabel} />
 			<PageOutlet />
+			<AppViewIOSChin />
 		</>
 	);
 }
