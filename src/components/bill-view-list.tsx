@@ -1,4 +1,3 @@
-import { Extension } from '@mui/icons-material';
 import {
 	Avatar,
 	List,
@@ -16,8 +15,12 @@ export default function (props: {
 	openBillView(billID: string): void;
 }) {
 	// component logic
+	const mapBillsWithTypeIcon = props.bills.map((bill) => ({
+		icon: AppNormsService.normalizeBillTypeIcon(bill.type),
+		...bill,
+	}));
 
-	function parse(bill: BillInfoType) {
+	function parseSecondaryText(bill: BillInfoType) {
 		if (bill.participants.length == 1) return `Only You`;
 		if (bill.participants.length == 2) return `You and someone else`;
 
@@ -27,18 +30,18 @@ export default function (props: {
 	// component layout
 	return (
 		<List sx={{ padding: 0 }}>
-			{props.bills.map((bill) => (
+			{mapBillsWithTypeIcon.map((bill) => (
 				<ListItemButton key={bill.id} onClick={() => props.openBillView(bill.id!)}>
 					<ListItemAvatar>
 						<Avatar sx={{ bgcolor: AppNormsService.normalizeColor(bill.id!) }}>
-							<Extension />
+							<bill.icon />
 						</Avatar>
 					</ListItemAvatar>
 					<ListItemText
 						primary={<Typography noWrap={true}>{bill.title}</Typography>}
 						secondary={
 							<Typography noWrap={true} variant={'subtitle2'}>
-								{parse(bill)}
+								{parseSecondaryText(bill)}
 							</Typography>
 						}
 					/>

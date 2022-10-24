@@ -1,18 +1,17 @@
 import moment from 'moment';
 import { QuestionMark } from '@mui/icons-material';
-import { BillPlanIcon, BillTypeIcon } from '../configs/@';
-import { UserBillPlansType, UserBillTypesType } from '../types/@';
+import { BillPlanIconMap, BillTypeIconMap } from '../configs/@';
 
 // define dervice
 class AppNormsService {
 	constructor(private format = Intl.NumberFormat('en', { notation: 'compact' })) {}
 
-	normalizeBillPlanIcon = (value: UserBillPlansType) => {
-		return BillPlanIcon.get(value) || QuestionMark;
+	normalizeBillPlanIcon = (value: string) => {
+		return BillPlanIconMap.get(value) || QuestionMark;
 	};
 
-	normalizeBillTypeIcon = (value: UserBillTypesType) => {
-		return BillTypeIcon.get(value) || QuestionMark;
+	normalizeBillTypeIcon = (value: string) => {
+		return BillTypeIconMap.get(value) || QuestionMark;
 	};
 
 	normalizeColor = (value: string): string => {

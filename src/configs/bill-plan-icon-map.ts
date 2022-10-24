@@ -10,9 +10,8 @@ import {
 	School,
 } from '@mui/icons-material';
 import { FunctionComponent } from 'react';
-import { UserBillPlansType } from '../types/@';
 
-export default new Map<UserBillPlansType, FunctionComponent>([
+export default new Map<string, FunctionComponent>([
 	['Clothing', Checkroom],
 	['Education', School],
 	['Entertainment', Attractions],

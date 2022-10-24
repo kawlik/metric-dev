@@ -1,4 +1,4 @@
-import { Delete, Dialpad, PersonOff, PersonSearch } from '@mui/icons-material';
+import { Delete, Dialpad, Person, PersonOff, PersonSearch } from '@mui/icons-material';
 import {
 	Avatar,
 	ButtonGroup,
@@ -34,9 +34,11 @@ export default function (props: { users: string[]; setUsers(users: string[]): vo
 	return (
 		<List sx={{ padding: 0 }}>
 			{assignedUsersArray.map((user, index) => (
-				<ListItem key={index} sx={{ my: '1px' }}>
+				<ListItem key={index}>
 					<ListItemAvatar>
-						<Avatar />
+						<Avatar>
+							<Person />
+						</Avatar>
 					</ListItemAvatar>
 					<ListItemText primary={<Typography noWrap={true}>{user}</Typography>} />
 					<IconButton disabled={user === userAuth?.phoneNumber}>
@@ -45,21 +47,23 @@ export default function (props: { users: string[]; setUsers(users: string[]): vo
 				</ListItem>
 			))}
 			{unassignedSlots.map((user, index) => (
-				<ListItem key={index} sx={{ my: '1px' }}>
+				<ListItem key={index}>
 					<ListItemAvatar>
 						<Avatar>
 							<PersonOff />
 						</Avatar>
 					</ListItemAvatar>
 					<ListItemText primary={<Typography noWrap={true}>{user}</Typography>} />
-					<ButtonGroup>
-						<IconButton>
-							<Dialpad />
-						</IconButton>
-						<IconButton>
-							<PersonSearch />
-						</IconButton>
-					</ButtonGroup>
+					{index === 0 && (
+						<ButtonGroup>
+							<IconButton>
+								<Dialpad />
+							</IconButton>
+							<IconButton>
+								<PersonSearch />
+							</IconButton>
+						</ButtonGroup>
+					)}
 				</ListItem>
 			))}
 		</List>

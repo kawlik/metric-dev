@@ -32,8 +32,8 @@ export default function (props: {}) {
 	const [viewLoading, setViewLoading] = useState(false);
 
 	const canGoBack = currentStep !== 0;
-	const canGoNext = currentStep !== 2 && !!billTitle.length && validToDate >= todayUnix;
-	const canGoSave = currentStep === 2 && !!billTitle.length && validToDate >= todayUnix;
+	const canGoNext = currentStep !== 2 && !!billTitle.trim() && validToDate >= todayUnix;
+	const canGoSave = currentStep === 2 && !!billTitle.trim() && validToDate >= todayUnix;
 
 	function goHome() {
 		navigate(-1);
