@@ -65,7 +65,7 @@ class BillLedger<T> extends FirebaseCollection<T> {
 			timestampUpdated: Timestamp.now(),
 			timestampValidTo: Timestamp.fromMillis(data.deadline),
 			title: data.title,
-			type: 'Expenses',
+			type: '',
 		});
 
 		await batch.commit();

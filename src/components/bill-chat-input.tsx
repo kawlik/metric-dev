@@ -1,4 +1,4 @@
-import { AttachMoney, RequestQuote, Send } from '@mui/icons-material';
+import { AttachMoney, FactCheck, RequestQuote, Send } from '@mui/icons-material';
 import {
 	AppBar,
 	IconButton,
@@ -14,11 +14,15 @@ export default function (props: {}) {
 	// component logic
 	const availableActions = [
 		{
+			name: 'Checklist',
+			icon: FactCheck,
+		},
+		{
 			name: 'Expense',
 			icon: AttachMoney,
 		},
 		{
-			name: 'Plan',
+			name: 'Objective',
 			icon: RequestQuote,
 		},
 	];
@@ -35,7 +39,7 @@ export default function (props: {}) {
 				borderTopWidth: 1,
 			}}
 		>
-			<Toolbar sx={{ alignItems: 'flex-end', paddingY: 2 }}>
+			<Toolbar sx={{ alignItems: 'flex-end', paddingY: 1 }}>
 				<SpeedDial
 					ariaLabel={'Bill actions'}
 					icon={<SpeedDialIcon />}

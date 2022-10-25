@@ -1,7 +1,8 @@
-import { AppBar, Toolbar } from '@mui/material';
+import { AppBar, Button, Toolbar } from '@mui/material';
 
 export default function (props: {}) {
 	// component logic
+	function downladPDF() {}
 
 	// component layout
 	return (
@@ -15,7 +16,11 @@ export default function (props: {}) {
 				borderTopWidth: 1,
 			}}
 		>
-			<Toolbar></Toolbar>
+			<Toolbar>
+				<Button fullWidth={true} onClick={downladPDF}>
+					Downlad PDF
+				</Button>
+			</Toolbar>
 		</AppBar>
 	);
 }

@@ -8,9 +8,9 @@ import {
 import { FunctionComponent } from 'react';
 
 export default new Map<string, FunctionComponent>([
-	['Excursion', Tapas],
 	['Expenses', AttachMoney],
 	['Ledger', AccountBalance],
+	['Outing', Tapas],
 	['Other', Extension],
 	['Trip', TravelExplore],
 ]);

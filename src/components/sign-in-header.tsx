@@ -6,7 +6,7 @@ export default function (props: { srcAvatar: string }) {
 	// component layout
 	return (
 		<Stack component={'header'} gap={2} justifyContent={'center'} padding={1}>
-			<Box mx={'auto'}>
+			<Box marginX={'auto'}>
 				<Avatar
 					src={props.srcAvatar}
 					sx={{ height: 96, width: 96 }}
