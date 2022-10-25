@@ -1,9 +1,16 @@
 import { createContext, useContext } from 'react';
-import { BillInfoType, ContextsType, UserAuthType, UserModeType } from '../types/@';
+import {
+	BillDataType,
+	BillInfoType,
+	ContextsType,
+	UserAuthType,
+	UserModeType,
+} from '../types/@';
 
 // create contexts
 export const AppContext = createContext<{
-	billCurrent: ContextsType<BillInfoType | null>;
+	billData: ContextsType<BillDataType | null>;
+	billInfo: ContextsType<BillInfoType | null>;
 	isSignedIn: ContextsType<boolean>;
 	isSignedUp: ContextsType<boolean>;
 	billLedgers: ContextsType<BillInfoType[] | undefined>;
@@ -11,7 +18,8 @@ export const AppContext = createContext<{
 	userAuth: ContextsType<UserAuthType>;
 	userMode: ContextsType<UserModeType>;
 }>({
-	billCurrent: { get: () => null, set: (ctx) => {} },
+	billData: { get: () => null, set: (ctx) => {} },
+	billInfo: { get: () => null, set: (ctx) => {} },
 	billLedgers: { get: () => undefined, set: (ctx) => {} },
 	billReports: { get: () => undefined, set: (ctx) => {} },
 	isSignedIn: { get: () => false, set: (ctx) => {} },

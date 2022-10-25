@@ -3,19 +3,6 @@ import { Subject } from 'rxjs';
 import { FirestoreService } from './@.service';
 import { BillDataType } from '../types/@';
 import { FirebaseDocument } from './utils/@';
-import { FunctionComponent } from 'react';
-import {
-	Attractions,
-	Checkroom,
-	ConnectWithoutContact,
-	EvStation,
-	Fastfood,
-	HealthAndSafety,
-	Home,
-	QuestionMark,
-	Receipt,
-	School,
-} from '@mui/icons-material';
 
 // define service
 class BillDataService<T> extends FirebaseDocument<T> {

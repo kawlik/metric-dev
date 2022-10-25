@@ -8,7 +8,7 @@ import {
 	StorageLocalService,
 	UserAuthService,
 } from '../services/@.service';
-import { BillInfoType, UserAuthType, UserModeType } from '../types/@';
+import { BillDataType, BillInfoType, UserAuthType, UserModeType } from '../types/@';
 import { AppContext } from './app-contexts';
 
 export default function (props: PropsWithChildren) {
@@ -17,7 +17,8 @@ export default function (props: PropsWithChildren) {
 	const preferedMode = preferesDark ? 'dark' : 'light';
 
 	// component state
-	const [billCurrent, setCurrentBill] = useState<BillInfoType | null>(null);
+	const [billData, setBillData] = useState<BillDataType | null>(null);
+	const [billInfo, setBillInfo] = useState<BillInfoType | null>(null);
 	const [billLedgers, setBillLedgers] = useState<BillInfoType[] | undefined>(undefined);
 	const [billReports, setBillReports] = useState<BillInfoType[] | undefined>(undefined);
 	const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
@@ -64,7 +65,8 @@ export default function (props: PropsWithChildren) {
 			<AppContext.Provider
 				children={props.children}
 				value={{
-					billCurrent: { get: () => billCurrent, set: setCurrentBill },
+					billInfo: { get: () => billInfo, set: setBillInfo },
+					billData: { get: () => billData, set: setBillData },
 					billLedgers: { get: () => billLedgers, set: setBillLedgers },
 					billReports: { get: () => billReports, set: setBillReports },
 					isSignedIn: { get: () => isSignedIn, set: setIsSignedIn },
