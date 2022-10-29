@@ -14,7 +14,13 @@ import {
 } from '@mui/material';
 import { useRef, useState } from 'react';
 
-export default function (props: { avatar: string; label: string; logout(): void }) {
+export default function (props: {
+	avatar: string;
+	label: string;
+	logout(): void;
+	openProblem(): void;
+	openSettings(): void;
+}) {
 	// component logic
 	const menuAnchor = useRef(null);
 
@@ -52,13 +58,13 @@ export default function (props: { avatar: string; label: string; logout(): void 
 				</ButtonGroup>
 			</Toolbar>
 			<Menu anchorEl={menuAnchor.current} onClose={closeMenu} open={isMenuOpen}>
-				<MenuItem disabled={true} onClick={closeMenu}>
+				<MenuItem onClick={props.openSettings}>
 					<ListItemIcon>
 						<Settings />
 					</ListItemIcon>
 					<ListItemText>Settings</ListItemText>
 				</MenuItem>
-				<MenuItem disabled={true} onClick={closeMenu}>
+				<MenuItem onClick={props.openProblem}>
 					<ListItemIcon>
 						<ReportProblem />
 					</ListItemIcon>

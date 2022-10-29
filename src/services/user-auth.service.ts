@@ -38,8 +38,11 @@ class UserAuthService extends FirebaseAuth {
 		return signInWithPhoneNumber(FirebaseService.Auth, phone, this.recapthcaVerifier!);
 	};
 
-	private prepare = (): Promise<number> => {
-		this.recapthcaVerifier?.clear();
+	private prepare = (): Promise<number | string> => {
+		if (!!this.recapthcaVerifier) {
+			return this.recapthcaVerifier.verify();
+		}
+
 		this.recapthcaVerifier = new RecaptchaVerifier(
 			this.recapthcaSelector,
 			this.recapthcaParams,

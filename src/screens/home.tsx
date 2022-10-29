@@ -22,10 +22,24 @@ export default function (props: {}) {
 		navigate(`/${route}/`, { replace: true });
 	}
 
+	function openProblem() {
+		alert('Sorry, the selected functionality is not available yet.');
+	}
+
+	function openSettings() {
+		alert('Sorry, the selected functionality is not available yet.');
+	}
+
 	// component layout
 	return (
 		<>
-			<HomeTopbar avatar={userAvatar} label={currentPage} logout={logout} />
+			<HomeTopbar
+				avatar={userAvatar}
+				label={currentPage}
+				logout={logout}
+				openProblem={openProblem}
+				openSettings={openSettings}
+			/>
 			<PageOutlet />
 			<HomeTabbar page={currentPage} setPage={openPage} />
 		</>

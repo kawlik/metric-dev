@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { QuestionMark, Receipt } from '@mui/icons-material';
+import { AttachMoney, QuestionMark } from '@mui/icons-material';
 import { BillPlanIconMap, BillTypeIconMap } from '../configs/@';
 
 // define dervice
@@ -11,7 +11,7 @@ class AppNormsService {
 	};
 
 	normalizeBillTypeIcon = (value: string) => {
-		return BillTypeIconMap.get(value) || Receipt;
+		return BillTypeIconMap.get(value) || AttachMoney;
 	};
 
 	normalizeColor = (value: string): string => {

@@ -33,7 +33,9 @@ export default function (props: {}) {
 		return setIsVerifierOpen(true);
 	}
 
-	function openPrivacyPolicy() {}
+	function openPrivacyPolicy() {
+		alert('Sorry, the selected functionality is not available yet.');
+	}
 
 	function verifyOTPCode(otpCode: string) {
 		return UserAuthService.verifyOTP(otpCode);

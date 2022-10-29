@@ -14,16 +14,19 @@ export default function (props: {}) {
 	// component logic
 	const availableActions = [
 		{
-			name: 'Checklist',
-			icon: FactCheck,
-		},
-		{
-			name: 'Expense',
 			icon: AttachMoney,
+			name: 'Expense',
+			open: () => alert('Sorry, the selected functionality is not available yet.'),
 		},
 		{
-			name: 'Objective',
 			icon: RequestQuote,
+			name: 'Objective',
+			open: () => alert('Sorry, the selected functionality is not available yet.'),
+		},
+		{
+			icon: FactCheck,
+			name: 'Checklist',
+			open: () => alert('Sorry, the selected functionality is not available yet.'),
 		},
 	];
 
@@ -49,6 +52,7 @@ export default function (props: {}) {
 						<SpeedDialAction
 							key={action.name}
 							icon={<action.icon />}
+							onClick={action.open}
 							tooltipOpen={true}
 							tooltipPlacement={'right'}
 							tooltipTitle={action.name}

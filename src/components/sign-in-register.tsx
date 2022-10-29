@@ -1,5 +1,5 @@
 import { Security } from '@mui/icons-material';
-import { Button } from '@mui/material';
+import { Button, CircularProgress } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { AppPhoneField } from './@';
 
@@ -8,14 +8,19 @@ export default function (props: { generateOTPCode(phoneNumber: string): Promise<
 
 	// component state
 	const [canGenerate, setCanGenerate] = useState(false);
+	const [isVerifying, setIsVerifying] = useState(false);
 	const [phoneNumber, setPhoneNumber] = useState('');
 
 	async function generate() {
+		setIsVerifying(true);
+
 		try {
 			await props.generateOTPCode(phoneNumber);
 		} catch {
 			alert('Something went wrong. Please try again later.');
 		}
+
+		setIsVerifying(false);
 	}
 
 	// component lifecycle
@@ -32,13 +37,15 @@ export default function (props: { generateOTPCode(phoneNumber: string): Promise<
 		<>
 			<AppPhoneField onChange={setPhoneNumber} />
 			<Button
-				disabled={!canGenerate}
+				disabled={!canGenerate || isVerifying}
 				endIcon={<Security />}
 				fullWidth={true}
 				onClick={generate}
 				size={'large'}
+				sx={{ position: 'relative' }}
 				variant={'outlined'}
 			>
+				{isVerifying && <CircularProgress size={24} sx={{ position: 'absolute' }} />}
 				Generate OTP
 			</Button>
 		</>

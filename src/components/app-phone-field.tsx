@@ -15,11 +15,16 @@ export default function (props: { onChange(value: string): void; value?: string 
 	useEffect(() => {
 		if (phoneNumber.length < 9) return;
 
-		const parsedPhoneNumber = AppPhoneService.parseToPhoneNumber(phoneNumber, countryCode);
+		try {
+			const parsedPhoneNumber = AppPhoneService.parseToPhoneNumber(
+				phoneNumber,
+				countryCode,
+			);
 
-		if (AppPhoneService.isValidPhoneNumber(parsedPhoneNumber)) {
-			props?.onChange(parsedPhoneNumber);
-		}
+			if (AppPhoneService.isValidPhoneNumber(parsedPhoneNumber)) {
+				props?.onChange(parsedPhoneNumber);
+			}
+		} catch (error) {}
 	}, [countryCode, phoneNumber]);
 
 	// component layout

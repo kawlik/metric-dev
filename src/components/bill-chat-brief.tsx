@@ -2,7 +2,9 @@ import { AppBar, Button, Toolbar } from '@mui/material';
 
 export default function (props: {}) {
 	// component logic
-	function downladPDF() {}
+	function downladPDF() {
+		alert('Sorry, the selected functionality is not available yet.');
+	}
 
 	// component layout
 	return (

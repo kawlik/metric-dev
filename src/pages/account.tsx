@@ -1,4 +1,3 @@
-import { DeleteForever } from '@mui/icons-material';
 import { Avatar, Button, Stack, Typography } from '@mui/material';
 import { AppViewStack } from '../components/@';
 import { useContexts } from '../contexts/@';
@@ -11,7 +10,9 @@ export default function (props: {}) {
 	const userPhone = contexts.userAuth.get()?.phoneNumber || '';
 	const userPhoto = contexts.userAuth.get()?.photoURL || '';
 
-	function deleteAccount() {}
+	function deleteAccount() {
+		alert('Sorry, the selected functionality is not available yet.');
+	}
 
 	// component layout
 	return (
