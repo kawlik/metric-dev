@@ -26,6 +26,10 @@ export default function (props: {}) {
 		alert('Sorry, the selected functionality is not available yet.');
 	}
 
+	function openSearch() {
+		navigate('/search/');
+	}
+
 	function openSettings() {
 		alert('Sorry, the selected functionality is not available yet.');
 	}
@@ -38,6 +42,7 @@ export default function (props: {}) {
 				label={currentPage}
 				logout={logout}
 				openProblem={openProblem}
+				openSearch={openSearch}
 				openSettings={openSettings}
 			/>
 			<PageOutlet />

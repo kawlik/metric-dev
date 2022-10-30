@@ -13,6 +13,7 @@ import {
 	BillFormScreen,
 	BillViewScreen,
 	HomeScreen,
+	SearchScreen,
 	SignInScreen,
 	SignUpScreen,
 } from './screens/@';
@@ -39,6 +40,7 @@ export default function (props: {}) {
 			<Route path="*" element={<Navigate to="ledgers" />} />
 
 			<Route path="create" element={<BillFormScreen />} />
+			<Route path="search" element={<SearchScreen />} />
 
 			<Route path="ledger" element={<BillViewScreen />}>
 				<Route path=":billID" element={<BillLedgerPage />} />

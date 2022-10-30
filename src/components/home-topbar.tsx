@@ -19,6 +19,7 @@ export default function (props: {
 	label: string;
 	logout(): void;
 	openProblem(): void;
+	openSearch(): void;
 	openSettings(): void;
 }) {
 	// component logic
@@ -49,7 +50,7 @@ export default function (props: {
 					{props.label}
 				</Typography>
 				<ButtonGroup sx={{ marginLeft: 'auto' }}>
-					<IconButton>
+					<IconButton onClick={props.openSearch}>
 						<Search />
 					</IconButton>
 					<IconButton onClick={openMenu} ref={menuAnchor}>
