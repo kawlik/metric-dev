@@ -15,7 +15,7 @@ class BillInfoService<T> extends FirebaseDocument<T> {
 	};
 
 	override callback = (snapshot: DocumentSnapshot) => {
-		const payload = snapshot.data() || null;
+		const payload = { ...snapshot.data(), id: snapshot.id } || null;
 
 		this.subject$.next(payload as T);
 	};

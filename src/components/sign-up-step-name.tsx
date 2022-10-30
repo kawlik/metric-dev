@@ -18,7 +18,6 @@ export default function (props: { name: string; setName(name: string): void }) {
 			</Typography>
 			<Stack gap={1} flexDirection={'row'}>
 				<TextField
-					autoFocus={true}
 					error={!valid}
 					helperText={'Up to 31 characters'}
 					fullWidth={true}

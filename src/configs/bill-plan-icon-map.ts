@@ -9,9 +9,10 @@ import {
 	Receipt,
 	School,
 } from '@mui/icons-material';
-import { FunctionComponent } from 'react';
+import { SvgIconTypeMap } from '@mui/material';
+import { OverridableComponent } from '@mui/material/OverridableComponent';
 
-export default new Map<string, FunctionComponent>([
+export default new Map<string, OverridableComponent<SvgIconTypeMap<{}, 'svg'>>>([
 	['Clothing', Checkroom],
 	['Education', School],
 	['Entertainment', Attractions],

@@ -1,6 +1,7 @@
+import { UserPostType } from './@';
+
 export default interface BillPost {
-	payload: string;
-	timestamp: Timestamp;
-	type: string;
+	post: UserPostType;
+	time: Timestamp;
 	user: string;
 }

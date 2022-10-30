@@ -5,6 +5,7 @@ export { default as AppViewIOSChin } from './app-view-ioschin';
 export { default as AppViewLoading } from './app-view-loading';
 export { default as AppViewStack } from './app-view-stack';
 export { default as BillChatBrief } from './bill-chat-brief';
+export { default as BillChatEntry } from './bill-chat-entry';
 export { default as BillChatInput } from './bill-chat-input';
 export { default as BillChatPosts } from './bill-chat-posts';
 export { default as BillFormActions } from './bill-form-actions';

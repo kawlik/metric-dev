@@ -5,6 +5,7 @@ export { default as AppPhotoService } from './app-photo.service';
 export { default as BillDataService } from './bill-data.service';
 export { default as BillInfoService } from './bill-info.service';
 export { default as BillLedgerService } from './bill-ledger.service';
+export { default as BillPostalService } from './bill-postal.service';
 export { default as BillReportService } from './bill-report.service';
 export { default as FirebaseService } from './firebase.service';
 export { default as FirestoreService } from './firestore.service';

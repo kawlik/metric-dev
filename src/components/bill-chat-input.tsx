@@ -9,26 +9,37 @@ import {
 	TextField,
 	Toolbar,
 } from '@mui/material';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { BillPostIconMap } from '../configs/@';
+import { useContexts } from '../contexts/@';
+import { BillPostalService } from '../services/@.service';
 
 export default function (props: {}) {
 	// component logic
-	const availableActions = [
-		{
-			icon: AttachMoney,
-			name: 'Expense',
-			open: () => alert('Sorry, the selected functionality is not available yet.'),
-		},
-		{
-			icon: RequestQuote,
-			name: 'Objective',
-			open: () => alert('Sorry, the selected functionality is not available yet.'),
-		},
-		{
-			icon: FactCheck,
-			name: 'Checklist',
-			open: () => alert('Sorry, the selected functionality is not available yet.'),
-		},
-	];
+	const contexts = useContexts();
+	const navigate = useNavigate();
+
+	const document = contexts.billInfo.get()?.id;
+	const options = [...BillPostIconMap].map((post) => ({
+		open: () => navigate(`post/${post[0].toLowerCase()}`),
+		icon: post[1],
+		name: post[0],
+	}));
+
+	// component state
+	const [postMessage, setPostMesage] = useState('');
+
+	async function post() {
+		setPostMesage('');
+
+		try {
+			BillPostalService.post(document!, postMessage);
+		} catch (error) {
+			alert('Something went wrong. Please try again later.');
+			setPostMesage(postMessage);
+		}
+	}
 
 	// component layout
 	return (
@@ -48,7 +59,7 @@ export default function (props: {}) {
 					icon={<SpeedDialIcon />}
 					sx={{ position: 'absolute' }}
 				>
-					{availableActions.map((action) => (
+					{options.map((action) => (
 						<SpeedDialAction
 							key={action.name}
 							icon={<action.icon />}
@@ -63,15 +74,17 @@ export default function (props: {}) {
 					fullWidth={true}
 					maxRows={3}
 					multiline={true}
-					placeholder={'Fast post'}
+					placeholder={'Something fast'}
+					onChange={(e) => setPostMesage(e.target.value)}
 					sx={{ marginLeft: 8 }}
+					value={postMessage}
 					InputProps={{
 						endAdornment: (
 							<InputAdornment
 								position={'end'}
 								sx={{ marginBottom: 1.5, marginTop: 'auto' }}
 							>
-								<IconButton>
+								<IconButton disabled={!postMessage.trim()} onClick={post}>
 									<Send sx={{ transform: 'rotate(-30deg)' }} />
 								</IconButton>
 							</InputAdornment>

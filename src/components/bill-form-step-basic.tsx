@@ -51,7 +51,6 @@ export default function (props: {
 				<Avatar src={Gif} sx={{ height: 72, width: 72 }} variant={'rounded'} />
 			</Box>
 			<TextField
-				autoFocus={true}
 				error={!isTitleValid}
 				fullWidth={true}
 				label={'Bill title'}

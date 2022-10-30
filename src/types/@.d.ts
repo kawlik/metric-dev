@@ -6,3 +6,4 @@ export type { default as ContextsType } from './contexts';
 export type { default as UserAuthType } from './user-auth';
 export type { default as UserDataType } from './user-data';
 export type { default as UserModeType } from './user-mode';
+export type { default as UserPostType } from './user-post';

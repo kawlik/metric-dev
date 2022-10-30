@@ -69,7 +69,6 @@ export default function (props: {
 			<DialogTitle>Verify OTP code</DialogTitle>
 			<DialogContent>
 				<TextField
-					autoFocus={true}
 					error={hasErrored}
 					fullWidth={true}
 					helperText={helperText}
