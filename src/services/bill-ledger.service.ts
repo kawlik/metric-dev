@@ -59,7 +59,7 @@ class BillLedger<T> extends FirebaseCollection<T> {
 		});
 
 		batch.set(billInfoRef, <BillInfoType>{
-			balance: Math.ceil(Math.random() * 100),
+			balance: 0,
 			participants: data.participants,
 			timestampCreated: Timestamp.now(),
 			timestampUpdated: Timestamp.now(),

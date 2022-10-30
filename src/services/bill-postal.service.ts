@@ -30,7 +30,7 @@ class BillPostalService {
 			time: Timestamp.now(),
 			user: FirebaseService.Auth.currentUser?.phoneNumber!,
 			post: {
-				post: postMessage,
+				message: postMessage,
 				type: 'Post',
 			},
 		};

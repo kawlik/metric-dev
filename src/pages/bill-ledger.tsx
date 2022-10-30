@@ -5,7 +5,7 @@ export default function (props: {}) {
 
 	// component layout
 	return (
-		<AppViewStack flex={1}>
+		<AppViewStack flex={1} sx={{ overflowX: 'hidden', overflowY: 'scroll' }}>
 			<BillChatPosts />
 			<BillChatInput />
 		</AppViewStack>

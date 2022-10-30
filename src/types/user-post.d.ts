@@ -1,10 +1,10 @@
 interface iPost {
-	post: string;
+	message: string;
 	type: string;
 }
 
 class Post implements iPost {
-	post: string;
+	message: string;
 	type: 'Post';
 }
 
