@@ -22,7 +22,6 @@ export default function (props: {}) {
 			{posts.map((post, index) => (
 				<ListItem key={index} sx={{ alignItems: 'flex-start', gap: 1, order: -index }}>
 					<Avatar
-						src={user.photoURL!}
 						sx={{
 							height: 32,
 							width: 32,

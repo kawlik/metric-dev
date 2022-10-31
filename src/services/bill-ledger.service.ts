@@ -5,11 +5,12 @@ import {
 	Query,
 	query,
 	QuerySnapshot,
+	runTransaction,
 	Timestamp,
 	where,
 	writeBatch,
 } from 'firebase/firestore';
-import { Subject } from 'rxjs';
+import { async, Subject } from 'rxjs';
 import { FirebaseService, FirestoreService } from './@.service';
 import { BillDataType, BillInfoType } from '../types/@';
 import { FirebaseCollection } from './utils/@';
@@ -72,6 +73,14 @@ class BillLedger<T> extends FirebaseCollection<T> {
 		await batch.commit();
 
 		return billInfoRef.id;
+	};
+
+	closeLedger = async (document: string): Promise<void> => {
+		await runTransaction(FirebaseService.Firestore, async (transaction) => {
+			transaction.update(doc(FirestoreService.collectionBillInfo, document), {
+				timestampValidTo: Timestamp.now(),
+			});
+		});
 	};
 }
 

@@ -1,15 +1,23 @@
-import { useEffect } from 'react';
-import { Outlet as PageOutlet, useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Outlet as PageOutlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { AppViewIOSChin, AppViewLoading, BillViewTopbar } from '../components/@';
 import { useContexts } from '../contexts/@';
-import { AppNormsService, BillDataService, BillInfoService } from '../services/@.service';
+import {
+	AppNormsService,
+	BillDataService,
+	BillInfoService,
+	BillLedgerService,
+} from '../services/@.service';
 
 export default function (props: {}) {
 	// component logic
 	const contexts = useContexts();
 	const navigate = useNavigate();
+	const location = useLocation();
 	const pathname = useParams();
 
+	const actionMore = location.pathname.includes('more');
+	const actionPost = location.pathname.includes('post');
 	const billID = pathname['billID']?.split('/')[0];
 	const billValid = contexts.billInfo.get()?.timestampValidTo.toMillis();
 	const billLabel = contexts.billInfo.get()?.title;
@@ -21,6 +29,9 @@ export default function (props: {}) {
 	const isLedger = timestampBill > timestampUnix;
 	const isReport = timestampBill < timestampUnix;
 
+	// component state
+	const [isPending, setIsPending] = useState(false);
+
 	function goBack() {
 		navigate(-1);
 	}
@@ -29,8 +40,18 @@ export default function (props: {}) {
 		alert('Sorry, the selected functionality is not available yet.');
 	}
 
-	function openReport() {
-		alert('Sorry, the selected functionality is not available yet.');
+	async function openReport() {
+		if (confirm('Are you sure you want to close the current ledger?')) {
+			setIsPending(true);
+
+			try {
+				await BillLedgerService.closeLedger(billID!);
+			} catch (error) {
+				alert('Something went wrong. Please try again later.');
+			}
+
+			setIsPending(false);
+		}
 	}
 
 	function openStats() {
@@ -64,9 +85,10 @@ export default function (props: {}) {
 	// component layout
 	return (
 		<>
-			<AppViewLoading isLoading={isLoading} />
+			<AppViewLoading isLoading={isLoading || isPending} />
 			<BillViewTopbar
 				goBack={goBack}
+				isAction={actionMore || actionPost}
 				isLedger={isLedger}
 				isReport={isReport}
 				label={billLabel || ''}
