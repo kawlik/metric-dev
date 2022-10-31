@@ -23,8 +23,9 @@ export default function (props: {}) {
 			await BillPostalService.postObjectiveDone(document, objective!);
 		} catch (error) {
 			alert('Something went wrong. Please try again later.');
-			setIsUpdating(false);
 		}
+
+		setIsUpdating(false);
 	}
 
 	// component layout

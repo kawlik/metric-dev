@@ -72,7 +72,8 @@ export default function (props: {}) {
 						label={'Description'}
 						onChange={(e) => setObjectiveMore(e.target.value)}
 						multiline={true}
-						rows={3}
+						minRows={2}
+						maxRows={5}
 						sx={{ alignItems: 'flex-start' }}
 						type={'text'}
 						value={objectiveMore}

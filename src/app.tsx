@@ -8,8 +8,8 @@ import {
 	BillReportPage,
 	ReportsPage,
 	UpdatesPage,
-	BillLedgerExpensePage,
-	BillLedgerObjectivePage,
+	ActionExpensePage,
+	ActionObjectivePage,
 } from './pages/@';
 import {
 	BillFormScreen,
@@ -46,8 +46,8 @@ export default function (props: {}) {
 
 			<Route path="ledger" element={<BillViewScreen />}>
 				<Route path=":billID" element={<BillLedgerPage />} />
-				<Route path=":billID/post/expense" element={<BillLedgerExpensePage />} />
-				<Route path=":billID/post/objective" element={<BillLedgerObjectivePage />} />
+				<Route path=":billID/post/expense" element={<ActionExpensePage />} />
+				<Route path=":billID/post/objective" element={<ActionObjectivePage />} />
 			</Route>
 
 			<Route path="report" element={<BillViewScreen />}>
