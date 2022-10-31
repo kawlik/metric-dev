@@ -31,7 +31,6 @@ export default function (props: { onChange(value: string): void; value?: string 
 	return (
 		<Stack flexDirection={'row'} gap={1}>
 			<Select
-				displayEmpty={true}
 				onChange={(e) => setCountryCode(e.target.value as CountryCode)}
 				size={'small'}
 				sx={{ pr: 1 }}

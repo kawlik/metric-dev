@@ -1,19 +1,35 @@
-import { Avatar, Box, Checkbox, FormControlLabel, Stack, TextField } from '@mui/material';
+import {
+	Avatar,
+	Box,
+	Checkbox,
+	FormControlLabel,
+	MenuItem,
+	Select,
+	Stack,
+	TextField,
+} from '@mui/material';
 import { useEffect, useState } from 'react';
 import { AppNormsService } from '../services/@.service';
 
 // assets
 import Gif from '../assets/cheque.gif';
+import { BillTypeIconMap } from '../configs/@';
 
 export default function (props: {
+	type: string;
 	title: string;
 	dedline: number;
+	setType(title: string): void;
 	setTitle(title: string): void;
 	setDedline(dedline: number): void;
 }) {
 	// component logic
 	const isTitleValid = props.title.trim().length > 0 && props.title.length < 32;
 	const maxTimestamp = '9999-12-31T23:59:59.9999999Z';
+	const options = [...BillTypeIconMap].map((plan) => ({
+		icon: plan[1],
+		name: plan[0],
+	}));
 
 	const neverUnix = AppNormsService.normalizeMoment(maxTimestamp).valueOf();
 	const todayUnix = AppNormsService.normalizeMoment().endOf('day').valueOf();
@@ -50,15 +66,29 @@ export default function (props: {
 			<Box margin={'auto'}>
 				<Avatar src={Gif} sx={{ height: 72, width: 72 }} variant={'rounded'} />
 			</Box>
-			<TextField
-				error={!isTitleValid}
-				fullWidth={true}
-				label={'Bill title'}
-				onChange={(e) => props.setTitle(e.target.value.slice(0, 31))}
-				size={'small'}
-				type={'text'}
-				value={props.title}
-			/>
+			<Stack flexDirection={'row'} gap={1}>
+				<Select
+					onChange={(e) => props.setType(e.target.value)}
+					size={'small'}
+					sx={{ pr: 1 }}
+					value={props.type}
+				>
+					{options.map((plan) => (
+						<MenuItem key={plan.name} value={plan.name}>
+							<plan.icon fontSize={'inherit'} />
+						</MenuItem>
+					))}
+				</Select>
+				<TextField
+					error={!isTitleValid}
+					fullWidth={true}
+					label={'Bill title'}
+					onChange={(e) => props.setTitle(e.target.value.slice(0, 31))}
+					size={'small'}
+					type={'text'}
+					value={props.title}
+				/>
+			</Stack>
 			<TextField
 				disabled={hasNoDeadline}
 				fullWidth={true}

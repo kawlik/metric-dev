@@ -1,5 +1,12 @@
-import { ArrowBackIosNew } from '@mui/icons-material';
-import { AppBar, Autocomplete, IconButton, TextField, Toolbar } from '@mui/material';
+import { ArrowBackIosNew, Search } from '@mui/icons-material';
+import {
+	AppBar,
+	Autocomplete,
+	IconButton,
+	InputAdornment,
+	TextField,
+	Toolbar,
+} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useContexts } from '../contexts/@';
 
@@ -51,7 +58,23 @@ export default function (props: {}) {
 					onChange={(event, value) => !!value?.page && open(value.page)}
 					options={options}
 					size={'small'}
-					renderInput={(params) => <TextField {...params} label={'Search'} />}
+					renderInput={(params) => (
+						<TextField
+							{...params}
+							label={'Search'}
+							InputProps={{
+								...params.InputProps,
+								endAdornment: (
+									<InputAdornment
+										position={'end'}
+										sx={{ position: 'absolute', right: 8 }}
+									>
+										<Search />
+									</InputAdornment>
+								),
+							}}
+						/>
+					)}
 				/>
 			</Toolbar>
 		</AppBar>

@@ -20,7 +20,8 @@ export default function (props: {}) {
 	const contexts = useContexts();
 	const navigate = useNavigate();
 
-	const document = contexts.billInfo.get()?.id;
+	const document = contexts.billInfo.get()?.id!;
+	const balance = contexts.billInfo.get()?.balance!;
 	const options = [...BillPostIconMap].map((post) => ({
 		open: () => navigate(`post/${post[0].toLowerCase()}`),
 		icon: post[1],
@@ -34,7 +35,7 @@ export default function (props: {}) {
 		setPostMesage('');
 
 		try {
-			BillPostalService.post(document!, postMessage);
+			BillPostalService.post(document, balance, postMessage);
 		} catch (error) {
 			alert('Something went wrong. Please try again later.');
 			setPostMesage(postMessage);

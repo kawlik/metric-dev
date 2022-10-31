@@ -1,6 +1,5 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { AppPageEmpty } from './components/@';
-import AppPageSplash from './components/app-page-splash';
+import { AppPageSplash } from './components/@';
 import { useContexts } from './contexts/@';
 import {
 	AccountPage,
@@ -9,6 +8,8 @@ import {
 	BillReportPage,
 	ReportsPage,
 	UpdatesPage,
+	BillLedgerExpensePage,
+	BillLedgerObjectivePage,
 } from './pages/@';
 import {
 	BillFormScreen,
@@ -45,8 +46,8 @@ export default function (props: {}) {
 
 			<Route path="ledger" element={<BillViewScreen />}>
 				<Route path=":billID" element={<BillLedgerPage />} />
-				<Route path=":billID/post/expense" element={<AppPageEmpty />} />
-				<Route path=":billID/post/objective" element={<AppPageEmpty />} />
+				<Route path=":billID/post/expense" element={<BillLedgerExpensePage />} />
+				<Route path=":billID/post/objective" element={<BillLedgerObjectivePage />} />
 			</Route>
 
 			<Route path="report" element={<BillViewScreen />}>

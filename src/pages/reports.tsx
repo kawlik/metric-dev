@@ -24,7 +24,7 @@ export default function (props: {}) {
 	return (
 		<>
 			<AppViewLoading isLoading={isLoading} />
-			<AppViewStack flex={1} sx={{ overflowX: 'hidden', overflowY: 'scroll' }}>
+			<AppViewStack flex={1}>
 				{Array.isArray(billsList) && billsList?.length === 0 && <AppPageEmpty />}
 				{Array.isArray(billsList) && billsList?.length !== 0 && (
 					<>

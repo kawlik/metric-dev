@@ -1,20 +1,20 @@
-interface iPost {
-	message: string;
-	type: string;
-}
-
-class Post implements iPost {
-	message: string;
+class Post {
+	text: string;
 	type: 'Post';
 }
 
 class PostExpense extends Post {
 	override type: 'Expense';
-	value: number;
+
+	plan: string;
+	cost: number;
 }
 
 class PostObjective extends Post {
 	override type: 'Objective';
+
+	done: boolean;
+	more: string;
 }
 
 type UserPost = Post | PostExpense | PostObjective;

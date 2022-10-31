@@ -38,7 +38,7 @@ export default function (props: { bills: BillInfoType[] }) {
 					verticalAlign={'middle'}
 					content={() => (
 						<Typography textAlign={'center'} variant={'h4'}>
-							{AppNormsService.normalizeNumber(ballance)}
+							{AppNormsService.normalizeNumber(ballance)}💰
 						</Typography>
 					)}
 				/>

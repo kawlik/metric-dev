@@ -6,7 +6,7 @@ export default function (props: StackProps) {
 	// component layout
 	return (
 		<Grow in={true}>
-			<Stack component={'main'} position={'relative'} {...props} />
+			<Stack component={'main'} overflow={'hidden'} position={'relative'} {...props} />
 		</Grow>
 	);
 }

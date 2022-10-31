@@ -12,31 +12,31 @@ import { BillPlanIconMap } from '../configs/@';
 
 export default function (props: { plans: string[]; setPlans(plans: string[]): void }) {
 	// component logic
-	const chosenExpensesSet = new Set(props.plans);
-	const availableExpenses = [...BillPlanIconMap].map((plan) => ({
+	const chosenPlansSet = new Set(props.plans);
+	const availablePlans = [...BillPlanIconMap].map((plan) => ({
 		icon: plan[1],
 		name: plan[0],
 	}));
 
-	function onExpanseChange(expense: string, value: boolean) {
+	function onPlanChange(plan: string, value: boolean) {
 		if (value) {
-			chosenExpensesSet.add(expense);
+			chosenPlansSet.add(plan);
 		} else {
-			chosenExpensesSet.delete(expense);
+			chosenPlansSet.delete(plan);
 		}
 
-		props.setPlans([...chosenExpensesSet.add('Other')]);
+		props.setPlans([...chosenPlansSet.add('Other')]);
 	}
 
 	// component lifecycle
 	useEffect(() => {
-		props.setPlans([...chosenExpensesSet.add('Other')]);
+		props.setPlans([...chosenPlansSet.add('Other')]);
 	}, []);
 
 	// component layout
 	return (
 		<List sx={{ padding: 0 }}>
-			{availableExpenses.map((expense) => (
+			{availablePlans.map((expense) => (
 				<ListItem key={expense.name}>
 					<ListItemAvatar>
 						<Avatar>
@@ -47,8 +47,8 @@ export default function (props: { plans: string[]; setPlans(plans: string[]): vo
 						primary={<Typography noWrap={true}>{expense.name}</Typography>}
 					/>
 					<Switch
-						onChange={(e) => onExpanseChange(expense.name, e.target.checked)}
-						checked={chosenExpensesSet.has(expense.name)}
+						onChange={(e) => onPlanChange(expense.name, e.target.checked)}
+						checked={chosenPlansSet.has(expense.name)}
 						disabled={expense.name === 'Other'}
 						size={'small'}
 					/>

@@ -8,6 +8,7 @@ export { default as BillChatBrief } from './bill-chat-brief';
 export { default as BillChatEntry } from './bill-chat-entry';
 export { default as BillChatInput } from './bill-chat-input';
 export { default as BillChatPosts } from './bill-chat-posts';
+export { default as BillChatObjective } from './bill-chat-objective';
 export { default as BillFormActions } from './bill-form-actions';
 export { default as BillFormStepBasic } from './bill-form-step-basic';
 export { default as BillFormStepPlans } from './bill-form-step-plans';
