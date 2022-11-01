@@ -21,22 +21,18 @@ export default function (props: { post: BillPostType }) {
 	}
 
 	// component layout
-	return (
-		<Typography fontStyle={'italic'} variant={'subtitle2'}>
-			Unsupported post type.
-		</Typography>
-	);
+	return <Typography fontStyle={'italic'}>Unsupported post type.</Typography>;
 }
 
 function Post(props: { text: string }) {
-	return <Typography variant={'subtitle2'}>{props.text}</Typography>;
+	return <Typography>{props.text}</Typography>;
 }
 
 function Expense(props: { cost: number; text: string }) {
 	return (
 		<>
-			<Typography variant={'subtitle2'}>{props.text}</Typography>
-			<Typography variant={'subtitle1'}>🪙 {props.cost}</Typography>
+			<Typography>{props.text}</Typography>
+			<Typography>🪙 {props.cost}</Typography>
 		</>
 	);
 }
@@ -44,16 +40,13 @@ function Expense(props: { cost: number; text: string }) {
 function Objective(props: { done: boolean; more: string; text: string }) {
 	return (
 		<>
-			<Typography
-				sx={{ textDecoration: props.done ? 'line-through' : '' }}
-				variant={'subtitle1'}
-			>
+			<Typography sx={{ textDecoration: props.done ? 'line-through' : '' }}>
 				📌 {props.text}
 			</Typography>
 			{!!props.more && (
 				<>
 					<Divider sx={{ marginY: 1 }} />
-					<Typography variant={'subtitle2'}>{props.more}</Typography>
+					<Typography>{props.more}</Typography>
 				</>
 			)}
 		</>
