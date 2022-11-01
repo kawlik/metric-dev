@@ -1,9 +1,13 @@
 import { AppBar, Button, Toolbar } from '@mui/material';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function (props: {}) {
 	// component logic
+	const location = useLocation();
+	const navigate = useNavigate();
+
 	function downladPDF() {
-		alert('Sorry, the selected functionality is not available yet.');
+		navigate(location.pathname + 'more/downlad');
 	}
 
 	// component layout

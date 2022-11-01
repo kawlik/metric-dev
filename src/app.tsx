@@ -3,6 +3,7 @@ import { AppPageSplash } from './components/@';
 import { useContexts } from './contexts/@';
 import {
 	AccountPage,
+	ActionMoreDownladPage,
 	ActionMoreModifyPage,
 	ActionMoreStatisticsPage,
 	ActionPostExpensePage,
@@ -56,6 +57,7 @@ export default function (props: {}) {
 
 			<Route path="report" element={<BillViewScreen />}>
 				<Route path=":billID" element={<BillReportPage />} />
+				<Route path=":billID/more/downlad" element={<ActionMoreDownladPage />} />
 				<Route path=":billID/more/statistics" element={<ActionMoreStatisticsPage />} />
 			</Route>
 

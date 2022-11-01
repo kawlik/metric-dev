@@ -1,4 +1,5 @@
 export { default as AccountPage } from './account';
+export { default as ActionMoreDownladPage } from './action-more-downlad';
 export { default as ActionMoreModifyPage } from './action-more-modify';
 export { default as ActionMoreStatisticsPage } from './action-more-statistics';
 export { default as ActionPostExpensePage } from './action-post-expense';

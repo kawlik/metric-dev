@@ -1,4 +1,7 @@
+import jsPDF from 'jspdf';
 import moment from 'moment';
+import html2canvas from 'html2canvas';
+
 import { AttachMoney, QuestionMark } from '@mui/icons-material';
 import { BillPlanIconMap, BillTypeIconMap } from '../configs/@';
 
@@ -24,6 +27,14 @@ class AppNormsService {
 
 	normalizeNumber = (value: number): string => {
 		return this.format.format(value);
+	};
+
+	normalizePDF = async (documentHTML: HTMLElement, filename?: string): Promise<void> => {
+		const canvas = await html2canvas(documentHTML);
+		const worker = new jsPDF();
+
+		worker.addImage(canvas, 'JPEG', 0, 0, canvas.width / 5, canvas.height / 5);
+		worker.save(filename);
 	};
 
 	private prepareHash = (base: string): number => {
