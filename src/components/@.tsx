@@ -1,3 +1,4 @@
+export { default as AppBillStatistics } from './app-bill-statistics';
 export { default as AppPageEmpty } from './app-page-empty';
 export { default as AppPageSplash } from './app-page-splash';
 export { default as AppPhoneField } from './app-phone-field';

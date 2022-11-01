@@ -1,4 +1,4 @@
-import { AttachMoney, FactCheck, RequestQuote, Send } from '@mui/icons-material';
+import { Send } from '@mui/icons-material';
 import {
 	AppBar,
 	IconButton,
@@ -10,7 +10,7 @@ import {
 	Toolbar,
 } from '@mui/material';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { BillPostIconMap } from '../configs/@';
 import { useContexts } from '../contexts/@';
 import { BillPostalService } from '../services/@.service';
@@ -18,12 +18,13 @@ import { BillPostalService } from '../services/@.service';
 export default function (props: {}) {
 	// component logic
 	const contexts = useContexts();
+	const location = useLocation();
 	const navigate = useNavigate();
 
 	const document = contexts.billInfo.get()?.id!;
 	const balance = contexts.billInfo.get()?.balance!;
 	const options = [...BillPostIconMap].map((post) => ({
-		open: () => navigate(`post/${post[0].toLowerCase()}`),
+		open: () => navigate(location.pathname + `/post/${post[0].toLowerCase()}`),
 		icon: post[1],
 		name: post[0],
 	}));

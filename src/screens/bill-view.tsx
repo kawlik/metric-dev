@@ -37,7 +37,11 @@ export default function (props: {}) {
 	}
 
 	function openModify() {
-		alert('Sorry, the selected functionality is not available yet.');
+		navigate(location.pathname + '/more/modify');
+	}
+
+	function openStats() {
+		navigate(location.pathname + '/more/statistics');
 	}
 
 	async function openReport() {
@@ -52,10 +56,6 @@ export default function (props: {}) {
 
 			setIsPending(false);
 		}
-	}
-
-	function openStats() {
-		alert('Sorry, the selected functionality is not available yet.');
 	}
 
 	// component lifecycle
@@ -78,8 +78,8 @@ export default function (props: {}) {
 	}, []);
 
 	useEffect(() => {
-		if (isLedger) navigate(`/ledger/${billID}`, { replace: true });
-		if (isReport) navigate(`/report/${billID}`, { replace: true });
+		// if (isLedger) navigate(`/ledger/${billID}`, { replace: true });
+		// if (isReport) navigate(`/report/${billID}`, { replace: true });
 	}, [isLedger, isReport]);
 
 	// component layout

@@ -3,13 +3,15 @@ import { AppPageSplash } from './components/@';
 import { useContexts } from './contexts/@';
 import {
 	AccountPage,
+	ActionMoreModifyPage,
+	ActionMoreStatisticsPage,
+	ActionPostExpensePage,
+	ActionPostObjectivePage,
 	BillLedgerPage,
-	LedgersPage,
 	BillReportPage,
+	LedgersPage,
 	ReportsPage,
 	UpdatesPage,
-	ActionExpensePage,
-	ActionObjectivePage,
 } from './pages/@';
 import {
 	BillFormScreen,
@@ -46,12 +48,15 @@ export default function (props: {}) {
 
 			<Route path="ledger" element={<BillViewScreen />}>
 				<Route path=":billID" element={<BillLedgerPage />} />
-				<Route path=":billID/post/expense" element={<ActionExpensePage />} />
-				<Route path=":billID/post/objective" element={<ActionObjectivePage />} />
+				<Route path=":billID/more/modify" element={<ActionMoreModifyPage />} />
+				<Route path=":billID/more/statistics" element={<ActionMoreStatisticsPage />} />
+				<Route path=":billID/post/expense" element={<ActionPostExpensePage />} />
+				<Route path=":billID/post/objective" element={<ActionPostObjectivePage />} />
 			</Route>
 
 			<Route path="report" element={<BillViewScreen />}>
 				<Route path=":billID" element={<BillReportPage />} />
+				<Route path=":billID/more/statistics" element={<ActionMoreStatisticsPage />} />
 			</Route>
 
 			<Route path="*" element={<HomeScreen />}>
