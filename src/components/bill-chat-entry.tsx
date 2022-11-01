@@ -32,7 +32,7 @@ function Expense(props: { cost: number; text: string }) {
 	return (
 		<>
 			<Typography>{props.text}</Typography>
-			<Typography>🪙 {props.cost}</Typography>
+			<Typography fontWeight={700}>🪙 {props.cost}</Typography>
 		</>
 	);
 }
@@ -40,15 +40,13 @@ function Expense(props: { cost: number; text: string }) {
 function Objective(props: { done: boolean; more: string; text: string }) {
 	return (
 		<>
-			<Typography sx={{ textDecoration: props.done ? 'line-through' : '' }}>
+			<Typography
+				fontWeight={700}
+				sx={{ textDecoration: props.done ? 'line-through' : '' }}
+			>
 				📌 {props.text}
 			</Typography>
-			{!!props.more && (
-				<>
-					<Divider sx={{ marginY: 1 }} />
-					<Typography>{props.more}</Typography>
-				</>
-			)}
+			{!!props.more && <Typography>{props.more}</Typography>}
 		</>
 	);
 }
