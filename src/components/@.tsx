@@ -1,4 +1,3 @@
-export { default as AppBillStatistics } from './app-bill-statistics';
 export { default as AppPageEmpty } from './app-page-empty';
 export { default as AppPageSplash } from './app-page-splash';
 export { default as AppPhoneField } from './app-phone-field';
@@ -15,6 +14,7 @@ export { default as BillFormStepBasic } from './bill-form-step-basic';
 export { default as BillFormStepPlans } from './bill-form-step-plans';
 export { default as BillFormStepUsers } from './bill-form-step-users';
 export { default as BillFormStepper } from './bill-form-stepper';
+export { default as BillPDFSummary } from './bill-pdf-summary';
 export { default as BillFormTopbar } from './bill-form-topbar';
 export { default as BillViewChart } from './bill-view-chart';
 export { default as BillViewFLoat } from './bill-view-float';

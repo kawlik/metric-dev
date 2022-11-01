@@ -24,7 +24,7 @@ export default function (props: {}) {
 	const document = contexts.billInfo.get()?.id!;
 	const balance = contexts.billInfo.get()?.balance!;
 	const options = [...BillPostIconMap].map((post) => ({
-		open: () => navigate(location.pathname + `/post/${post[0].toLowerCase()}`),
+		open: () => navigate(location.pathname + `post/${post[0].toLowerCase()}/`),
 		icon: post[1],
 		name: post[0],
 	}));

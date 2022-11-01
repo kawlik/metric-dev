@@ -37,11 +37,11 @@ export default function (props: {}) {
 	}
 
 	function openModify() {
-		navigate(location.pathname + '/more/modify');
+		navigate(location.pathname + 'more/modify/');
 	}
 
 	function openStats() {
-		navigate(location.pathname + '/more/statistics');
+		navigate(location.pathname + 'more/statistics/');
 	}
 
 	async function openReport() {
