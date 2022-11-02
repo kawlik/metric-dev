@@ -34,7 +34,7 @@ export default function (props: {}) {
 	}
 
 	function openPrivacyPolicy() {
-		alert('Sorry, the selected functionality is not available yet.');
+		navigate('/security/');
 	}
 
 	function verifyOTPCode(otpCode: string) {
@@ -44,7 +44,7 @@ export default function (props: {}) {
 	// component lifecycle
 	useEffect(() => {
 		if (contexts.isSignedIn.get() === true) {
-			navigate('/sign-up/');
+			// navigate('/sign-up/');
 		}
 	}, [contexts.isSignedIn]);
 

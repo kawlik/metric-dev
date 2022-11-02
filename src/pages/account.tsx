@@ -1,3 +1,4 @@
+import { Share } from '@mui/icons-material';
 import { Avatar, Button, Stack, Typography } from '@mui/material';
 import { AppViewStack } from '../components/@';
 import { useContexts } from '../contexts/@';
@@ -10,7 +11,7 @@ export default function (props: {}) {
 	const userPhone = contexts.userAuth.get()?.phoneNumber || '';
 	const userPhoto = contexts.userAuth.get()?.photoURL || '';
 
-	function deleteAccount() {
+	function shareAccount() {
 		alert('Sorry, the selected functionality is not available yet.');
 	}
 
@@ -26,8 +27,13 @@ export default function (props: {}) {
 					{userPhone}
 				</Typography>
 			</Stack>
-			<Button color={'error'} fullWidth={true} onClick={deleteAccount}>
-				Delete Account
+			<Button
+				color={'success'}
+				endIcon={<Share />}
+				fullWidth={true}
+				onClick={shareAccount}
+			>
+				Share
 			</Button>
 		</AppViewStack>
 	);

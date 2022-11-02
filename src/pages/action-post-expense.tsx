@@ -9,6 +9,7 @@ import {
 	MenuItem,
 	Select,
 	TextField,
+	Typography,
 } from '@mui/material';
 import { Stack } from '@mui/system';
 import { useState } from 'react';
@@ -77,12 +78,15 @@ export default function (props: {}) {
 						<Select
 							onChange={(e) => setExpensePlan(e.target.value)}
 							size={'small'}
-							sx={{ pr: 1 }}
+							sx={{ overflowX: 'hidden' }}
 							value={expensePlan}
 						>
 							{options.map((plan) => (
 								<MenuItem key={plan.name} value={plan.name}>
 									<plan.icon fontSize={'inherit'} />
+									<Typography component={'span'} marginLeft={1} noWrap={true}>
+										{plan.name}
+									</Typography>
 								</MenuItem>
 							))}
 						</Select>

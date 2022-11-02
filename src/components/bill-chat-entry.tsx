@@ -33,7 +33,7 @@ function Expense(props: { cost: number; text: string }) {
 		<>
 			<Typography>{props.text}</Typography>
 			<Typography sx={{ fontWeight: 700 }}>
-				<span>{`🪙 ${props.cost}`}</span>
+				<span>{`🪙 ${props.cost.toFixed(2)}`}</span>
 			</Typography>
 		</>
 	);

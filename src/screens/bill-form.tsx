@@ -60,7 +60,7 @@ export default function (props: {}) {
 				type: billType,
 			});
 
-			navigate(`/ledger/${newLedgerID}`, { replace: true });
+			navigate(`/ledger/${newLedgerID}/`, { replace: true });
 		} catch {
 			alert('Something went wrong. Please try again later.');
 		}

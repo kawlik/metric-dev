@@ -1,4 +1,4 @@
-import { Logout, MoreVert, ReportProblem, Search, Settings } from '@mui/icons-material';
+import { Logout, MoreVert, Search, Security, Settings } from '@mui/icons-material';
 import {
 	AppBar,
 	Avatar,
@@ -18,9 +18,9 @@ export default function (props: {
 	avatar: string;
 	label: string;
 	logout(): void;
-	openProblem(): void;
 	openSearch(): void;
 	openSettings(): void;
+	openSecurity(): void;
 }) {
 	// component logic
 	const menuAnchor = useRef(null);
@@ -59,17 +59,17 @@ export default function (props: {
 				</ButtonGroup>
 			</Toolbar>
 			<Menu anchorEl={menuAnchor.current} onClose={closeMenu} open={isMenuOpen}>
+				<MenuItem onClick={props.openSecurity}>
+					<ListItemIcon>
+						<Security />
+					</ListItemIcon>
+					<ListItemText>Security</ListItemText>
+				</MenuItem>
 				<MenuItem onClick={props.openSettings}>
 					<ListItemIcon>
 						<Settings />
 					</ListItemIcon>
 					<ListItemText>Settings</ListItemText>
-				</MenuItem>
-				<MenuItem onClick={props.openProblem}>
-					<ListItemIcon>
-						<ReportProblem />
-					</ListItemIcon>
-					<ListItemText>Problem</ListItemText>
 				</MenuItem>
 				<Divider />
 				<MenuItem onClick={props.logout}>

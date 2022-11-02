@@ -11,21 +11,25 @@ import { BillPostType } from '../types/@';
 export default function (props: { posts: BillPostType[]; users: string[] }) {
 	// component logic
 	const totalPosts = props.posts.length;
-	const totalValue = props.posts.reduce((prev, curr) => {
-		if (curr.post.type !== 'Expense') return prev;
-		return prev + curr.post.cost;
-	}, 0);
+	const totalValue = props.posts
+		.reduce((prev, curr) => {
+			if (curr.post.type !== 'Expense') return prev;
+			return prev + curr.post.cost;
+		}, 0)
+		.toFixed(2);
 
 	function getContribution(user: string) {
-		return props.posts.reduce((prev, curr) => {
-			const currType = curr.post.type;
-			const currUser = curr.user;
+		return props.posts
+			.reduce((prev, curr) => {
+				const currType = curr.post.type;
+				const currUser = curr.user;
 
-			if (currUser !== user) return prev;
-			if (currType !== 'Expense') return prev;
+				if (currUser !== user) return prev;
+				if (currType !== 'Expense') return prev;
 
-			return prev + curr.post.cost;
-		}, 0);
+				return prev + curr.post.cost;
+			}, 0)
+			.toFixed(2);
 	}
 
 	// component layout

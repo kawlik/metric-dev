@@ -7,6 +7,7 @@ import {
 	Select,
 	Stack,
 	TextField,
+	Typography,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { AppNormsService } from '../services/@.service';
@@ -70,12 +71,15 @@ export default function (props: {
 				<Select
 					onChange={(e) => props.setType(e.target.value)}
 					size={'small'}
-					sx={{ pr: 1 }}
+					sx={{ overflowX: 'hidden' }}
 					value={props.type}
 				>
 					{options.map((plan) => (
 						<MenuItem key={plan.name} value={plan.name}>
 							<plan.icon fontSize={'inherit'} />
+							<Typography component={'span'} marginLeft={1} noWrap={true}>
+								{plan.name}
+							</Typography>
 						</MenuItem>
 					))}
 				</Select>

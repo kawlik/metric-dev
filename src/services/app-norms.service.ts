@@ -7,7 +7,10 @@ import { BillPlanIconMap, BillTypeIconMap } from '../configs/@';
 
 // define dervice
 class AppNormsService {
-	constructor(private format = Intl.NumberFormat('en', { notation: 'compact' })) {}
+	constructor(
+		private formatPhone = Intl.NumberFormat('en', { notation: 'compact' }),
+		private formatPDFA4 = { x: 595.28, y: 841.89 },
+	) {}
 
 	normalizeBillPlanIcon = (value: string) => {
 		return BillPlanIconMap.get(value) || QuestionMark;
@@ -26,14 +29,17 @@ class AppNormsService {
 	normalizeMoment = (value?: moment.MomentInput) => moment(value);
 
 	normalizeNumber = (value: number): string => {
-		return this.format.format(value);
+		return this.formatPhone.format(value);
 	};
 
 	normalizePDF = async (documentHTML: HTMLElement, filename?: string): Promise<void> => {
 		const canvas = await html2canvas(documentHTML);
 		const worker = new jsPDF();
 
-		worker.addImage(canvas, 'JPEG', 0, 0, canvas.width / 5, canvas.height / 5);
+		const offsetX = (100 * canvas.width) / this.formatPDFA4.x;
+		const offsetY = (100 * canvas.height) / this.formatPDFA4.x;
+
+		worker.addImage(canvas, 'JPEG', 0, 0, offsetX, offsetY);
 		worker.save(filename);
 	};
 

@@ -22,16 +22,16 @@ export default function (props: {}) {
 		navigate(`/${route}/`, { replace: true });
 	}
 
-	function openProblem() {
-		alert('Sorry, the selected functionality is not available yet.');
-	}
-
 	function openSearch() {
 		navigate('/search/');
 	}
 
+	function openSecurity() {
+		navigate('/security/');
+	}
+
 	function openSettings() {
-		alert('Sorry, the selected functionality is not available yet.');
+		navigate('/settings/');
 	}
 
 	// component layout
@@ -41,8 +41,8 @@ export default function (props: {}) {
 				avatar={userAvatar}
 				label={currentPage}
 				logout={logout}
-				openProblem={openProblem}
 				openSearch={openSearch}
+				openSecurity={openSecurity}
 				openSettings={openSettings}
 			/>
 			<PageOutlet />

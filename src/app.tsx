@@ -18,7 +18,9 @@ import {
 	BillFormScreen,
 	BillViewScreen,
 	HomeScreen,
+	SecurityScreen,
 	SearchScreen,
+	SettingsScreen,
 	SignInScreen,
 	SignUpScreen,
 } from './screens/@';
@@ -37,6 +39,8 @@ export default function (props: {}) {
 		<Routes>
 			<Route path="*" element={<Navigate to="sign-in" />} />
 
+			<Route path="security" element={<SecurityScreen />} />
+
 			<Route path="sign-in" element={<SignInScreen />} />
 			<Route path="sign-up" element={<SignUpScreen />} />
 		</Routes>
@@ -46,6 +50,9 @@ export default function (props: {}) {
 
 			<Route path="create" element={<BillFormScreen />} />
 			<Route path="search" element={<SearchScreen />} />
+
+			<Route path="security" element={<SecurityScreen />} />
+			<Route path="settings" element={<SettingsScreen />} />
 
 			<Route path="ledger" element={<BillViewScreen />}>
 				<Route path=":billID" element={<BillLedgerPage />} />
