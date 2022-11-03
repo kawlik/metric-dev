@@ -1,7 +1,7 @@
 import { ArrowBackIosNew } from '@mui/icons-material';
 import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { AppViewStack } from '../components/@';
+import { AppViewStack, SettingsTheme } from '../components/@';
 
 export default function (props: {}) {
 	// component logic
@@ -29,7 +29,9 @@ export default function (props: {}) {
 					</Typography>
 				</Toolbar>
 			</AppBar>
-			<AppViewStack flex={1} padding={2}></AppViewStack>
+			<AppViewStack flex={1}>
+				<SettingsTheme />
+			</AppViewStack>
 		</>
 	);
 }

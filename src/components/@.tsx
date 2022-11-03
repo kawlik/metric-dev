@@ -22,6 +22,7 @@ export { default as BillViewList } from './bill-view-list';
 export { default as BillViewTopbar } from './bill-view-topbar';
 export { default as HomeTabbar } from './home-tabbar';
 export { default as HomeTopbar } from './home-topbar';
+export { default as SettingsTheme } from './settings-theme';
 export { default as SignInFooter } from './sign-in-footer';
 export { default as SignInHeader } from './sign-in-header';
 export { default as SignInRecaptcha } from './sign-in-recaptcha';

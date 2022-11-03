@@ -2,6 +2,7 @@ import { Share } from '@mui/icons-material';
 import { Avatar, Button, Stack, Typography } from '@mui/material';
 import { AppViewStack } from '../components/@';
 import { useContexts } from '../contexts/@';
+import { AppAgentService } from '../services/@.service';
 
 export default function (props: {}) {
 	// component logic
@@ -11,8 +12,15 @@ export default function (props: {}) {
 	const userPhone = contexts.userAuth.get()?.phoneNumber || '';
 	const userPhoto = contexts.userAuth.get()?.photoURL || '';
 
-	function shareAccount() {
-		alert('Sorry, the selected functionality is not available yet.');
+	async function shareAccount() {
+		try {
+			await AppAgentService.share({
+				title: `Metric© - an invitation from ${userName} (${userPhone})!`,
+				text: 'Hi! You can find me in the Metric© service, where we can split the bill together!',
+			});
+		} catch (error) {
+			alert('Something went wrong. Please try again later.');
+		}
 	}
 
 	// component layout

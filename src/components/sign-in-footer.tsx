@@ -7,7 +7,7 @@ export default function (props: { openPrivacyPolicy(): void }) {
 	// component layout
 	return (
 		<Button endIcon={<Security />} fullWidth={true} onClick={props.openPrivacyPolicy}>
-			Privacy policy
+			Security
 		</Button>
 	);
 }

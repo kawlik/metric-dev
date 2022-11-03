@@ -4,6 +4,7 @@ import {
 	ListItem,
 	ListItemAvatar,
 	ListItemText,
+	Stack,
 	Typography,
 } from '@mui/material';
 import { BillPostType } from '../types/@';
@@ -34,13 +35,13 @@ export default function (props: { posts: BillPostType[]; users: string[] }) {
 
 	// component layout
 	return (
-		<>
+		<Stack gap={1} padding={2}>
 			<Typography variant={'h4'}>Summary</Typography>
 			<Typography variant={'h6'}>💡 Total posts: {totalPosts}</Typography>
 			<Typography variant={'h6'}>💰 Total value: {totalValue}</Typography>
 			<Typography />
 			<Typography variant={'h5'}>Contributions</Typography>
-			<List>
+			<List sx={{ padding: 0 }}>
 				{props.users.map((user) => (
 					<ListItem key={user}>
 						<ListItemAvatar>
@@ -61,6 +62,6 @@ export default function (props: { posts: BillPostType[]; users: string[] }) {
 					</ListItem>
 				))}
 			</List>
-		</>
+		</Stack>
 	);
 }

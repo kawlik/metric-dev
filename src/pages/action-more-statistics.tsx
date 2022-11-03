@@ -10,7 +10,7 @@ export default function (props: {}) {
 
 	// component layout
 	return (
-		<AppViewStack flex={1} gap={1} padding={2}>
+		<AppViewStack flex={1} gap={1}>
 			<BillStatsSummary posts={posts} users={users} />
 		</AppViewStack>
 	);

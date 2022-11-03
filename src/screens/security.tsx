@@ -31,7 +31,7 @@ export default function (props: {}) {
 			</AppBar>
 			<AppViewStack flex={1} padding={2} sx={{ overflowY: 'scroll' }}>
 				<h1>Privacy Policy</h1>
-				<p>Last updated: November 02, 2022</p>
+				<p>Last updated: November 03, 2022</p>
 				<p>
 					This Privacy Policy describes Our policies and procedures on the collection,
 					use and disclosure of Your information when You use the Service and tells
@@ -43,10 +43,10 @@ export default function (props: {}) {
 					with this Privacy Policy. This Privacy Policy has been created with the help
 					of the{' '}
 					<a
-						href="https://www.privacypolicies.com/privacy-policy-generator/"
+						href="https://www.freeprivacypolicy.com/free-privacy-policy-generator/"
 						target="_blank"
 					>
-						Privacy Policy Generator
+						Free Privacy Policy Generator
 					</a>
 					.
 				</p>
@@ -140,11 +140,11 @@ export default function (props: {}) {
 						<p>
 							<strong>Website</strong> refers to Metric, accessible from{' '}
 							<a
-								href="http://kawlik.github.io/metric"
+								href="https://kawlik.github.io/metric"
 								rel="external nofollow noopener"
 								target="_blank"
 							>
-								http://kawlik.github.io/metric
+								https://kawlik.github.io/metric
 							</a>
 						</p>
 					</li>
@@ -202,6 +202,10 @@ export default function (props: {}) {
 				</p>
 				<ul>
 					<li>Information from your Device's phone book (contacts list)</li>
+					<li>
+						Pictures and other information from your Device's camera and photo
+						library
+					</li>
 				</ul>
 				<p>
 					We use this information to provide features of Our Service, to improve and
@@ -245,10 +249,10 @@ export default function (props: {}) {
 					You go offline, while Session Cookies are deleted as soon as You close Your
 					web browser. Learn more about cookies on the{' '}
 					<a
-						href="https://www.privacypolicies.com/blog/privacy-policy-template/#Use_Of_Cookies_Log_Files_And_Tracking"
+						href="https://www.freeprivacypolicy.com/blog/sample-privacy-policy-template/#Use_Of_Cookies_And_Tracking"
 						target="_blank"
 					>
-						Privacy Policies website
+						Free Privacy Policy website
 					</a>{' '}
 					article.
 				</p>
@@ -501,6 +505,35 @@ export default function (props: {}) {
 					100% secure. While We strive to use commercially acceptable means to protect
 					Your Personal Data, We cannot guarantee its absolute security.
 				</p>
+				<h1>Detailed Information on the Processing of Your Personal Data</h1>
+				<p>
+					The Service Providers We use may have access to Your Personal Data. These
+					third-party vendors collect, store, use, process and transfer information
+					about Your activity on Our Service in accordance with their Privacy
+					Policies.
+				</p>
+				<h2>Usage, Performance and Miscellaneous</h2>
+				<p>
+					We may use third-party Service Providers to provide better improvement of
+					our Service.
+				</p>
+				<ul>
+					<li>
+						<p>
+							<strong>Invisible reCAPTCHA</strong>
+						</p>
+						<p>
+							Their Privacy Policy can be viewed at{' '}
+							<a
+								href="https://policies.google.com/"
+								rel="external nofollow noopener"
+								target="_blank"
+							>
+								https://policies.google.com/
+							</a>
+						</p>
+					</li>
+				</ul>
 				<h1>Children's Privacy</h1>
 				<p>
 					Our Service does not address anyone under the age of 13. We do not knowingly
@@ -547,9 +580,8 @@ export default function (props: {}) {
 				<ul>
 					<li>By email: kpawlik1103@gmail.com</li>
 				</ul>
-				<br />
 				<h1>Terms and Conditions</h1>
-				<p>Last updated: November 02, 2022</p>
+				<p>Last updated: November 03, 2022</p>
 				<p>
 					Please read these terms and conditions carefully before using Our Service.
 				</p>
@@ -618,10 +650,10 @@ export default function (props: {}) {
 							the Service. This Terms and Conditions agreement has been created
 							with the help of the{' '}
 							<a
-								href="https://www.privacypolicies.com/terms-conditions-generator/"
+								href="https://www.freeprivacypolicy.com/free-terms-and-conditions-generator/"
 								target="_blank"
 							>
-								Terms and Conditions Generator
+								Free Terms and Conditions Generator
 							</a>
 							.
 						</p>

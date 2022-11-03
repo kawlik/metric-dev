@@ -14,6 +14,7 @@ import { AppContext } from './app-contexts';
 export default function (props: PropsWithChildren) {
 	// component logic
 	const preferesDark = useMediaQuery('(prefers-color-scheme: dark)');
+	const preferesMode = StorageLocalService.Theme;
 	const preferedMode = preferesDark ? 'dark' : 'light';
 
 	// component state
@@ -55,7 +56,7 @@ export default function (props: PropsWithChildren) {
 	}, [userAuth]);
 
 	useEffect(() => {
-		setUserMode(preferedMode);
+		setUserMode(preferesMode || preferedMode);
 	}, [preferedMode]);
 
 	// component layout

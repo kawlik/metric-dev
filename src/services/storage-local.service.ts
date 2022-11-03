@@ -1,33 +1,26 @@
-import { BillInfoType } from '../types/@';
+import { UserModeType } from '../types/@';
 
 // define service
 class StorageLocalService {
-	private readonly keyStorageLedgers = 'metric-storage-ledgers';
-	private readonly keyStorageReports = 'metric-storage-reports';
+	private readonly keyTheme = 'user-theme';
 
-	get Ledgers(): BillInfoType[] | undefined {
-		if (!localStorage.getItem(this.keyStorageLedgers)) return undefined;
+	get Theme() {
+		const theme = localStorage.getItem(this.keyTheme);
 
-		return JSON.parse(localStorage.getItem(this.keyStorageLedgers)!);
+		if (theme === 'dark' || theme === 'light') {
+			return theme;
+		} else {
+			return undefined;
+		}
 	}
 
-	get Reports(): BillInfoType[] | undefined {
-		if (!localStorage.getItem(this.keyStorageReports)) return undefined;
-
-		return JSON.parse(localStorage.getItem(this.keyStorageReports)!);
+	set Theme(theme: UserModeType) {
+		if (theme === 'dark' || theme === 'light') {
+			localStorage.setItem(this.keyTheme, theme);
+		} else {
+			localStorage.setItem(this.keyTheme, '');
+		}
 	}
-
-	saveLedgers = (ledgers: BillInfoType[] | undefined): void => {
-		if (!ledgers) return;
-
-		localStorage.setItem(this.keyStorageLedgers, JSON.stringify(ledgers));
-	};
-
-	saveReports = (reports: BillInfoType[] | undefined): void => {
-		if (!reports) return;
-
-		localStorage.setItem(this.keyStorageReports, JSON.stringify(reports));
-	};
 }
 
 // export service
