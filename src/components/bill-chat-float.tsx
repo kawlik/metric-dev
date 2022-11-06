@@ -2,7 +2,7 @@ import { Check } from '@mui/icons-material';
 import { AppBar, CircularProgress, IconButton, Toolbar, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useContexts } from '../contexts/@';
-import { BillPostalService } from '../services/@.service';
+import { AppAlertService, BillPostalService } from '../services/@.service';
 
 export default function (props: {}) {
 	// component logic
@@ -22,7 +22,7 @@ export default function (props: {}) {
 		try {
 			await BillPostalService.postObjectiveDone(document, objective!);
 		} catch (error) {
-			alert('Something went wrong. Please try again later.');
+			AppAlertService.error();
 		}
 
 		setIsUpdating(false);

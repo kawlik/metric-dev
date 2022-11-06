@@ -3,11 +3,11 @@ import { AppPageSplash } from './components/@';
 import { useContexts } from './contexts/@';
 import {
 	AccountPage,
-	ActionMoreDownladPage,
-	ActionMoreModifyPage,
-	ActionMoreStatisticsPage,
-	ActionPostExpensePage,
-	ActionPostObjectivePage,
+	ViewMoreDownladPage,
+	ViewMoreModifyPage,
+	ViewMoreStatisticsPage,
+	ViewPostExpensePage,
+	ViewPostObjectivePage,
 	BillLedgerPage,
 	BillReportPage,
 	LedgersPage,
@@ -56,16 +56,16 @@ export default function (props: {}) {
 
 			<Route path="ledger" element={<BillViewScreen />}>
 				<Route path=":billID" element={<BillLedgerPage />} />
-				<Route path=":billID/more/modify" element={<ActionMoreModifyPage />} />
-				<Route path=":billID/more/statistics" element={<ActionMoreStatisticsPage />} />
-				<Route path=":billID/post/expense" element={<ActionPostExpensePage />} />
-				<Route path=":billID/post/objective" element={<ActionPostObjectivePage />} />
+				<Route path=":billID/more/modify" element={<ViewMoreModifyPage />} />
+				<Route path=":billID/more/statistics" element={<ViewMoreStatisticsPage />} />
+				<Route path=":billID/post/expense" element={<ViewPostExpensePage />} />
+				<Route path=":billID/post/objective" element={<ViewPostObjectivePage />} />
 			</Route>
 
 			<Route path="report" element={<BillViewScreen />}>
 				<Route path=":billID" element={<BillReportPage />} />
-				<Route path=":billID/more/downlad" element={<ActionMoreDownladPage />} />
-				<Route path=":billID/more/statistics" element={<ActionMoreStatisticsPage />} />
+				<Route path=":billID/more/downlad" element={<ViewMoreDownladPage />} />
+				<Route path=":billID/more/statistics" element={<ViewMoreStatisticsPage />} />
 			</Route>
 
 			<Route path="*" element={<HomeScreen />}>

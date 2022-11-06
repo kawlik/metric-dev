@@ -1,5 +1,5 @@
-import { AppViewStack } from '../components/@';
-import { useContexts } from '../contexts/@';
+import { AppViewStack } from '../../components/@';
+import { useContexts } from '../../contexts/@';
 
 export default function (props: {}) {
 	// component logic

@@ -1,6 +1,7 @@
 import { Security } from '@mui/icons-material';
 import { Button, CircularProgress } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { AppAlertService } from '../services/@.service';
 import { AppPhoneField } from './@';
 
 export default function (props: { generateOTPCode(phoneNumber: string): Promise<void> }) {
@@ -17,7 +18,7 @@ export default function (props: { generateOTPCode(phoneNumber: string): Promise<
 		try {
 			await props.generateOTPCode(phoneNumber);
 		} catch {
-			alert('Something went wrong. Please try again later.');
+			AppAlertService.error();
 		}
 
 		setIsVerifying(false);

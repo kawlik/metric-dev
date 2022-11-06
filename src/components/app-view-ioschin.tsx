@@ -5,5 +5,5 @@ export default function (props: {}) {
 	// component logic
 
 	// component layout
-	return <Box padding={AppAgentService.isIOS ? 1.5 : 0} />;
+	return <Box padding={AppAgentService.agent('iPhone') ? 1.5 : 0} />;
 }

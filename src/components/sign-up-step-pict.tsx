@@ -1,7 +1,7 @@
 import { PhotoCamera } from '@mui/icons-material';
 import { Avatar, Button, CircularProgress, Stack } from '@mui/material';
 import { ChangeEvent, useState } from 'react';
-import { AppPhotoService, StorageCloudService } from '../services/@.service';
+import { AppAlertService, AppPhotoService, StorageCloudService } from '../services/@.service';
 
 export default function (props: { pict: string; setPict(pict: string): void }) {
 	// component logic
@@ -23,7 +23,7 @@ export default function (props: { pict: string; setPict(pict: string): void }) {
 
 			props.setPict(userPictureUrl);
 		} catch {
-			alert('Something went wrong. Please try again later.');
+			AppAlertService.error();
 		}
 
 		setIsPending(false);

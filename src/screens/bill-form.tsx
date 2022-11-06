@@ -12,7 +12,7 @@ import {
 	BillFormStepper,
 	BillFormTopbar,
 } from '../components/@';
-import { AppNormsService, BillLedgerService } from '../services/@.service';
+import { AppAlertService, AppNormsService, BillLedgerService } from '../services/@.service';
 
 export default function (props: {}) {
 	// component logic
@@ -62,7 +62,7 @@ export default function (props: {}) {
 
 			navigate(`/ledger/${newLedgerID}/`, { replace: true });
 		} catch {
-			alert('Something went wrong. Please try again later.');
+			AppAlertService.error();
 		}
 
 		setViewLoading(false);

@@ -1,23 +1,16 @@
 // define dervice
 class AppAgentService {
-	get isIOS(): boolean {
-		return this.checkUserAgent('iPhone');
-	}
+	constructor(private navigator: Navigator) {}
 
-	share = async (data: { title: string; text?: string }): Promise<void> => {
-		console.log(window.location);
+	agent = (platform: 'Android' | 'iPad' | 'iPhone') => navigator.userAgent.includes(platform);
 
-		await navigator.share({
+	share = async (data: { title: string; text?: string }): Promise<void> =>
+		this.navigator.share({
 			url: 'https://kawlik.github.io/material',
 			title: data.title,
 			text: data.text,
 		});
-	};
-
-	private checkUserAgent(platform: 'Android' | 'iPad' | 'iPhone') {
-		return window.navigator.userAgent.includes(platform);
-	}
 }
 
 // export service
-export default new AppAgentService();
+export default new AppAgentService(window.navigator);

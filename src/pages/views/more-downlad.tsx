@@ -1,10 +1,10 @@
 import { CssBaseline, ThemeProvider } from '@mui/material';
-import { BillStatsSummary, AppViewStack, AppViewLoading } from '../components/@';
-import { useContexts } from '../contexts/@';
-import { MUIThemeLight } from '../configs/@';
+import { BillStatsSummary, AppViewStack, AppViewLoading } from '../../components/@';
+import { useContexts } from '../../contexts/@';
+import { MUIThemeLight } from '../../configs/@';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { AppNormsService } from '../services/@.service';
+import { AppAlertService, AppNormsService } from '../../services/@.service';
 
 export default function (props: {}) {
 	// component logic
@@ -23,7 +23,7 @@ export default function (props: {}) {
 			try {
 				AppNormsService.normalizePDF(documentHTML, filename);
 			} catch (error) {
-				alert('Something went wrong. Please try again later.');
+				AppAlertService.error();
 			} finally {
 				navigate(-1);
 			}

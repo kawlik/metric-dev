@@ -3,6 +3,7 @@ import { Outlet as PageOutlet, useLocation, useNavigate, useParams } from 'react
 import { AppViewIOSChin, AppViewLoading, BillViewTopbar } from '../components/@';
 import { useContexts } from '../contexts/@';
 import {
+	AppAlertService,
 	AppNormsService,
 	BillDataService,
 	BillInfoService,
@@ -51,7 +52,7 @@ export default function (props: {}) {
 			try {
 				await BillLedgerService.closeLedger(billID!);
 			} catch (error) {
-				alert('Something went wrong. Please try again later.');
+				AppAlertService.error();
 			}
 
 			setIsPending(false);

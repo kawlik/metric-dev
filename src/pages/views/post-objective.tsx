@@ -11,13 +11,12 @@ import {
 import { Stack } from '@mui/system';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AppViewStack } from '../components/@';
-import { BillPlanIconMap } from '../configs/@';
-import { useContexts } from '../contexts/@';
-import { BillPostalService } from '../services/@.service';
+import { AppViewStack } from '../../components/@';
+import { useContexts } from '../../contexts/@';
+import { AppAlertService, BillPostalService } from '../../services/@.service';
 
 // assets
-import Gif from '../assets/purse.gif';
+import Gif from '../../assets/note.gif';
 
 export default function (props: {}) {
 	// component logic
@@ -45,7 +44,7 @@ export default function (props: {}) {
 
 			navigate(-1);
 		} catch (error) {
-			alert('Something went wrong. Please try again later.');
+			AppAlertService.error();
 			setIsSending(false);
 		}
 	}

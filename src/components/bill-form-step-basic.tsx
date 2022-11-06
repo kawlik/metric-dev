@@ -10,7 +10,7 @@ import {
 	Typography,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { AppNormsService } from '../services/@.service';
+import { AppAlertService, AppNormsService } from '../services/@.service';
 
 // assets
 import Gif from '../assets/cheque.gif';
@@ -45,7 +45,7 @@ export default function (props: {
 		const newDateUnix = AppNormsService.normalizeMoment(date).endOf('day').valueOf();
 
 		if (newDateUnix < todayUnix) {
-			alert('You cannot choose a date from the past!');
+			AppAlertService.alert('You cannot choose a date from the past!');
 		} else {
 			setSavedDeadline(newDateUnix);
 			props.setDedline(newDateUnix);

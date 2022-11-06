@@ -13,7 +13,7 @@ import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { BillPostIconMap } from '../configs/@';
 import { useContexts } from '../contexts/@';
-import { BillPostalService } from '../services/@.service';
+import { AppAlertService, BillPostalService } from '../services/@.service';
 
 export default function (props: {}) {
 	// component logic
@@ -38,8 +38,9 @@ export default function (props: {}) {
 		try {
 			BillPostalService.post(document, balance, postMessage);
 		} catch (error) {
-			alert('Something went wrong. Please try again later.');
-			setPostMesage(postMessage);
+			AppAlertService.error().then(() => {
+				setPostMesage(postMessage);
+			});
 		}
 	}
 

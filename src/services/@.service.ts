@@ -1,4 +1,5 @@
 export { default as AppAgentService } from './app-agent.service';
+export { default as AppAlertService } from './app-alert.service';
 export { default as AppNormsService } from './app-norms.service';
 export { default as AppPhoneService } from './app-phone.service';
 export { default as AppPhotoService } from './app-photo.service';

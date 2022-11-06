@@ -11,7 +11,7 @@ import {
 	SignUpStepper,
 } from '../components/@';
 import { useContexts } from '../contexts/@';
-import { UserDataService } from '../services/@.service';
+import { AppAlertService, UserDataService } from '../services/@.service';
 
 export default function (props: {}) {
 	// component logic
@@ -50,7 +50,7 @@ export default function (props: {}) {
 
 			contexts.isSignedUp.set(true);
 		} catch {
-			alert('Something went wrong. Please try again later.');
+			AppAlertService.error();
 		}
 
 		setViewLoading(false);

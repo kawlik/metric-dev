@@ -12,15 +12,11 @@ export default function (props: {}) {
 	const userPhone = contexts.userAuth.get()?.phoneNumber || '';
 	const userPhoto = contexts.userAuth.get()?.photoURL || '';
 
-	async function shareAccount() {
-		try {
-			await AppAgentService.share({
-				title: `Metric© - an invitation from ${userName} (${userPhone})!`,
-				text: 'Hi! You can find me in the Metric© service, where we can split the bill together!',
-			});
-		} catch (error) {
-			alert('Something went wrong. Please try again later.');
-		}
+	function shareAccount() {
+		AppAgentService.share({
+			title: `Metric© - an invitation from ${userName} (${userPhone})!`,
+			text: 'Hi! You can find me in the Metric© service, where we can split the bill together!',
+		});
 	}
 
 	// component layout
