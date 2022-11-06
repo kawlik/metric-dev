@@ -6,7 +6,7 @@ import react from '@vitejs/plugin-react';
 
 // vite config
 export default defineConfig({
-	base: '/material/',
+	base: '/metric-dev/',
 	plugins: [
 		react(),
 		VitePWA({
